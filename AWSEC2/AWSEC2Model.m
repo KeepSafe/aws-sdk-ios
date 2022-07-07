@@ -9755,9 +9755,31 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"dryRun" : @"DryRun",
              @"groupName" : @"GroupName",
              @"partitionCount" : @"PartitionCount",
+             @"spreadLevel" : @"SpreadLevel",
              @"strategy" : @"Strategy",
              @"tagSpecifications" : @"TagSpecifications",
              };
+}
+
++ (NSValueTransformer *)spreadLevelJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"host"] == NSOrderedSame) {
+            return @(AWSEC2SpreadLevelHost);
+        }
+        if ([value caseInsensitiveCompare:@"rack"] == NSOrderedSame) {
+            return @(AWSEC2SpreadLevelRack);
+        }
+        return @(AWSEC2SpreadLevelUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2SpreadLevelHost:
+                return @"host";
+            case AWSEC2SpreadLevelRack:
+                return @"rack";
+            default:
+                return nil;
+        }
+    }];
 }
 
 + (NSValueTransformer *)strategyJSONTransformer {
@@ -68145,10 +68167,32 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"groupId" : @"GroupId",
              @"groupName" : @"GroupName",
              @"partitionCount" : @"PartitionCount",
+             @"spreadLevel" : @"SpreadLevel",
              @"state" : @"State",
              @"strategy" : @"Strategy",
              @"tags" : @"Tags",
              };
+}
+
++ (NSValueTransformer *)spreadLevelJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"host"] == NSOrderedSame) {
+            return @(AWSEC2SpreadLevelHost);
+        }
+        if ([value caseInsensitiveCompare:@"rack"] == NSOrderedSame) {
+            return @(AWSEC2SpreadLevelRack);
+        }
+        return @(AWSEC2SpreadLevelUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2SpreadLevelHost:
+                return @"host";
+            case AWSEC2SpreadLevelRack:
+                return @"rack";
+            default:
+                return nil;
+        }
+    }];
 }
 
 + (NSValueTransformer *)stateJSONTransformer {
