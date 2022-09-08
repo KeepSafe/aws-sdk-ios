@@ -65138,6 +65138,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -65287,6 +65290,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVpnConnectionDeviceType:
+                return @"vpn-connection-device-type";
             default:
                 return nil;
         }
@@ -65533,6 +65538,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -65682,6 +65690,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVpnConnectionDeviceType:
+                return @"vpn-connection-device-type";
             default:
                 return nil;
         }
@@ -103503,6 +103513,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -103652,6 +103665,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVpnConnectionDeviceType:
+                return @"vpn-connection-device-type";
             default:
                 return nil;
         }
@@ -107941,6 +107956,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -108090,6 +108108,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVpnConnectionDeviceType:
+                return @"vpn-connection-device-type";
             default:
                 return nil;
         }
@@ -108332,6 +108352,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -108481,6 +108504,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVpnConnectionDeviceType:
+                return @"vpn-connection-device-type";
             default:
                 return nil;
         }
