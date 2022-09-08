@@ -8789,6 +8789,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"clientToken" : @"ClientToken",
+             @"deliverCrossAccountRole" : @"DeliverCrossAccountRole",
              @"deliverLogsPermissionArn" : @"DeliverLogsPermissionArn",
              @"destinationOptions" : @"DestinationOptions",
              @"dryRun" : @"DryRun",
@@ -8816,6 +8817,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"s3"] == NSOrderedSame) {
             return @(AWSEC2LogDestinationTypeS3);
         }
+        if ([value caseInsensitiveCompare:@"kinesis-data-firehose"] == NSOrderedSame) {
+            return @(AWSEC2LogDestinationTypeKinesisDataFirehose);
+        }
         return @(AWSEC2LogDestinationTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -8823,6 +8827,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"cloud-watch-logs";
             case AWSEC2LogDestinationTypeS3:
                 return @"s3";
+            case AWSEC2LogDestinationTypeKinesisDataFirehose:
+                return @"kinesis-data-firehose";
             default:
                 return nil;
         }
@@ -38854,6 +38860,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"creationTime" : @"CreationTime",
+             @"deliverCrossAccountRole" : @"DeliverCrossAccountRole",
              @"deliverLogsErrorMessage" : @"DeliverLogsErrorMessage",
              @"deliverLogsPermissionArn" : @"DeliverLogsPermissionArn",
              @"deliverLogsStatus" : @"DeliverLogsStatus",
@@ -38891,6 +38898,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"s3"] == NSOrderedSame) {
             return @(AWSEC2LogDestinationTypeS3);
         }
+        if ([value caseInsensitiveCompare:@"kinesis-data-firehose"] == NSOrderedSame) {
+            return @(AWSEC2LogDestinationTypeKinesisDataFirehose);
+        }
         return @(AWSEC2LogDestinationTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -38898,6 +38908,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"cloud-watch-logs";
             case AWSEC2LogDestinationTypeS3:
                 return @"s3";
+            case AWSEC2LogDestinationTypeKinesisDataFirehose:
+                return @"kinesis-data-firehose";
             default:
                 return nil;
         }
