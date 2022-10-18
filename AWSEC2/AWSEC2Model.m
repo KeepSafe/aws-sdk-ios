@@ -9511,7 +9511,6 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"dryRun" : @"DryRun",
              @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
              @"localGatewayVirtualInterfaceGroupId" : @"LocalGatewayVirtualInterfaceGroupId",
-             @"networkInterfaceId" : @"NetworkInterfaceId",
              };
 }
 
@@ -66016,15 +66015,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
-             @"coipPoolId" : @"CoipPoolId",
              @"destinationCidrBlock" : @"DestinationCidrBlock",
              @"localGatewayRouteTableArn" : @"LocalGatewayRouteTableArn",
              @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
              @"localGatewayVirtualInterfaceGroupId" : @"LocalGatewayVirtualInterfaceGroupId",
-             @"networkInterfaceId" : @"NetworkInterfaceId",
              @"ownerId" : @"OwnerId",
              @"state" : @"State",
-             @"subnetId" : @"SubnetId",
              @"types" : @"Type",
              };
 }
@@ -66099,33 +66095,11 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"localGatewayId" : @"LocalGatewayId",
              @"localGatewayRouteTableArn" : @"LocalGatewayRouteTableArn",
              @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
-             @"mode" : @"Mode",
              @"outpostArn" : @"OutpostArn",
              @"ownerId" : @"OwnerId",
              @"state" : @"State",
              @"tags" : @"Tags",
              };
-}
-
-+ (NSValueTransformer *)modeJSONTransformer {
-    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value caseInsensitiveCompare:@"direct-vpc-routing"] == NSOrderedSame) {
-            return @(AWSEC2LocalGatewayRouteTableModeDirectVpcRouting);
-        }
-        if ([value caseInsensitiveCompare:@"coip"] == NSOrderedSame) {
-            return @(AWSEC2LocalGatewayRouteTableModeCoip);
-        }
-        return @(AWSEC2LocalGatewayRouteTableModeUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case AWSEC2LocalGatewayRouteTableModeDirectVpcRouting:
-                return @"direct-vpc-routing";
-            case AWSEC2LocalGatewayRouteTableModeCoip:
-                return @"coip";
-            default:
-                return nil;
-        }
-    }];
 }
 
 + (NSValueTransformer *)tagsJSONTransformer {
@@ -67885,41 +67859,6 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)launchTemplateJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2LaunchTemplate class]];
-}
-
-@end
-
-@implementation AWSEC2ModifyLocalGatewayRouteRequest
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-	return @{
-             @"destinationCidrBlock" : @"DestinationCidrBlock",
-             @"dryRun" : @"DryRun",
-             @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
-             @"networkInterfaceId" : @"NetworkInterfaceId",
-             };
-}
-
-@end
-
-@implementation AWSEC2ModifyLocalGatewayRouteResult
-
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-	return @{
-             @"route" : @"Route",
-             };
-}
-
-+ (NSValueTransformer *)routeJSONTransformer {
-    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2LocalGatewayRoute class]];
 }
 
 @end
