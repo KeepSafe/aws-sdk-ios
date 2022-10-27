@@ -10466,7 +10466,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"clientToken" : @"ClientToken",
+             @"deleteReplacedRootVolume" : @"DeleteReplacedRootVolume",
              @"dryRun" : @"DryRun",
+             @"imageId" : @"ImageId",
              @"instanceId" : @"InstanceId",
              @"snapshotId" : @"SnapshotId",
              @"tagSpecifications" : @"TagSpecifications",
@@ -73669,8 +73671,11 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"completeTime" : @"CompleteTime",
+             @"deleteReplacedRootVolume" : @"DeleteReplacedRootVolume",
+             @"imageId" : @"ImageId",
              @"instanceId" : @"InstanceId",
              @"replaceRootVolumeTaskId" : @"ReplaceRootVolumeTaskId",
+             @"snapshotId" : @"SnapshotId",
              @"startTime" : @"StartTime",
              @"tags" : @"Tags",
              @"taskState" : @"TaskState",
