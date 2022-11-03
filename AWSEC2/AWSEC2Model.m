@@ -78,6 +78,44 @@ NSString *const AWSEC2ErrorDomain = @"com.amazonaws.AWSEC2ErrorDomain";
 
 @end
 
+@implementation AWSEC2AcceptAddressTransferRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"address" : @"Address",
+             @"dryRun" : @"DryRun",
+             @"tagSpecifications" : @"TagSpecifications",
+             };
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2AcceptAddressTransferResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"addressTransfer" : @"AddressTransfer",
+             };
+}
+
++ (NSValueTransformer *)addressTransferJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AddressTransfer class]];
+}
+
+@end
+
 @implementation AWSEC2AcceptReservedInstancesExchangeQuoteRequest
 
 + (BOOL)supportsSecureCoding {
@@ -603,6 +641,67 @@ NSString *const AWSEC2ErrorDomain = @"com.amazonaws.AWSEC2ErrorDomain";
 
 + (NSValueTransformer *)ptrRecordUpdateJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2PtrUpdateStatus class]];
+}
+
+@end
+
+@implementation AWSEC2AddressTransfer
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"addressTransferStatus" : @"AddressTransferStatus",
+             @"allocationId" : @"AllocationId",
+             @"publicIp" : @"PublicIp",
+             @"transferAccountId" : @"TransferAccountId",
+             @"transferOfferAcceptedTimestamp" : @"TransferOfferAcceptedTimestamp",
+             @"transferOfferExpirationTimestamp" : @"TransferOfferExpirationTimestamp",
+             };
+}
+
++ (NSValueTransformer *)addressTransferStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"pending"] == NSOrderedSame) {
+            return @(AWSEC2AddressTransferStatusPending);
+        }
+        if ([value caseInsensitiveCompare:@"disabled"] == NSOrderedSame) {
+            return @(AWSEC2AddressTransferStatusDisabled);
+        }
+        if ([value caseInsensitiveCompare:@"accepted"] == NSOrderedSame) {
+            return @(AWSEC2AddressTransferStatusAccepted);
+        }
+        return @(AWSEC2AddressTransferStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2AddressTransferStatusPending:
+                return @"pending";
+            case AWSEC2AddressTransferStatusDisabled:
+                return @"disabled";
+            case AWSEC2AddressTransferStatusAccepted:
+                return @"accepted";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)transferOfferAcceptedTimestampJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)transferOfferExpirationTimestampJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
 }
 
 @end
@@ -14860,6 +14959,42 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2DescribeAddressTransfersRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"allocationIds" : @"AllocationIds",
+             @"dryRun" : @"DryRun",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             };
+}
+
+@end
+
+@implementation AWSEC2DescribeAddressTransfersResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"addressTransfers" : @"AddressTransfers",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)addressTransfersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2AddressTransfer class]];
+}
+
+@end
+
 @implementation AWSEC2DescribeAddressesAttributeRequest
 
 + (BOOL)supportsSecureCoding {
@@ -27141,6 +27276,39 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2DisableAddressTransferRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"allocationId" : @"AllocationId",
+             @"dryRun" : @"DryRun",
+             };
+}
+
+@end
+
+@implementation AWSEC2DisableAddressTransferResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"addressTransfer" : @"AddressTransfer",
+             };
+}
+
++ (NSValueTransformer *)addressTransferJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AddressTransfer class]];
+}
+
+@end
+
 @implementation AWSEC2DisableEbsEncryptionByDefaultRequest
 
 + (BOOL)supportsSecureCoding {
@@ -28768,6 +28936,40 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     } reverseBlock:^id(NSDate *date) {
 return [date aws_stringValue:AWSDateISO8601DateFormat1];
     }];
+}
+
+@end
+
+@implementation AWSEC2EnableAddressTransferRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"allocationId" : @"AllocationId",
+             @"dryRun" : @"DryRun",
+             @"transferAccountId" : @"TransferAccountId",
+             };
+}
+
+@end
+
+@implementation AWSEC2EnableAddressTransferResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"addressTransfer" : @"AddressTransfer",
+             };
+}
+
++ (NSValueTransformer *)addressTransferJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AddressTransfer class]];
 }
 
 @end
