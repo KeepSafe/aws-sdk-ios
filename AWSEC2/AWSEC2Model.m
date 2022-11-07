@@ -2770,6 +2770,35 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2CancelImageLaunchPermissionRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"imageId" : @"ImageId",
+             };
+}
+
+@end
+
+@implementation AWSEC2CancelImageLaunchPermissionResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"returned" : @"Return",
+             };
+}
+
+@end
+
 @implementation AWSEC2CancelImportTaskRequest
 
 + (BOOL)supportsSecureCoding {
