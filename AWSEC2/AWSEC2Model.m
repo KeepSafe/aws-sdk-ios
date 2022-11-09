@@ -50674,6 +50674,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"acceleratorNames" : @"AcceleratorNames",
              @"acceleratorTotalMemoryMiB" : @"AcceleratorTotalMemoryMiB",
              @"acceleratorTypes" : @"AcceleratorTypes",
+             @"allowedInstanceTypes" : @"AllowedInstanceTypes",
              @"bareMetal" : @"BareMetal",
              @"baselineEbsBandwidthMbps" : @"BaselineEbsBandwidthMbps",
              @"burstablePerformance" : @"BurstablePerformance",
@@ -50684,6 +50685,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"localStorageTypes" : @"LocalStorageTypes",
              @"memoryGiBPerVCpu" : @"MemoryGiBPerVCpu",
              @"memoryMiB" : @"MemoryMiB",
+             @"networkBandwidthGbps" : @"NetworkBandwidthGbps",
              @"networkInterfaceCount" : @"NetworkInterfaceCount",
              @"onDemandMaxPricePercentageOverLowestPrice" : @"OnDemandMaxPricePercentageOverLowestPrice",
              @"requireHibernateSupport" : @"RequireHibernateSupport",
@@ -50791,6 +50793,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2MemoryMiB class]];
 }
 
++ (NSValueTransformer *)networkBandwidthGbpsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2NetworkBandwidthGbps class]];
+}
+
 + (NSValueTransformer *)networkInterfaceCountJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2NetworkInterfaceCount class]];
 }
@@ -50818,6 +50824,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"acceleratorNames" : @"AcceleratorNames",
              @"acceleratorTotalMemoryMiB" : @"AcceleratorTotalMemoryMiB",
              @"acceleratorTypes" : @"AcceleratorTypes",
+             @"allowedInstanceTypes" : @"AllowedInstanceTypes",
              @"bareMetal" : @"BareMetal",
              @"baselineEbsBandwidthMbps" : @"BaselineEbsBandwidthMbps",
              @"burstablePerformance" : @"BurstablePerformance",
@@ -50828,6 +50835,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"localStorageTypes" : @"LocalStorageTypes",
              @"memoryGiBPerVCpu" : @"MemoryGiBPerVCpu",
              @"memoryMiB" : @"MemoryMiB",
+             @"networkBandwidthGbps" : @"NetworkBandwidthGbps",
              @"networkInterfaceCount" : @"NetworkInterfaceCount",
              @"onDemandMaxPricePercentageOverLowestPrice" : @"OnDemandMaxPricePercentageOverLowestPrice",
              @"requireHibernateSupport" : @"RequireHibernateSupport",
@@ -50933,6 +50941,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)memoryMiBJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2MemoryMiBRequest class]];
+}
+
++ (NSValueTransformer *)networkBandwidthGbpsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2NetworkBandwidthGbpsRequest class]];
 }
 
 + (NSValueTransformer *)networkInterfaceCountJSONTransformer {
@@ -65353,6 +65365,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"affinity" : @"Affinity",
              @"availabilityZone" : @"AvailabilityZone",
+             @"groupId" : @"GroupId",
              @"groupName" : @"GroupName",
              @"hostId" : @"HostId",
              @"hostResourceGroupArn" : @"HostResourceGroupArn",
@@ -65400,6 +65413,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"affinity" : @"Affinity",
              @"availabilityZone" : @"AvailabilityZone",
+             @"groupId" : @"GroupId",
              @"groupName" : @"GroupName",
              @"hostId" : @"HostId",
              @"hostResourceGroupArn" : @"HostResourceGroupArn",
@@ -68412,6 +68426,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"affinity" : @"Affinity",
+             @"groupId" : @"GroupId",
              @"groupName" : @"GroupName",
              @"hostId" : @"HostId",
              @"hostResourceGroupArn" : @"HostResourceGroupArn",
@@ -70744,6 +70759,36 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2NetworkBandwidthGbps
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"max" : @"Max",
+             @"min" : @"Min",
+             };
+}
+
+@end
+
+@implementation AWSEC2NetworkBandwidthGbpsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"max" : @"Max",
+             @"min" : @"Min",
+             };
+}
+
+@end
+
 @implementation AWSEC2NetworkCardInfo
 
 + (BOOL)supportsSecureCoding {
@@ -72109,6 +72154,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"affinity" : @"Affinity",
              @"availabilityZone" : @"AvailabilityZone",
+             @"groupId" : @"GroupId",
              @"groupName" : @"GroupName",
              @"hostId" : @"HostId",
              @"hostResourceGroupArn" : @"HostResourceGroupArn",
