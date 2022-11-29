@@ -1994,6 +1994,46 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2AttachVerifiedAccessTrustProviderRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             @"verifiedAccessTrustProviderId" : @"VerifiedAccessTrustProviderId",
+             };
+}
+
+@end
+
+@implementation AWSEC2AttachVerifiedAccessTrustProviderResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessInstance" : @"VerifiedAccessInstance",
+             @"verifiedAccessTrustProvider" : @"VerifiedAccessTrustProvider",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessInstanceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessInstance class]];
+}
+
++ (NSValueTransformer *)verifiedAccessTrustProviderJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessTrustProvider class]];
+}
+
+@end
+
 @implementation AWSEC2AttachVolumeRequest
 
 + (BOOL)supportsSecureCoding {
@@ -7830,6 +7870,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -8979,6 +9022,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -12061,6 +12106,405 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2CreateVerifiedAccessEndpointEniOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"networkInterfaceId" : @"NetworkInterfaceId",
+             @"port" : @"Port",
+             @"protocols" : @"Protocol",
+             };
+}
+
++ (NSValueTransformer *)protocolsJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"http"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTP);
+        }
+        if ([value caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTPS);
+        }
+        return @(AWSEC2VerifiedAccessEndpointProtocolUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointProtocolHTTP:
+                return @"http";
+            case AWSEC2VerifiedAccessEndpointProtocolHTTPS:
+                return @"https";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessEndpointLoadBalancerOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"loadBalancerArn" : @"LoadBalancerArn",
+             @"port" : @"Port",
+             @"protocols" : @"Protocol",
+             @"subnetIds" : @"SubnetIds",
+             };
+}
+
++ (NSValueTransformer *)protocolsJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"http"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTP);
+        }
+        if ([value caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTPS);
+        }
+        return @(AWSEC2VerifiedAccessEndpointProtocolUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointProtocolHTTP:
+                return @"http";
+            case AWSEC2VerifiedAccessEndpointProtocolHTTPS:
+                return @"https";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessEndpointRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"applicationDomain" : @"ApplicationDomain",
+             @"attachmentType" : @"AttachmentType",
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"domainCertificateArn" : @"DomainCertificateArn",
+             @"dryRun" : @"DryRun",
+             @"endpointDomainPrefix" : @"EndpointDomainPrefix",
+             @"endpointType" : @"EndpointType",
+             @"loadBalancerOptions" : @"LoadBalancerOptions",
+             @"networkInterfaceOptions" : @"NetworkInterfaceOptions",
+             @"policyDocument" : @"PolicyDocument",
+             @"securityGroupIds" : @"SecurityGroupIds",
+             @"tagSpecifications" : @"TagSpecifications",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             };
+}
+
++ (NSValueTransformer *)attachmentTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"vpc"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointAttachmentTypeVPC);
+        }
+        return @(AWSEC2VerifiedAccessEndpointAttachmentTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointAttachmentTypeVPC:
+                return @"vpc";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)endpointTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"load-balancer"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointTypeLoadBalancer);
+        }
+        if ([value caseInsensitiveCompare:@"network-interface"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointTypeNetworkInterface);
+        }
+        return @(AWSEC2VerifiedAccessEndpointTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointTypeLoadBalancer:
+                return @"load-balancer";
+            case AWSEC2VerifiedAccessEndpointTypeNetworkInterface:
+                return @"network-interface";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)loadBalancerOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2CreateVerifiedAccessEndpointLoadBalancerOptions class]];
+}
+
++ (NSValueTransformer *)networkInterfaceOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2CreateVerifiedAccessEndpointEniOptions class]];
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessEndpointResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessEndpoint" : @"VerifiedAccessEndpoint",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessEndpointJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessEndpoint class]];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessGroupRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"policyDocument" : @"PolicyDocument",
+             @"tagSpecifications" : @"TagSpecifications",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessGroupResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessGroup" : @"VerifiedAccessGroup",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessGroupJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessGroup class]];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessInstanceRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"tagSpecifications" : @"TagSpecifications",
+             };
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessInstanceResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessInstance" : @"VerifiedAccessInstance",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessInstanceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessInstance class]];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessTrustProviderDeviceOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"tenantId" : @"TenantId",
+             };
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessTrustProviderOidcOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"authorizationEndpoint" : @"AuthorizationEndpoint",
+             @"clientId" : @"ClientId",
+             @"clientSecret" : @"ClientSecret",
+             @"issuer" : @"Issuer",
+             @"scope" : @"Scope",
+             @"tokenEndpoint" : @"TokenEndpoint",
+             @"userInfoEndpoint" : @"UserInfoEndpoint",
+             };
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessTrustProviderRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"deviceOptions" : @"DeviceOptions",
+             @"deviceTrustProviderType" : @"DeviceTrustProviderType",
+             @"dryRun" : @"DryRun",
+             @"oidcOptions" : @"OidcOptions",
+             @"policyReferenceName" : @"PolicyReferenceName",
+             @"tagSpecifications" : @"TagSpecifications",
+             @"trustProviderType" : @"TrustProviderType",
+             @"userTrustProviderType" : @"UserTrustProviderType",
+             };
+}
+
++ (NSValueTransformer *)deviceOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2CreateVerifiedAccessTrustProviderDeviceOptions class]];
+}
+
++ (NSValueTransformer *)deviceTrustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"jamf"] == NSOrderedSame) {
+            return @(AWSEC2DeviceTrustProviderTypeJamf);
+        }
+        if ([value caseInsensitiveCompare:@"crowdstrike"] == NSOrderedSame) {
+            return @(AWSEC2DeviceTrustProviderTypeCrowdstrike);
+        }
+        return @(AWSEC2DeviceTrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2DeviceTrustProviderTypeJamf:
+                return @"jamf";
+            case AWSEC2DeviceTrustProviderTypeCrowdstrike:
+                return @"crowdstrike";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)oidcOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2CreateVerifiedAccessTrustProviderOidcOptions class]];
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
++ (NSValueTransformer *)trustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"user"] == NSOrderedSame) {
+            return @(AWSEC2TrustProviderTypeUser);
+        }
+        if ([value caseInsensitiveCompare:@"device"] == NSOrderedSame) {
+            return @(AWSEC2TrustProviderTypeDevice);
+        }
+        return @(AWSEC2TrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2TrustProviderTypeUser:
+                return @"user";
+            case AWSEC2TrustProviderTypeDevice:
+                return @"device";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)userTrustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"iam-identity-center"] == NSOrderedSame) {
+            return @(AWSEC2UserTrustProviderTypeIamIdentityCenter);
+        }
+        if ([value caseInsensitiveCompare:@"oidc"] == NSOrderedSame) {
+            return @(AWSEC2UserTrustProviderTypeOidc);
+        }
+        return @(AWSEC2UserTrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2UserTrustProviderTypeIamIdentityCenter:
+                return @"iam-identity-center";
+            case AWSEC2UserTrustProviderTypeOidc:
+                return @"oidc";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2CreateVerifiedAccessTrustProviderResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessTrustProvider" : @"VerifiedAccessTrustProvider",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessTrustProviderJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessTrustProvider class]];
+}
+
+@end
+
 @implementation AWSEC2CreateVolumePermission
 
 + (BOOL)supportsSecureCoding {
@@ -14762,6 +15206,142 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)transitGatewayVpcAttachmentJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2TransitGatewayVpcAttachment class]];
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessEndpointRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessEndpointId" : @"VerifiedAccessEndpointId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessEndpointResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessEndpoint" : @"VerifiedAccessEndpoint",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessEndpointJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessEndpoint class]];
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessGroupRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessGroupResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessGroup" : @"VerifiedAccessGroup",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessGroupJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessGroup class]];
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessInstanceRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessInstanceResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessInstance" : @"VerifiedAccessInstance",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessInstanceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessInstance class]];
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessTrustProviderRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessTrustProviderId" : @"VerifiedAccessTrustProviderId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DeleteVerifiedAccessTrustProviderResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessTrustProvider" : @"VerifiedAccessTrustProvider",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessTrustProviderJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessTrustProvider class]];
 }
 
 @end
@@ -18423,6 +19003,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -19572,6 +20155,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -23855,6 +24440,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -25004,6 +25592,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -26660,6 +27250,214 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2DescribeVerifiedAccessEndpointsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessEndpointIds" : @"VerifiedAccessEndpointIds",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessEndpointsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessEndpoints" : @"VerifiedAccessEndpoints",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessEndpointsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2VerifiedAccessEndpoint class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessGroupsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessGroupIds" : @"VerifiedAccessGroupIds",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessGroupsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessGroups" : @"VerifiedAccessGroups",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessGroupsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2VerifiedAccessGroup class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessInstanceLoggingConfigurationsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessInstanceIds" : @"VerifiedAccessInstanceIds",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessInstanceLoggingConfigurationsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"loggingConfigurations" : @"LoggingConfigurations",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)loggingConfigurationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2VerifiedAccessInstanceLoggingConfiguration class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessInstancesRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessInstanceIds" : @"VerifiedAccessInstanceIds",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessInstancesResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessInstances" : @"VerifiedAccessInstances",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessInstancesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2VerifiedAccessInstance class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessTrustProvidersRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessTrustProviderIds" : @"VerifiedAccessTrustProviderIds",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeVerifiedAccessTrustProvidersResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"nextToken" : @"NextToken",
+             @"verifiedAccessTrustProviders" : @"VerifiedAccessTrustProviders",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessTrustProvidersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2VerifiedAccessTrustProvider class]];
+}
+
+@end
+
 @implementation AWSEC2DescribeVolumeAttributeRequest
 
 + (BOOL)supportsSecureCoding {
@@ -27528,6 +28326,46 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2DetachVerifiedAccessTrustProviderRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             @"verifiedAccessTrustProviderId" : @"VerifiedAccessTrustProviderId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DetachVerifiedAccessTrustProviderResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessInstance" : @"VerifiedAccessInstance",
+             @"verifiedAccessTrustProvider" : @"VerifiedAccessTrustProvider",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessInstanceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessInstance class]];
+}
+
++ (NSValueTransformer *)verifiedAccessTrustProviderJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessTrustProvider class]];
+}
+
+@end
+
 @implementation AWSEC2DetachVolumeRequest
 
 + (BOOL)supportsSecureCoding {
@@ -27557,6 +28395,20 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"dryRun" : @"DryRun",
              @"vpcId" : @"VpcId",
              @"vpnGatewayId" : @"VpnGatewayId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DeviceOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"tenantId" : @"TenantId",
              };
 }
 
@@ -32769,6 +33621,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -33918,6 +34773,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -35927,6 +36784,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -37076,6 +37936,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -38833,6 +39695,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -39982,6 +40847,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -42009,6 +42876,66 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)transitGatewayRouteTablePropagationsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TransitGatewayRouteTablePropagation class]];
+}
+
+@end
+
+@implementation AWSEC2GetVerifiedAccessEndpointPolicyRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessEndpointId" : @"VerifiedAccessEndpointId",
+             };
+}
+
+@end
+
+@implementation AWSEC2GetVerifiedAccessEndpointPolicyResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"policyDocument" : @"PolicyDocument",
+             @"policyEnabled" : @"PolicyEnabled",
+             };
+}
+
+@end
+
+@implementation AWSEC2GetVerifiedAccessGroupPolicyRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             };
+}
+
+@end
+
+@implementation AWSEC2GetVerifiedAccessGroupPolicyResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"policyDocument" : @"PolicyDocument",
+             @"policyEnabled" : @"PolicyEnabled",
+             };
 }
 
 @end
@@ -45288,6 +46215,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -46437,6 +47367,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -48727,6 +49659,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -49876,6 +50811,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -53889,6 +54826,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -55038,6 +55978,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -56815,6 +57757,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -57964,6 +58909,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -61083,6 +62030,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -62232,6 +63182,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -64969,6 +65921,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -66118,6 +67073,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -66701,6 +67658,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"verified-access-instance"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessInstance);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-group"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessGroup);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessEndpoint);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-policy"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessPolicy);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-trust-provider"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessTrustProvider);
+        }
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
@@ -66859,6 +67831,16 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVerifiedAccessInstance:
+                return @"verified-access-instance";
+            case AWSEC2ResourceTypeVerifiedAccessGroup:
+                return @"verified-access-group";
+            case AWSEC2ResourceTypeVerifiedAccessEndpoint:
+                return @"verified-access-endpoint";
+            case AWSEC2ResourceTypeVerifiedAccessPolicy:
+                return @"verified-access-policy";
+            case AWSEC2ResourceTypeVerifiedAccessTrustProvider:
+                return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
             default:
@@ -67116,6 +68098,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"verified-access-instance"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessInstance);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-group"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessGroup);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessEndpoint);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-policy"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessPolicy);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-trust-provider"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessTrustProvider);
+        }
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
@@ -67274,6 +68271,16 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVerifiedAccessInstance:
+                return @"verified-access-instance";
+            case AWSEC2ResourceTypeVerifiedAccessGroup:
+                return @"verified-access-group";
+            case AWSEC2ResourceTypeVerifiedAccessEndpoint:
+                return @"verified-access-endpoint";
+            case AWSEC2ResourceTypeVerifiedAccessPolicy:
+                return @"verified-access-policy";
+            case AWSEC2ResourceTypeVerifiedAccessTrustProvider:
+                return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
             default:
@@ -70480,6 +71487,355 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2ModifyVerifiedAccessEndpointEniOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"port" : @"Port",
+             @"protocols" : @"Protocol",
+             };
+}
+
++ (NSValueTransformer *)protocolsJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"http"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTP);
+        }
+        if ([value caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTPS);
+        }
+        return @(AWSEC2VerifiedAccessEndpointProtocolUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointProtocolHTTP:
+                return @"http";
+            case AWSEC2VerifiedAccessEndpointProtocolHTTPS:
+                return @"https";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessEndpointLoadBalancerOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"port" : @"Port",
+             @"protocols" : @"Protocol",
+             @"subnetIds" : @"SubnetIds",
+             };
+}
+
++ (NSValueTransformer *)protocolsJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"http"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTP);
+        }
+        if ([value caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTPS);
+        }
+        return @(AWSEC2VerifiedAccessEndpointProtocolUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointProtocolHTTP:
+                return @"http";
+            case AWSEC2VerifiedAccessEndpointProtocolHTTPS:
+                return @"https";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessEndpointPolicyRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"policyDocument" : @"PolicyDocument",
+             @"policyEnabled" : @"PolicyEnabled",
+             @"verifiedAccessEndpointId" : @"VerifiedAccessEndpointId",
+             };
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessEndpointPolicyResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"policyDocument" : @"PolicyDocument",
+             @"policyEnabled" : @"PolicyEnabled",
+             };
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessEndpointRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"loadBalancerOptions" : @"LoadBalancerOptions",
+             @"networkInterfaceOptions" : @"NetworkInterfaceOptions",
+             @"verifiedAccessEndpointId" : @"VerifiedAccessEndpointId",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             };
+}
+
++ (NSValueTransformer *)loadBalancerOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2ModifyVerifiedAccessEndpointLoadBalancerOptions class]];
+}
+
++ (NSValueTransformer *)networkInterfaceOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2ModifyVerifiedAccessEndpointEniOptions class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessEndpointResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessEndpoint" : @"VerifiedAccessEndpoint",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessEndpointJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessEndpoint class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessGroupPolicyRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"policyDocument" : @"PolicyDocument",
+             @"policyEnabled" : @"PolicyEnabled",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             };
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessGroupPolicyResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"policyDocument" : @"PolicyDocument",
+             @"policyEnabled" : @"PolicyEnabled",
+             };
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessGroupRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessGroupResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessGroup" : @"VerifiedAccessGroup",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessGroupJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessGroup class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessInstanceLoggingConfigurationRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"accessLogs" : @"AccessLogs",
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
++ (NSValueTransformer *)accessLogsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogOptions class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessInstanceLoggingConfigurationResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"loggingConfiguration" : @"LoggingConfiguration",
+             };
+}
+
++ (NSValueTransformer *)loggingConfigurationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessInstanceLoggingConfiguration class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessInstanceRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessInstanceResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessInstance" : @"VerifiedAccessInstance",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessInstanceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessInstance class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessTrustProviderOidcOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"scope" : @"Scope",
+             };
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessTrustProviderRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"oidcOptions" : @"OidcOptions",
+             @"verifiedAccessTrustProviderId" : @"VerifiedAccessTrustProviderId",
+             };
+}
+
++ (NSValueTransformer *)oidcOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2ModifyVerifiedAccessTrustProviderOidcOptions class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyVerifiedAccessTrustProviderResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"verifiedAccessTrustProvider" : @"VerifiedAccessTrustProvider",
+             };
+}
+
++ (NSValueTransformer *)verifiedAccessTrustProviderJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessTrustProvider class]];
+}
+
+@end
+
 @implementation AWSEC2ModifyVolumeAttributeRequest
 
 + (BOOL)supportsSecureCoding {
@@ -72441,6 +73797,26 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"key" : @"Key",
              @"values" : @"Values",
+             };
+}
+
+@end
+
+@implementation AWSEC2OidcOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"authorizationEndpoint" : @"AuthorizationEndpoint",
+             @"clientId" : @"ClientId",
+             @"clientSecret" : @"ClientSecret",
+             @"issuer" : @"Issuer",
+             @"scope" : @"Scope",
+             @"tokenEndpoint" : @"TokenEndpoint",
+             @"userInfoEndpoint" : @"UserInfoEndpoint",
              };
 }
 
@@ -76831,6 +78207,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -77980,6 +79359,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -79924,6 +81305,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -81073,6 +82457,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -82954,6 +84340,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -84103,6 +85492,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -85977,6 +87368,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -87126,6 +88520,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -89042,6 +90438,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -90191,6 +91590,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -92178,6 +93579,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -93327,6 +94731,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -95687,6 +97093,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -96836,6 +98245,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -99282,6 +100693,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -100431,6 +101845,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -103750,6 +105166,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -104899,6 +106318,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -105527,6 +106948,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"verified-access-instance"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessInstance);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-group"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessGroup);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessEndpoint);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-policy"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessPolicy);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-trust-provider"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessTrustProvider);
+        }
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
@@ -105685,6 +107121,16 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVerifiedAccessInstance:
+                return @"verified-access-instance";
+            case AWSEC2ResourceTypeVerifiedAccessGroup:
+                return @"verified-access-group";
+            case AWSEC2ResourceTypeVerifiedAccessEndpoint:
+                return @"verified-access-endpoint";
+            case AWSEC2ResourceTypeVerifiedAccessPolicy:
+                return @"verified-access-policy";
+            case AWSEC2ResourceTypeVerifiedAccessTrustProvider:
+                return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
             default:
@@ -107984,6 +109430,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"hpc6id.32xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeHPC6id_32xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -109133,6 +110582,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"trn1.2xlarge";
             case AWSEC2InstanceTypeTRN1_32xlarge:
                 return @"trn1.32xlarge";
+            case AWSEC2InstanceTypeHPC6id_32xlarge:
+                return @"hpc6id.32xlarge";
             default:
                 return nil;
         }
@@ -110112,6 +111563,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"verified-access-instance"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessInstance);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-group"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessGroup);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessEndpoint);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-policy"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessPolicy);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-trust-provider"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessTrustProvider);
+        }
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
@@ -110270,6 +111736,16 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVerifiedAccessInstance:
+                return @"verified-access-instance";
+            case AWSEC2ResourceTypeVerifiedAccessGroup:
+                return @"verified-access-group";
+            case AWSEC2ResourceTypeVerifiedAccessEndpoint:
+                return @"verified-access-endpoint";
+            case AWSEC2ResourceTypeVerifiedAccessPolicy:
+                return @"verified-access-policy";
+            case AWSEC2ResourceTypeVerifiedAccessTrustProvider:
+                return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
             default:
@@ -110523,6 +111999,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-endpoint-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcEndpointConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"verified-access-instance"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessInstance);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-group"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessGroup);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessEndpoint);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-policy"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessPolicy);
+        }
+        if ([value caseInsensitiveCompare:@"verified-access-trust-provider"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVerifiedAccessTrustProvider);
+        }
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
@@ -110681,6 +112172,16 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"traffic-mirror-filter-rule";
             case AWSEC2ResourceTypeVpcEndpointConnectionDeviceType:
                 return @"vpc-endpoint-connection-device-type";
+            case AWSEC2ResourceTypeVerifiedAccessInstance:
+                return @"verified-access-instance";
+            case AWSEC2ResourceTypeVerifiedAccessGroup:
+                return @"verified-access-group";
+            case AWSEC2ResourceTypeVerifiedAccessEndpoint:
+                return @"verified-access-endpoint";
+            case AWSEC2ResourceTypeVerifiedAccessPolicy:
+                return @"verified-access-policy";
+            case AWSEC2ResourceTypeVerifiedAccessTrustProvider:
+                return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
             default:
@@ -114530,6 +116031,669 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)errorsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2ValidationError class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessEndpoint
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"applicationDomain" : @"ApplicationDomain",
+             @"attachmentType" : @"AttachmentType",
+             @"creationTime" : @"CreationTime",
+             @"deletionTime" : @"DeletionTime",
+             @"detail" : @"Description",
+             @"deviceValidationDomain" : @"DeviceValidationDomain",
+             @"domainCertificateArn" : @"DomainCertificateArn",
+             @"endpointDomain" : @"EndpointDomain",
+             @"endpointType" : @"EndpointType",
+             @"lastUpdatedTime" : @"LastUpdatedTime",
+             @"loadBalancerOptions" : @"LoadBalancerOptions",
+             @"networkInterfaceOptions" : @"NetworkInterfaceOptions",
+             @"securityGroupIds" : @"SecurityGroupIds",
+             @"status" : @"Status",
+             @"tags" : @"Tags",
+             @"verifiedAccessEndpointId" : @"VerifiedAccessEndpointId",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
++ (NSValueTransformer *)attachmentTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"vpc"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointAttachmentTypeVPC);
+        }
+        return @(AWSEC2VerifiedAccessEndpointAttachmentTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointAttachmentTypeVPC:
+                return @"vpc";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)endpointTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"load-balancer"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointTypeLoadBalancer);
+        }
+        if ([value caseInsensitiveCompare:@"network-interface"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointTypeNetworkInterface);
+        }
+        return @(AWSEC2VerifiedAccessEndpointTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointTypeLoadBalancer:
+                return @"load-balancer";
+            case AWSEC2VerifiedAccessEndpointTypeNetworkInterface:
+                return @"network-interface";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)loadBalancerOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessEndpointLoadBalancerOptions class]];
+}
+
++ (NSValueTransformer *)networkInterfaceOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessEndpointEniOptions class]];
+}
+
++ (NSValueTransformer *)statusJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessEndpointStatus class]];
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessEndpointEniOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"networkInterfaceId" : @"NetworkInterfaceId",
+             @"port" : @"Port",
+             @"protocols" : @"Protocol",
+             };
+}
+
++ (NSValueTransformer *)protocolsJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"http"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTP);
+        }
+        if ([value caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTPS);
+        }
+        return @(AWSEC2VerifiedAccessEndpointProtocolUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointProtocolHTTP:
+                return @"http";
+            case AWSEC2VerifiedAccessEndpointProtocolHTTPS:
+                return @"https";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessEndpointLoadBalancerOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"loadBalancerArn" : @"LoadBalancerArn",
+             @"port" : @"Port",
+             @"protocols" : @"Protocol",
+             @"subnetIds" : @"SubnetIds",
+             };
+}
+
++ (NSValueTransformer *)protocolsJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"http"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTP);
+        }
+        if ([value caseInsensitiveCompare:@"https"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointProtocolHTTPS);
+        }
+        return @(AWSEC2VerifiedAccessEndpointProtocolUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointProtocolHTTP:
+                return @"http";
+            case AWSEC2VerifiedAccessEndpointProtocolHTTPS:
+                return @"https";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessEndpointStatus
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"code" : @"Code",
+             @"message" : @"Message",
+             };
+}
+
++ (NSValueTransformer *)codeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"pending"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointStatusCodePending);
+        }
+        if ([value caseInsensitiveCompare:@"active"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointStatusCodeActive);
+        }
+        if ([value caseInsensitiveCompare:@"updating"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointStatusCodeUpdating);
+        }
+        if ([value caseInsensitiveCompare:@"deleting"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointStatusCodeDeleting);
+        }
+        if ([value caseInsensitiveCompare:@"deleted"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessEndpointStatusCodeDeleted);
+        }
+        return @(AWSEC2VerifiedAccessEndpointStatusCodeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessEndpointStatusCodePending:
+                return @"pending";
+            case AWSEC2VerifiedAccessEndpointStatusCodeActive:
+                return @"active";
+            case AWSEC2VerifiedAccessEndpointStatusCodeUpdating:
+                return @"updating";
+            case AWSEC2VerifiedAccessEndpointStatusCodeDeleting:
+                return @"deleting";
+            case AWSEC2VerifiedAccessEndpointStatusCodeDeleted:
+                return @"deleted";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessGroup
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"creationTime" : @"CreationTime",
+             @"deletionTime" : @"DeletionTime",
+             @"detail" : @"Description",
+             @"lastUpdatedTime" : @"LastUpdatedTime",
+             @"owner" : @"Owner",
+             @"tags" : @"Tags",
+             @"verifiedAccessGroupArn" : @"VerifiedAccessGroupArn",
+             @"verifiedAccessGroupId" : @"VerifiedAccessGroupId",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessInstance
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"creationTime" : @"CreationTime",
+             @"detail" : @"Description",
+             @"lastUpdatedTime" : @"LastUpdatedTime",
+             @"tags" : @"Tags",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             @"verifiedAccessTrustProviders" : @"VerifiedAccessTrustProviders",
+             };
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
+}
+
++ (NSValueTransformer *)verifiedAccessTrustProvidersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2VerifiedAccessTrustProviderCondensed class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessInstanceLoggingConfiguration
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"accessLogs" : @"AccessLogs",
+             @"verifiedAccessInstanceId" : @"VerifiedAccessInstanceId",
+             };
+}
+
++ (NSValueTransformer *)accessLogsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogs class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogCloudWatchLogsDestination
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"deliveryStatus" : @"DeliveryStatus",
+             @"enabled" : @"Enabled",
+             @"logGroup" : @"LogGroup",
+             };
+}
+
++ (NSValueTransformer *)deliveryStatusJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogDeliveryStatus class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogCloudWatchLogsDestinationOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"enabled" : @"Enabled",
+             @"logGroup" : @"LogGroup",
+             };
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogDeliveryStatus
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"code" : @"Code",
+             @"message" : @"Message",
+             };
+}
+
++ (NSValueTransformer *)codeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"success"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessLogDeliveryStatusCodeSuccess);
+        }
+        if ([value caseInsensitiveCompare:@"failed"] == NSOrderedSame) {
+            return @(AWSEC2VerifiedAccessLogDeliveryStatusCodeFailed);
+        }
+        return @(AWSEC2VerifiedAccessLogDeliveryStatusCodeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2VerifiedAccessLogDeliveryStatusCodeSuccess:
+                return @"success";
+            case AWSEC2VerifiedAccessLogDeliveryStatusCodeFailed:
+                return @"failed";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogKinesisDataFirehoseDestination
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"deliveryStatus" : @"DeliveryStatus",
+             @"deliveryStream" : @"DeliveryStream",
+             @"enabled" : @"Enabled",
+             };
+}
+
++ (NSValueTransformer *)deliveryStatusJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogDeliveryStatus class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogKinesisDataFirehoseDestinationOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"deliveryStream" : @"DeliveryStream",
+             @"enabled" : @"Enabled",
+             };
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"cloudWatchLogs" : @"CloudWatchLogs",
+             @"kinesisDataFirehose" : @"KinesisDataFirehose",
+             @"s3" : @"S3",
+             };
+}
+
++ (NSValueTransformer *)cloudWatchLogsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogCloudWatchLogsDestinationOptions class]];
+}
+
++ (NSValueTransformer *)kinesisDataFirehoseJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogKinesisDataFirehoseDestinationOptions class]];
+}
+
++ (NSValueTransformer *)s3JSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogS3DestinationOptions class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogS3Destination
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucketName" : @"BucketName",
+             @"bucketOwner" : @"BucketOwner",
+             @"deliveryStatus" : @"DeliveryStatus",
+             @"enabled" : @"Enabled",
+             @"prefix" : @"Prefix",
+             };
+}
+
++ (NSValueTransformer *)deliveryStatusJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogDeliveryStatus class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogS3DestinationOptions
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"bucketName" : @"BucketName",
+             @"bucketOwner" : @"BucketOwner",
+             @"enabled" : @"Enabled",
+             @"prefix" : @"Prefix",
+             };
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessLogs
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"cloudWatchLogs" : @"CloudWatchLogs",
+             @"kinesisDataFirehose" : @"KinesisDataFirehose",
+             @"s3" : @"S3",
+             };
+}
+
++ (NSValueTransformer *)cloudWatchLogsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogCloudWatchLogsDestination class]];
+}
+
++ (NSValueTransformer *)kinesisDataFirehoseJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogKinesisDataFirehoseDestination class]];
+}
+
++ (NSValueTransformer *)s3JSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VerifiedAccessLogS3Destination class]];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessTrustProvider
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"creationTime" : @"CreationTime",
+             @"detail" : @"Description",
+             @"deviceOptions" : @"DeviceOptions",
+             @"deviceTrustProviderType" : @"DeviceTrustProviderType",
+             @"lastUpdatedTime" : @"LastUpdatedTime",
+             @"oidcOptions" : @"OidcOptions",
+             @"policyReferenceName" : @"PolicyReferenceName",
+             @"tags" : @"Tags",
+             @"trustProviderType" : @"TrustProviderType",
+             @"userTrustProviderType" : @"UserTrustProviderType",
+             @"verifiedAccessTrustProviderId" : @"VerifiedAccessTrustProviderId",
+             };
+}
+
++ (NSValueTransformer *)deviceOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2DeviceOptions class]];
+}
+
++ (NSValueTransformer *)deviceTrustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"jamf"] == NSOrderedSame) {
+            return @(AWSEC2DeviceTrustProviderTypeJamf);
+        }
+        if ([value caseInsensitiveCompare:@"crowdstrike"] == NSOrderedSame) {
+            return @(AWSEC2DeviceTrustProviderTypeCrowdstrike);
+        }
+        return @(AWSEC2DeviceTrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2DeviceTrustProviderTypeJamf:
+                return @"jamf";
+            case AWSEC2DeviceTrustProviderTypeCrowdstrike:
+                return @"crowdstrike";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)oidcOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2OidcOptions class]];
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
+}
+
++ (NSValueTransformer *)trustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"user"] == NSOrderedSame) {
+            return @(AWSEC2TrustProviderTypeUser);
+        }
+        if ([value caseInsensitiveCompare:@"device"] == NSOrderedSame) {
+            return @(AWSEC2TrustProviderTypeDevice);
+        }
+        return @(AWSEC2TrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2TrustProviderTypeUser:
+                return @"user";
+            case AWSEC2TrustProviderTypeDevice:
+                return @"device";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)userTrustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"iam-identity-center"] == NSOrderedSame) {
+            return @(AWSEC2UserTrustProviderTypeIamIdentityCenter);
+        }
+        if ([value caseInsensitiveCompare:@"oidc"] == NSOrderedSame) {
+            return @(AWSEC2UserTrustProviderTypeOidc);
+        }
+        return @(AWSEC2UserTrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2UserTrustProviderTypeIamIdentityCenter:
+                return @"iam-identity-center";
+            case AWSEC2UserTrustProviderTypeOidc:
+                return @"oidc";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2VerifiedAccessTrustProviderCondensed
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"detail" : @"Description",
+             @"deviceTrustProviderType" : @"DeviceTrustProviderType",
+             @"trustProviderType" : @"TrustProviderType",
+             @"userTrustProviderType" : @"UserTrustProviderType",
+             @"verifiedAccessTrustProviderId" : @"VerifiedAccessTrustProviderId",
+             };
+}
+
++ (NSValueTransformer *)deviceTrustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"jamf"] == NSOrderedSame) {
+            return @(AWSEC2DeviceTrustProviderTypeJamf);
+        }
+        if ([value caseInsensitiveCompare:@"crowdstrike"] == NSOrderedSame) {
+            return @(AWSEC2DeviceTrustProviderTypeCrowdstrike);
+        }
+        return @(AWSEC2DeviceTrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2DeviceTrustProviderTypeJamf:
+                return @"jamf";
+            case AWSEC2DeviceTrustProviderTypeCrowdstrike:
+                return @"crowdstrike";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)trustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"user"] == NSOrderedSame) {
+            return @(AWSEC2TrustProviderTypeUser);
+        }
+        if ([value caseInsensitiveCompare:@"device"] == NSOrderedSame) {
+            return @(AWSEC2TrustProviderTypeDevice);
+        }
+        return @(AWSEC2TrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2TrustProviderTypeUser:
+                return @"user";
+            case AWSEC2TrustProviderTypeDevice:
+                return @"device";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)userTrustProviderTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"iam-identity-center"] == NSOrderedSame) {
+            return @(AWSEC2UserTrustProviderTypeIamIdentityCenter);
+        }
+        if ([value caseInsensitiveCompare:@"oidc"] == NSOrderedSame) {
+            return @(AWSEC2UserTrustProviderTypeOidc);
+        }
+        return @(AWSEC2UserTrustProviderTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2UserTrustProviderTypeIamIdentityCenter:
+                return @"iam-identity-center";
+            case AWSEC2UserTrustProviderTypeOidc:
+                return @"oidc";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
