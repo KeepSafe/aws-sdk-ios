@@ -1966,10 +1966,15 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"deviceIndex" : @"DeviceIndex",
              @"dryRun" : @"DryRun",
+             @"enaSrdSpecification" : @"EnaSrdSpecification",
              @"instanceId" : @"InstanceId",
              @"networkCardIndex" : @"NetworkCardIndex",
              @"networkInterfaceId" : @"NetworkInterfaceId",
              };
+}
+
++ (NSValueTransformer *)enaSrdSpecificationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2EnaSrdSpecification class]];
 }
 
 @end
@@ -2036,6 +2041,39 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)vpcAttachmentJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2VpcAttachment class]];
+}
+
+@end
+
+@implementation AWSEC2AttachmentEnaSrdSpecification
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"enaSrdEnabled" : @"EnaSrdEnabled",
+             @"enaSrdUdpSpecification" : @"EnaSrdUdpSpecification",
+             };
+}
+
++ (NSValueTransformer *)enaSrdUdpSpecificationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AttachmentEnaSrdUdpSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2AttachmentEnaSrdUdpSpecification
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"enaSrdUdpEnabled" : @"EnaSrdUdpEnabled",
+             };
 }
 
 @end
@@ -5017,6 +5055,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"clientToken" : @"ClientToken",
+             @"replicateImageTags" : @"CopyImageTags",
              @"detail" : @"Description",
              @"destinationOutpostArn" : @"DestinationOutpostArn",
              @"dryRun" : @"DryRun",
@@ -10074,6 +10113,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"clientToken" : @"ClientToken",
              @"connectivityType" : @"ConnectivityType",
              @"dryRun" : @"DryRun",
+             @"privateIpAddress" : @"PrivateIpAddress",
              @"subnetId" : @"SubnetId",
              @"tagSpecifications" : @"TagSpecifications",
              };
@@ -12618,6 +12658,195 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)tagsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
+}
+
+@end
+
+@implementation AWSEC2DataQuery
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destination" : @"Destination",
+             @"identifier" : @"Id",
+             @"metric" : @"Metric",
+             @"period" : @"Period",
+             @"source" : @"Source",
+             @"statistic" : @"Statistic",
+             };
+}
+
++ (NSValueTransformer *)metricJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"aggregate-latency"] == NSOrderedSame) {
+            return @(AWSEC2MetricTypeAggregateLatency);
+        }
+        return @(AWSEC2MetricTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2MetricTypeAggregateLatency:
+                return @"aggregate-latency";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)periodJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"five-minutes"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeFiveMinutes);
+        }
+        if ([value caseInsensitiveCompare:@"fifteen-minutes"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeFifteenMinutes);
+        }
+        if ([value caseInsensitiveCompare:@"one-hour"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneHour);
+        }
+        if ([value caseInsensitiveCompare:@"three-hours"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeThreeHours);
+        }
+        if ([value caseInsensitiveCompare:@"one-day"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneDay);
+        }
+        if ([value caseInsensitiveCompare:@"one-week"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneWeek);
+        }
+        return @(AWSEC2PeriodTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2PeriodTypeFiveMinutes:
+                return @"five-minutes";
+            case AWSEC2PeriodTypeFifteenMinutes:
+                return @"fifteen-minutes";
+            case AWSEC2PeriodTypeOneHour:
+                return @"one-hour";
+            case AWSEC2PeriodTypeThreeHours:
+                return @"three-hours";
+            case AWSEC2PeriodTypeOneDay:
+                return @"one-day";
+            case AWSEC2PeriodTypeOneWeek:
+                return @"one-week";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)statisticJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"p50"] == NSOrderedSame) {
+            return @(AWSEC2StatisticTypeP50);
+        }
+        return @(AWSEC2StatisticTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2StatisticTypeP50:
+                return @"p50";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2DataResponse
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destination" : @"Destination",
+             @"identifier" : @"Id",
+             @"metric" : @"Metric",
+             @"metricPoints" : @"MetricPoints",
+             @"period" : @"Period",
+             @"source" : @"Source",
+             @"statistic" : @"Statistic",
+             };
+}
+
++ (NSValueTransformer *)metricJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"aggregate-latency"] == NSOrderedSame) {
+            return @(AWSEC2MetricTypeAggregateLatency);
+        }
+        return @(AWSEC2MetricTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2MetricTypeAggregateLatency:
+                return @"aggregate-latency";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)metricPointsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2MetricPoint class]];
+}
+
++ (NSValueTransformer *)periodJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"five-minutes"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeFiveMinutes);
+        }
+        if ([value caseInsensitiveCompare:@"fifteen-minutes"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeFifteenMinutes);
+        }
+        if ([value caseInsensitiveCompare:@"one-hour"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneHour);
+        }
+        if ([value caseInsensitiveCompare:@"three-hours"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeThreeHours);
+        }
+        if ([value caseInsensitiveCompare:@"one-day"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneDay);
+        }
+        if ([value caseInsensitiveCompare:@"one-week"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneWeek);
+        }
+        return @(AWSEC2PeriodTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2PeriodTypeFiveMinutes:
+                return @"five-minutes";
+            case AWSEC2PeriodTypeFifteenMinutes:
+                return @"fifteen-minutes";
+            case AWSEC2PeriodTypeOneHour:
+                return @"one-hour";
+            case AWSEC2PeriodTypeThreeHours:
+                return @"three-hours";
+            case AWSEC2PeriodTypeOneDay:
+                return @"one-day";
+            case AWSEC2PeriodTypeOneWeek:
+                return @"one-week";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)statisticJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"p50"] == NSOrderedSame) {
+            return @(AWSEC2StatisticTypeP50);
+        }
+        return @(AWSEC2StatisticTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2StatisticTypeP50:
+                return @"p50";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -15205,6 +15434,46 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)availabilityZonesJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2AvailabilityZone class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeAwsNetworkPerformanceMetricSubscriptionsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeAwsNetworkPerformanceMetricSubscriptionsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"nextToken" : @"NextToken",
+             @"subscriptions" : @"Subscriptions",
+             };
+}
+
++ (NSValueTransformer *)subscriptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Subscription class]];
 }
 
 @end
@@ -27398,6 +27667,70 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2DisableAwsNetworkPerformanceMetricSubscriptionRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destination" : @"Destination",
+             @"dryRun" : @"DryRun",
+             @"metric" : @"Metric",
+             @"source" : @"Source",
+             @"statistic" : @"Statistic",
+             };
+}
+
++ (NSValueTransformer *)metricJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"aggregate-latency"] == NSOrderedSame) {
+            return @(AWSEC2MetricTypeAggregateLatency);
+        }
+        return @(AWSEC2MetricTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2MetricTypeAggregateLatency:
+                return @"aggregate-latency";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)statisticJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"p50"] == NSOrderedSame) {
+            return @(AWSEC2StatisticTypeP50);
+        }
+        return @(AWSEC2StatisticTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2StatisticTypeP50:
+                return @"p50";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2DisableAwsNetworkPerformanceMetricSubscriptionResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"output" : @"Output",
+             };
+}
+
+@end
+
 @implementation AWSEC2DisableEbsEncryptionByDefaultRequest
 
 + (BOOL)supportsSecureCoding {
@@ -29029,6 +29362,39 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2EnaSrdSpecification
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"enaSrdEnabled" : @"EnaSrdEnabled",
+             @"enaSrdUdpSpecification" : @"EnaSrdUdpSpecification",
+             };
+}
+
++ (NSValueTransformer *)enaSrdUdpSpecificationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2EnaSrdUdpSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2EnaSrdUdpSpecification
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"enaSrdUdpEnabled" : @"EnaSrdUdpEnabled",
+             };
+}
+
+@end
+
 @implementation AWSEC2EnableAddressTransferRequest
 
 + (BOOL)supportsSecureCoding {
@@ -29059,6 +29425,70 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)addressTransferJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AddressTransfer class]];
+}
+
+@end
+
+@implementation AWSEC2EnableAwsNetworkPerformanceMetricSubscriptionRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destination" : @"Destination",
+             @"dryRun" : @"DryRun",
+             @"metric" : @"Metric",
+             @"source" : @"Source",
+             @"statistic" : @"Statistic",
+             };
+}
+
++ (NSValueTransformer *)metricJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"aggregate-latency"] == NSOrderedSame) {
+            return @(AWSEC2MetricTypeAggregateLatency);
+        }
+        return @(AWSEC2MetricTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2MetricTypeAggregateLatency:
+                return @"aggregate-latency";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)statisticJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"p50"] == NSOrderedSame) {
+            return @(AWSEC2StatisticTypeP50);
+        }
+        return @(AWSEC2StatisticTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2StatisticTypeP50:
+                return @"p50";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
+@implementation AWSEC2EnableAwsNetworkPerformanceMetricSubscriptionResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"output" : @"Output",
+             };
 }
 
 @end
@@ -29467,6 +29897,34 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"success" : @"Success",
+             };
+}
+
+@end
+
+@implementation AWSEC2EnableReachabilityAnalyzerOrganizationSharingRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             };
+}
+
+@end
+
+@implementation AWSEC2EnableReachabilityAnalyzerOrganizationSharingResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"returnValue" : @"ReturnValue",
              };
 }
 
@@ -40024,6 +40482,64 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)ipv6CidrAssociationsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Ipv6CidrAssociation class]];
+}
+
+@end
+
+@implementation AWSEC2GetAwsNetworkPerformanceDataRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dataQueries" : @"DataQueries",
+             @"dryRun" : @"DryRun",
+             @"endTime" : @"EndTime",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             @"startTime" : @"StartTime",
+             };
+}
+
++ (NSValueTransformer *)dataQueriesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2DataQuery class]];
+}
+
++ (NSValueTransformer *)endTimeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)startTimeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
+@end
+
+@implementation AWSEC2GetAwsNetworkPerformanceDataResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dataResponses" : @"DataResponses",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)dataResponsesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2DataResponse class]];
 }
 
 @end
@@ -67464,6 +67980,39 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2MetricPoint
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"endDate" : @"EndDate",
+             @"startDate" : @"StartDate",
+             @"status" : @"Status",
+             @"value" : @"Value",
+             };
+}
+
++ (NSValueTransformer *)endDateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)startDateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
+@end
+
 @implementation AWSEC2ModifyAddressAttributeRequest
 
 + (BOOL)supportsSecureCoding {
@@ -69043,6 +69592,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"attachment" : @"Attachment",
              @"detail" : @"Description",
              @"dryRun" : @"DryRun",
+             @"enaSrdSpecification" : @"EnaSrdSpecification",
              @"groups" : @"Groups",
              @"networkInterfaceId" : @"NetworkInterfaceId",
              @"sourceDestCheck" : @"SourceDestCheck",
@@ -69055,6 +69605,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)detailJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AttributeValue class]];
+}
+
++ (NSValueTransformer *)enaSrdSpecificationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2EnaSrdSpecification class]];
 }
 
 + (NSValueTransformer *)sourceDestCheckJSONTransformer {
@@ -71071,6 +71625,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"defaultNetworkCardIndex" : @"DefaultNetworkCardIndex",
              @"efaInfo" : @"EfaInfo",
              @"efaSupported" : @"EfaSupported",
+             @"enaSrdSupported" : @"EnaSrdSupported",
              @"enaSupport" : @"EnaSupport",
              @"encryptionInTransitSupported" : @"EncryptionInTransitSupported",
              @"ipv4AddressesPerInterface" : @"Ipv4AddressesPerInterface",
@@ -71285,6 +71840,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"additionalAccounts" : @"AdditionalAccounts",
              @"alternatePathHints" : @"AlternatePathHints",
              @"explanations" : @"Explanations",
              @"filterInArns" : @"FilterInArns",
@@ -71297,6 +71853,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"startDate" : @"StartDate",
              @"status" : @"Status",
              @"statusMessage" : @"StatusMessage",
+             @"suggestedAccounts" : @"SuggestedAccounts",
              @"tags" : @"Tags",
              @"warningMessage" : @"WarningMessage",
              };
@@ -71368,12 +71925,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"createdDate" : @"CreatedDate",
              @"destination" : @"Destination",
+             @"destinationArn" : @"DestinationArn",
              @"destinationIp" : @"DestinationIp",
              @"destinationPort" : @"DestinationPort",
              @"networkInsightsPathArn" : @"NetworkInsightsPathArn",
              @"networkInsightsPathId" : @"NetworkInsightsPathId",
              @"protocols" : @"Protocol",
              @"source" : @"Source",
+             @"sourceArn" : @"SourceArn",
              @"sourceIp" : @"SourceIp",
              @"tags" : @"Tags",
              };
@@ -71649,6 +72208,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"attachmentId" : @"AttachmentId",
              @"deleteOnTermination" : @"DeleteOnTermination",
              @"deviceIndex" : @"DeviceIndex",
+             @"enaSrdSpecification" : @"EnaSrdSpecification",
              @"instanceId" : @"InstanceId",
              @"instanceOwnerId" : @"InstanceOwnerId",
              @"networkCardIndex" : @"NetworkCardIndex",
@@ -71662,6 +72222,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     } reverseBlock:^id(NSDate *date) {
 return [date aws_stringValue:AWSDateISO8601DateFormat1];
     }];
+}
+
++ (NSValueTransformer *)enaSrdSpecificationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AttachmentEnaSrdSpecification class]];
 }
 
 + (NSValueTransformer *)statusJSONTransformer {
@@ -108747,6 +109311,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"additionalAccounts" : @"AdditionalAccounts",
              @"clientToken" : @"ClientToken",
              @"dryRun" : @"DryRun",
              @"filterInArns" : @"FilterInArns",
@@ -109164,6 +109729,97 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)ipv6CidrBlockStateJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2SubnetCidrBlockState class]];
+}
+
+@end
+
+@implementation AWSEC2Subscription
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destination" : @"Destination",
+             @"metric" : @"Metric",
+             @"period" : @"Period",
+             @"source" : @"Source",
+             @"statistic" : @"Statistic",
+             };
+}
+
++ (NSValueTransformer *)metricJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"aggregate-latency"] == NSOrderedSame) {
+            return @(AWSEC2MetricTypeAggregateLatency);
+        }
+        return @(AWSEC2MetricTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2MetricTypeAggregateLatency:
+                return @"aggregate-latency";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)periodJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"five-minutes"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeFiveMinutes);
+        }
+        if ([value caseInsensitiveCompare:@"fifteen-minutes"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeFifteenMinutes);
+        }
+        if ([value caseInsensitiveCompare:@"one-hour"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneHour);
+        }
+        if ([value caseInsensitiveCompare:@"three-hours"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeThreeHours);
+        }
+        if ([value caseInsensitiveCompare:@"one-day"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneDay);
+        }
+        if ([value caseInsensitiveCompare:@"one-week"] == NSOrderedSame) {
+            return @(AWSEC2PeriodTypeOneWeek);
+        }
+        return @(AWSEC2PeriodTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2PeriodTypeFiveMinutes:
+                return @"five-minutes";
+            case AWSEC2PeriodTypeFifteenMinutes:
+                return @"fifteen-minutes";
+            case AWSEC2PeriodTypeOneHour:
+                return @"one-hour";
+            case AWSEC2PeriodTypeThreeHours:
+                return @"three-hours";
+            case AWSEC2PeriodTypeOneDay:
+                return @"one-day";
+            case AWSEC2PeriodTypeOneWeek:
+                return @"one-week";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)statisticJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"p50"] == NSOrderedSame) {
+            return @(AWSEC2StatisticTypeP50);
+        }
+        return @(AWSEC2StatisticTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2StatisticTypeP50:
+                return @"p50";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
