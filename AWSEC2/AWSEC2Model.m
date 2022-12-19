@@ -41146,6 +41146,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"detail" : @"Description",
              @"fpgaImageGlobalId" : @"FpgaImageGlobalId",
              @"fpgaImageId" : @"FpgaImageId",
+             @"instanceTypes" : @"InstanceTypes",
              @"name" : @"Name",
              @"ownerAlias" : @"OwnerAlias",
              @"ownerId" : @"OwnerId",
@@ -67676,6 +67677,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -67843,6 +67847,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
+            case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
+                return @"vpc-block-public-access-exclusion";
             default:
                 return nil;
         }
@@ -68116,6 +68122,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -68283,6 +68292,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
+            case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
+                return @"vpc-block-public-access-exclusion";
             default:
                 return nil;
         }
@@ -106966,6 +106977,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -107133,6 +107147,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
+            case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
+                return @"vpc-block-public-access-exclusion";
             default:
                 return nil;
         }
@@ -111581,6 +111597,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -111748,6 +111767,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
+            case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
+                return @"vpc-block-public-access-exclusion";
             default:
                 return nil;
         }
@@ -112017,6 +112038,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpn-connection-device-type"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpnConnectionDeviceType);
         }
+        if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -112184,6 +112208,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"verified-access-trust-provider";
             case AWSEC2ResourceTypeVpnConnectionDeviceType:
                 return @"vpn-connection-device-type";
+            case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
+                return @"vpc-block-public-access-exclusion";
             default:
                 return nil;
         }
