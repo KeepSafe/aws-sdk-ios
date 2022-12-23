@@ -20722,6 +20722,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"filters" : @"Filters",
              @"imageIds" : @"ImageIds",
              @"includeDeprecated" : @"IncludeDeprecated",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
              @"owners" : @"Owners",
              };
 }
@@ -20741,6 +20743,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"images" : @"Images",
+             @"nextToken" : @"NextToken",
              };
 }
 
