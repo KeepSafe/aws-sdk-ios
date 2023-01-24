@@ -9892,6 +9892,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"launchTemplateData" : @"LaunchTemplateData",
              @"launchTemplateId" : @"LaunchTemplateId",
              @"launchTemplateName" : @"LaunchTemplateName",
+             @"resolveAlias" : @"ResolveAlias",
              @"sourceVersion" : @"SourceVersion",
              @"versionDescription" : @"VersionDescription",
              };
@@ -21508,6 +21509,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"maxVersion" : @"MaxVersion",
              @"minVersion" : @"MinVersion",
              @"nextToken" : @"NextToken",
+             @"resolveAlias" : @"ResolveAlias",
              @"versions" : @"Versions",
              };
 }
