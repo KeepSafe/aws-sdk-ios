@@ -837,6 +837,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"autoPlacement" : @"AutoPlacement",
              @"availabilityZone" : @"AvailabilityZone",
              @"clientToken" : @"ClientToken",
+             @"hostMaintenance" : @"HostMaintenance",
              @"hostRecovery" : @"HostRecovery",
              @"instanceFamily" : @"InstanceFamily",
              @"instanceType" : @"InstanceType",
@@ -860,6 +861,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
             case AWSEC2AutoPlacementOn:
                 return @"on";
             case AWSEC2AutoPlacementOff:
+                return @"off";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)hostMaintenanceJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"on"] == NSOrderedSame) {
+            return @(AWSEC2HostMaintenanceOn);
+        }
+        if ([value caseInsensitiveCompare:@"off"] == NSOrderedSame) {
+            return @(AWSEC2HostMaintenanceOff);
+        }
+        return @(AWSEC2HostMaintenanceUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2HostMaintenanceOn:
+                return @"on";
+            case AWSEC2HostMaintenanceOff:
                 return @"off";
             default:
                 return nil;
@@ -1281,6 +1303,42 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2AssignPrivateNatGatewayAddressRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"natGatewayId" : @"NatGatewayId",
+             @"privateIpAddressCount" : @"PrivateIpAddressCount",
+             @"privateIpAddresses" : @"PrivateIpAddresses",
+             };
+}
+
+@end
+
+@implementation AWSEC2AssignPrivateNatGatewayAddressResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"natGatewayAddresses" : @"NatGatewayAddresses",
+             @"natGatewayId" : @"NatGatewayId",
+             };
+}
+
++ (NSValueTransformer *)natGatewayAddressesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2NatGatewayAddress class]];
+}
+
+@end
+
 @implementation AWSEC2AssignedPrivateIpAddress
 
 + (BOOL)supportsSecureCoding {
@@ -1484,6 +1542,82 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)instanceEventWindowJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2InstanceEventWindow class]];
+}
+
+@end
+
+@implementation AWSEC2AssociateIpamResourceDiscoveryRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"ipamId" : @"IpamId",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             @"tagSpecifications" : @"TagSpecifications",
+             };
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2AssociateIpamResourceDiscoveryResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamResourceDiscoveryAssociation" : @"IpamResourceDiscoveryAssociation",
+             };
+}
+
++ (NSValueTransformer *)ipamResourceDiscoveryAssociationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2IpamResourceDiscoveryAssociation class]];
+}
+
+@end
+
+@implementation AWSEC2AssociateNatGatewayAddressRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"allocationIds" : @"AllocationIds",
+             @"dryRun" : @"DryRun",
+             @"natGatewayId" : @"NatGatewayId",
+             @"privateIpAddresses" : @"PrivateIpAddresses",
+             };
+}
+
+@end
+
+@implementation AWSEC2AssociateNatGatewayAddressResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"natGatewayAddresses" : @"NatGatewayAddresses",
+             @"natGatewayId" : @"NatGatewayId",
+             };
+}
+
++ (NSValueTransformer *)natGatewayAddressesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2NatGatewayAddress class]];
 }
 
 @end
@@ -9835,6 +9969,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"dryRun" : @"DryRun",
              @"ipamScopeId" : @"IpamScopeId",
              @"locale" : @"Locale",
+             @"publicIpSource" : @"PublicIpSource",
              @"publiclyAdvertisable" : @"PubliclyAdvertisable",
              @"sourceIpamPoolId" : @"SourceIpamPoolId",
              @"tagSpecifications" : @"TagSpecifications",
@@ -9876,6 +10011,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         switch ([value integerValue]) {
             case AWSEC2IpamPoolAwsServiceEc2:
                 return @"ec2";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)publicIpSourceJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"amazon"] == NSOrderedSame) {
+            return @(AWSEC2IpamPoolPublicIpSourceAmazon);
+        }
+        if ([value caseInsensitiveCompare:@"byoip"] == NSOrderedSame) {
+            return @(AWSEC2IpamPoolPublicIpSourceByoip);
+        }
+        return @(AWSEC2IpamPoolPublicIpSourceUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2IpamPoolPublicIpSourceAmazon:
+                return @"amazon";
+            case AWSEC2IpamPoolPublicIpSourceByoip:
+                return @"byoip";
             default:
                 return nil;
         }
@@ -9928,6 +10084,50 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)tagSpecificationsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2CreateIpamResourceDiscoveryRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"operatingRegions" : @"OperatingRegions",
+             @"tagSpecifications" : @"TagSpecifications",
+             };
+}
+
++ (NSValueTransformer *)operatingRegionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2AddIpamOperatingRegion class]];
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2CreateIpamResourceDiscoveryResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamResourceDiscovery" : @"IpamResourceDiscovery",
+             };
+}
+
++ (NSValueTransformer *)ipamResourceDiscoveryJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2IpamResourceDiscovery class]];
 }
 
 @end
@@ -10161,6 +10361,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"destinationCidrBlock" : @"DestinationCidrBlock",
+             @"destinationPrefixListId" : @"DestinationPrefixListId",
              @"dryRun" : @"DryRun",
              @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
              @"localGatewayVirtualInterfaceGroupId" : @"LocalGatewayVirtualInterfaceGroupId",
@@ -10385,6 +10586,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"connectivityType" : @"ConnectivityType",
              @"dryRun" : @"DryRun",
              @"privateIpAddress" : @"PrivateIpAddress",
+             @"secondaryAllocationIds" : @"SecondaryAllocationIds",
+             @"secondaryPrivateIpAddressCount" : @"SecondaryPrivateIpAddressCount",
+             @"secondaryPrivateIpAddresses" : @"SecondaryPrivateIpAddresses",
              @"subnetId" : @"SubnetId",
              @"tagSpecifications" : @"TagSpecifications",
              };
@@ -14120,6 +14324,39 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2DeleteIpamResourceDiscoveryRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DeleteIpamResourceDiscoveryResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamResourceDiscovery" : @"IpamResourceDiscovery",
+             };
+}
+
++ (NSValueTransformer *)ipamResourceDiscoveryJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2IpamResourceDiscovery class]];
+}
+
+@end
+
 @implementation AWSEC2DeleteIpamResult
 
 + (BOOL)supportsSecureCoding {
@@ -14307,6 +14544,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"destinationCidrBlock" : @"DestinationCidrBlock",
+             @"destinationPrefixListId" : @"DestinationPrefixListId",
              @"dryRun" : @"DryRun",
              @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
              };
@@ -21776,6 +22014,88 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)ipamPoolsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2IpamPool class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeIpamResourceDiscoveriesRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"ipamResourceDiscoveryIds" : @"IpamResourceDiscoveryIds",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeIpamResourceDiscoveriesResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamResourceDiscoveries" : @"IpamResourceDiscoveries",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)ipamResourceDiscoveriesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2IpamResourceDiscovery class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeIpamResourceDiscoveryAssociationsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"ipamResourceDiscoveryAssociationIds" : @"IpamResourceDiscoveryAssociationIds",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeIpamResourceDiscoveryAssociationsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamResourceDiscoveryAssociations" : @"IpamResourceDiscoveryAssociations",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)ipamResourceDiscoveryAssociationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2IpamResourceDiscoveryAssociation class]];
 }
 
 @end
@@ -29935,6 +30255,75 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)instanceEventWindowJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2InstanceEventWindow class]];
+}
+
+@end
+
+@implementation AWSEC2DisassociateIpamResourceDiscoveryRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"ipamResourceDiscoveryAssociationId" : @"IpamResourceDiscoveryAssociationId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DisassociateIpamResourceDiscoveryResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamResourceDiscoveryAssociation" : @"IpamResourceDiscoveryAssociation",
+             };
+}
+
++ (NSValueTransformer *)ipamResourceDiscoveryAssociationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2IpamResourceDiscoveryAssociation class]];
+}
+
+@end
+
+@implementation AWSEC2DisassociateNatGatewayAddressRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"associationIds" : @"AssociationIds",
+             @"dryRun" : @"DryRun",
+             @"maxDrainDurationSeconds" : @"MaxDrainDurationSeconds",
+             @"natGatewayId" : @"NatGatewayId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DisassociateNatGatewayAddressResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"natGatewayAddresses" : @"NatGatewayAddresses",
+             @"natGatewayId" : @"NatGatewayId",
+             };
+}
+
++ (NSValueTransformer *)natGatewayAddressesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2NatGatewayAddress class]];
 }
 
 @end
@@ -43328,6 +43717,90 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2GetIpamDiscoveredAccountsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"discoveryRegion" : @"DiscoveryRegion",
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2GetIpamDiscoveredAccountsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamDiscoveredAccounts" : @"IpamDiscoveredAccounts",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)ipamDiscoveredAccountsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2IpamDiscoveredAccount class]];
+}
+
+@end
+
+@implementation AWSEC2GetIpamDiscoveredResourceCidrsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             @"resourceRegion" : @"ResourceRegion",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2GetIpamDiscoveredResourceCidrsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamDiscoveredResourceCidrs" : @"IpamDiscoveredResourceCidrs",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)ipamDiscoveredResourceCidrsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2IpamDiscoveredResourceCidr class]];
+}
+
+@end
+
 @implementation AWSEC2GetIpamPoolAllocationsRequest
 
 + (BOOL)supportsSecureCoding {
@@ -44588,6 +45061,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"availableCapacity" : @"AvailableCapacity",
              @"clientToken" : @"ClientToken",
              @"hostId" : @"HostId",
+             @"hostMaintenance" : @"HostMaintenance",
              @"hostProperties" : @"HostProperties",
              @"hostRecovery" : @"HostRecovery",
              @"hostReservationId" : @"HostReservationId",
@@ -44653,6 +45127,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)availableCapacityJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AvailableCapacity class]];
+}
+
++ (NSValueTransformer *)hostMaintenanceJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"on"] == NSOrderedSame) {
+            return @(AWSEC2HostMaintenanceOn);
+        }
+        if ([value caseInsensitiveCompare:@"off"] == NSOrderedSame) {
+            return @(AWSEC2HostMaintenanceOff);
+        }
+        return @(AWSEC2HostMaintenanceUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2HostMaintenanceOn:
+                return @"on";
+            case AWSEC2HostMaintenanceOff:
+                return @"off";
+            default:
+                return nil;
+        }
+    }];
 }
 
 + (NSValueTransformer *)hostPropertiesJSONTransformer {
@@ -61364,6 +61859,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"defaultResourceDiscoveryAssociationId" : @"DefaultResourceDiscoveryAssociationId",
+             @"defaultResourceDiscoveryId" : @"DefaultResourceDiscoveryId",
              @"detail" : @"Description",
              @"ipamArn" : @"IpamArn",
              @"ipamId" : @"IpamId",
@@ -61372,6 +61869,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"ownerId" : @"OwnerId",
              @"privateDefaultScopeId" : @"PrivateDefaultScopeId",
              @"publicDefaultScopeId" : @"PublicDefaultScopeId",
+             @"resourceDiscoveryAssociationCount" : @"ResourceDiscoveryAssociationCount",
              @"scopeCount" : @"ScopeCount",
              @"state" : @"State",
              @"tags" : @"Tags",
@@ -61607,6 +62105,156 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2IpamDiscoveredAccount
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"accountId" : @"AccountId",
+             @"discoveryRegion" : @"DiscoveryRegion",
+             @"failureReason" : @"FailureReason",
+             @"lastAttemptedDiscoveryTime" : @"LastAttemptedDiscoveryTime",
+             @"lastSuccessfulDiscoveryTime" : @"LastSuccessfulDiscoveryTime",
+             };
+}
+
++ (NSValueTransformer *)failureReasonJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2IpamDiscoveryFailureReason class]];
+}
+
++ (NSValueTransformer *)lastAttemptedDiscoveryTimeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)lastSuccessfulDiscoveryTimeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
+@end
+
+@implementation AWSEC2IpamDiscoveredResourceCidr
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipUsage" : @"IpUsage",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             @"resourceCidr" : @"ResourceCidr",
+             @"resourceId" : @"ResourceId",
+             @"resourceOwnerId" : @"ResourceOwnerId",
+             @"resourceRegion" : @"ResourceRegion",
+             @"resourceTags" : @"ResourceTags",
+             @"resourceType" : @"ResourceType",
+             @"sampleTime" : @"SampleTime",
+             @"vpcId" : @"VpcId",
+             };
+}
+
++ (NSValueTransformer *)resourceTagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2IpamResourceTag class]];
+}
+
++ (NSValueTransformer *)resourceTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"vpc"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceTypeVPC);
+        }
+        if ([value caseInsensitiveCompare:@"subnet"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceTypeSubnet);
+        }
+        if ([value caseInsensitiveCompare:@"eip"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceTypeEip);
+        }
+        if ([value caseInsensitiveCompare:@"public-ipv4-pool"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceTypePublicIpv4Pool);
+        }
+        if ([value caseInsensitiveCompare:@"ipv6-pool"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceTypeIpv6Pool);
+        }
+        return @(AWSEC2IpamResourceTypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2IpamResourceTypeVPC:
+                return @"vpc";
+            case AWSEC2IpamResourceTypeSubnet:
+                return @"subnet";
+            case AWSEC2IpamResourceTypeEip:
+                return @"eip";
+            case AWSEC2IpamResourceTypePublicIpv4Pool:
+                return @"public-ipv4-pool";
+            case AWSEC2IpamResourceTypeIpv6Pool:
+                return @"ipv6-pool";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)sampleTimeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
+@end
+
+@implementation AWSEC2IpamDiscoveryFailureReason
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"code" : @"Code",
+             @"message" : @"Message",
+             };
+}
+
++ (NSValueTransformer *)codeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"assume-role-failure"] == NSOrderedSame) {
+            return @(AWSEC2IpamDiscoveryFailureCodeAssumeRoleFailure);
+        }
+        if ([value caseInsensitiveCompare:@"throttling-failure"] == NSOrderedSame) {
+            return @(AWSEC2IpamDiscoveryFailureCodeThrottlingFailure);
+        }
+        if ([value caseInsensitiveCompare:@"unauthorized-failure"] == NSOrderedSame) {
+            return @(AWSEC2IpamDiscoveryFailureCodeUnauthorizedFailure);
+        }
+        return @(AWSEC2IpamDiscoveryFailureCodeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2IpamDiscoveryFailureCodeAssumeRoleFailure:
+                return @"assume-role-failure";
+            case AWSEC2IpamDiscoveryFailureCodeThrottlingFailure:
+                return @"throttling-failure";
+            case AWSEC2IpamDiscoveryFailureCodeUnauthorizedFailure:
+                return @"unauthorized-failure";
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
+
 @implementation AWSEC2IpamOperatingRegion
 
 + (BOOL)supportsSecureCoding {
@@ -61646,6 +62294,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"locale" : @"Locale",
              @"ownerId" : @"OwnerId",
              @"poolDepth" : @"PoolDepth",
+             @"publicIpSource" : @"PublicIpSource",
              @"publiclyAdvertisable" : @"PubliclyAdvertisable",
              @"sourceIpamPoolId" : @"SourceIpamPoolId",
              @"state" : @"State",
@@ -61710,6 +62359,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"public";
             case AWSEC2IpamScopeTypePrivate:
                 return @"private";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)publicIpSourceJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"amazon"] == NSOrderedSame) {
+            return @(AWSEC2IpamPoolPublicIpSourceAmazon);
+        }
+        if ([value caseInsensitiveCompare:@"byoip"] == NSOrderedSame) {
+            return @(AWSEC2IpamPoolPublicIpSourceByoip);
+        }
+        return @(AWSEC2IpamPoolPublicIpSourceUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2IpamPoolPublicIpSourceAmazon:
+                return @"amazon";
+            case AWSEC2IpamPoolPublicIpSourceByoip:
+                return @"byoip";
             default:
                 return nil;
         }
@@ -61854,6 +62524,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"cidr" : @"Cidr",
              @"failureReason" : @"FailureReason",
+             @"ipamPoolCidrId" : @"IpamPoolCidrId",
+             @"netmaskLength" : @"NetmaskLength",
              @"state" : @"State",
              };
 }
@@ -61933,11 +62605,16 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"cidr-not-available"] == NSOrderedSame) {
             return @(AWSEC2IpamPoolCidrFailureCodeCidrNotAvailable);
         }
+        if ([value caseInsensitiveCompare:@"limit-exceeded"] == NSOrderedSame) {
+            return @(AWSEC2IpamPoolCidrFailureCodeLimitExceeded);
+        }
         return @(AWSEC2IpamPoolCidrFailureCodeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
             case AWSEC2IpamPoolCidrFailureCodeCidrNotAvailable:
                 return @"cidr-not-available";
+            case AWSEC2IpamPoolCidrFailureCodeLimitExceeded:
+                return @"limit-exceeded";
             default:
                 return nil;
         }
@@ -62093,6 +62770,212 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSEC2IpamResourceDiscovery
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"detail" : @"Description",
+             @"ipamResourceDiscoveryArn" : @"IpamResourceDiscoveryArn",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             @"ipamResourceDiscoveryRegion" : @"IpamResourceDiscoveryRegion",
+             @"isDefault" : @"IsDefault",
+             @"operatingRegions" : @"OperatingRegions",
+             @"ownerId" : @"OwnerId",
+             @"state" : @"State",
+             @"tags" : @"Tags",
+             };
+}
+
++ (NSValueTransformer *)operatingRegionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2IpamOperatingRegion class]];
+}
+
++ (NSValueTransformer *)stateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"create-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateCreateInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"create-complete"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateCreateComplete);
+        }
+        if ([value caseInsensitiveCompare:@"create-failed"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateCreateFailed);
+        }
+        if ([value caseInsensitiveCompare:@"modify-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateModifyInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"modify-complete"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateModifyComplete);
+        }
+        if ([value caseInsensitiveCompare:@"modify-failed"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateModifyFailed);
+        }
+        if ([value caseInsensitiveCompare:@"delete-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateDeleteInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"delete-complete"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateDeleteComplete);
+        }
+        if ([value caseInsensitiveCompare:@"delete-failed"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateDeleteFailed);
+        }
+        if ([value caseInsensitiveCompare:@"isolate-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateIsolateInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"isolate-complete"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateIsolateComplete);
+        }
+        if ([value caseInsensitiveCompare:@"restore-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryStateRestoreInProgress);
+        }
+        return @(AWSEC2IpamResourceDiscoveryStateUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2IpamResourceDiscoveryStateCreateInProgress:
+                return @"create-in-progress";
+            case AWSEC2IpamResourceDiscoveryStateCreateComplete:
+                return @"create-complete";
+            case AWSEC2IpamResourceDiscoveryStateCreateFailed:
+                return @"create-failed";
+            case AWSEC2IpamResourceDiscoveryStateModifyInProgress:
+                return @"modify-in-progress";
+            case AWSEC2IpamResourceDiscoveryStateModifyComplete:
+                return @"modify-complete";
+            case AWSEC2IpamResourceDiscoveryStateModifyFailed:
+                return @"modify-failed";
+            case AWSEC2IpamResourceDiscoveryStateDeleteInProgress:
+                return @"delete-in-progress";
+            case AWSEC2IpamResourceDiscoveryStateDeleteComplete:
+                return @"delete-complete";
+            case AWSEC2IpamResourceDiscoveryStateDeleteFailed:
+                return @"delete-failed";
+            case AWSEC2IpamResourceDiscoveryStateIsolateInProgress:
+                return @"isolate-in-progress";
+            case AWSEC2IpamResourceDiscoveryStateIsolateComplete:
+                return @"isolate-complete";
+            case AWSEC2IpamResourceDiscoveryStateRestoreInProgress:
+                return @"restore-in-progress";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
+}
+
+@end
+
+@implementation AWSEC2IpamResourceDiscoveryAssociation
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamArn" : @"IpamArn",
+             @"ipamId" : @"IpamId",
+             @"ipamRegion" : @"IpamRegion",
+             @"ipamResourceDiscoveryAssociationArn" : @"IpamResourceDiscoveryAssociationArn",
+             @"ipamResourceDiscoveryAssociationId" : @"IpamResourceDiscoveryAssociationId",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             @"isDefault" : @"IsDefault",
+             @"ownerId" : @"OwnerId",
+             @"resourceDiscoveryStatus" : @"ResourceDiscoveryStatus",
+             @"state" : @"State",
+             @"tags" : @"Tags",
+             };
+}
+
++ (NSValueTransformer *)resourceDiscoveryStatusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"active"] == NSOrderedSame) {
+            return @(AWSEC2IpamAssociatedResourceDiscoveryStatusActive);
+        }
+        if ([value caseInsensitiveCompare:@"not-found"] == NSOrderedSame) {
+            return @(AWSEC2IpamAssociatedResourceDiscoveryStatusNotFound);
+        }
+        return @(AWSEC2IpamAssociatedResourceDiscoveryStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2IpamAssociatedResourceDiscoveryStatusActive:
+                return @"active";
+            case AWSEC2IpamAssociatedResourceDiscoveryStatusNotFound:
+                return @"not-found";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)stateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"associate-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateAssociateInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"associate-complete"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateAssociateComplete);
+        }
+        if ([value caseInsensitiveCompare:@"associate-failed"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateAssociateFailed);
+        }
+        if ([value caseInsensitiveCompare:@"disassociate-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateDisassociateInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"disassociate-complete"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateDisassociateComplete);
+        }
+        if ([value caseInsensitiveCompare:@"disassociate-failed"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateDisassociateFailed);
+        }
+        if ([value caseInsensitiveCompare:@"isolate-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateIsolateInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"isolate-complete"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateIsolateComplete);
+        }
+        if ([value caseInsensitiveCompare:@"restore-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2IpamResourceDiscoveryAssociationStateRestoreInProgress);
+        }
+        return @(AWSEC2IpamResourceDiscoveryAssociationStateUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2IpamResourceDiscoveryAssociationStateAssociateInProgress:
+                return @"associate-in-progress";
+            case AWSEC2IpamResourceDiscoveryAssociationStateAssociateComplete:
+                return @"associate-complete";
+            case AWSEC2IpamResourceDiscoveryAssociationStateAssociateFailed:
+                return @"associate-failed";
+            case AWSEC2IpamResourceDiscoveryAssociationStateDisassociateInProgress:
+                return @"disassociate-in-progress";
+            case AWSEC2IpamResourceDiscoveryAssociationStateDisassociateComplete:
+                return @"disassociate-complete";
+            case AWSEC2IpamResourceDiscoveryAssociationStateDisassociateFailed:
+                return @"disassociate-failed";
+            case AWSEC2IpamResourceDiscoveryAssociationStateIsolateInProgress:
+                return @"isolate-in-progress";
+            case AWSEC2IpamResourceDiscoveryAssociationStateIsolateComplete:
+                return @"isolate-complete";
+            case AWSEC2IpamResourceDiscoveryAssociationStateRestoreInProgress:
+                return @"restore-in-progress";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
 }
 
 @end
@@ -70385,6 +71268,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
         }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscovery);
+        }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -70554,6 +71443,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"vpn-connection-device-type";
             case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
                 return @"vpc-block-public-access-exclusion";
+            case AWSEC2ResourceTypeIpamResourceDiscovery:
+                return @"ipam-resource-discovery";
+            case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
+                return @"ipam-resource-discovery-association";
             default:
                 return nil;
         }
@@ -70830,6 +71723,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
         }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscovery);
+        }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -70999,6 +71898,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"vpn-connection-device-type";
             case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
                 return @"vpc-block-public-access-exclusion";
+            case AWSEC2ResourceTypeIpamResourceDiscovery:
+                return @"ipam-resource-discovery";
+            case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
+                return @"ipam-resource-discovery-association";
             default:
                 return nil;
         }
@@ -71312,6 +72215,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"coipPoolId" : @"CoipPoolId",
              @"destinationCidrBlock" : @"DestinationCidrBlock",
+             @"destinationPrefixListId" : @"DestinationPrefixListId",
              @"localGatewayRouteTableArn" : @"LocalGatewayRouteTableArn",
              @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
              @"localGatewayVirtualInterfaceGroupId" : @"LocalGatewayVirtualInterfaceGroupId",
@@ -72265,6 +73169,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"autoPlacement" : @"AutoPlacement",
              @"hostIds" : @"HostIds",
+             @"hostMaintenance" : @"HostMaintenance",
              @"hostRecovery" : @"HostRecovery",
              @"instanceFamily" : @"InstanceFamily",
              @"instanceType" : @"InstanceType",
@@ -72285,6 +73190,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
             case AWSEC2AutoPlacementOn:
                 return @"on";
             case AWSEC2AutoPlacementOff:
+                return @"off";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)hostMaintenanceJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"on"] == NSOrderedSame) {
+            return @(AWSEC2HostMaintenanceOn);
+        }
+        if ([value caseInsensitiveCompare:@"off"] == NSOrderedSame) {
+            return @(AWSEC2HostMaintenanceOff);
+        }
+        return @(AWSEC2HostMaintenanceUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2HostMaintenanceOn:
+                return @"on";
+            case AWSEC2HostMaintenanceOff:
                 return @"off";
             default:
                 return nil;
@@ -73134,6 +74060,50 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2ModifyIpamResourceDiscoveryRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"addOperatingRegions" : @"AddOperatingRegions",
+             @"detail" : @"Description",
+             @"dryRun" : @"DryRun",
+             @"ipamResourceDiscoveryId" : @"IpamResourceDiscoveryId",
+             @"removeOperatingRegions" : @"RemoveOperatingRegions",
+             };
+}
+
++ (NSValueTransformer *)addOperatingRegionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2AddIpamOperatingRegion class]];
+}
+
++ (NSValueTransformer *)removeOperatingRegionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2RemoveIpamOperatingRegion class]];
+}
+
+@end
+
+@implementation AWSEC2ModifyIpamResourceDiscoveryResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipamResourceDiscovery" : @"IpamResourceDiscovery",
+             };
+}
+
++ (NSValueTransformer *)ipamResourceDiscoveryJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2IpamResourceDiscovery class]];
+}
+
+@end
+
 @implementation AWSEC2ModifyIpamResult
 
 + (BOOL)supportsSecureCoding {
@@ -73231,6 +74201,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"destinationCidrBlock" : @"DestinationCidrBlock",
+             @"destinationPrefixListId" : @"DestinationPrefixListId",
              @"dryRun" : @"DryRun",
              @"localGatewayRouteTableId" : @"LocalGatewayRouteTableId",
              @"localGatewayVirtualInterfaceGroupId" : @"LocalGatewayVirtualInterfaceGroupId",
@@ -75534,10 +76505,55 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"allocationId" : @"AllocationId",
+             @"associationId" : @"AssociationId",
+             @"failureMessage" : @"FailureMessage",
+             @"isPrimary" : @"IsPrimary",
              @"networkInterfaceId" : @"NetworkInterfaceId",
              @"privateIp" : @"PrivateIp",
              @"publicIp" : @"PublicIp",
+             @"status" : @"Status",
              };
+}
+
++ (NSValueTransformer *)statusJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"assigning"] == NSOrderedSame) {
+            return @(AWSEC2NatGatewayAddressStatusAssigning);
+        }
+        if ([value caseInsensitiveCompare:@"unassigning"] == NSOrderedSame) {
+            return @(AWSEC2NatGatewayAddressStatusUnassigning);
+        }
+        if ([value caseInsensitiveCompare:@"associating"] == NSOrderedSame) {
+            return @(AWSEC2NatGatewayAddressStatusAssociating);
+        }
+        if ([value caseInsensitiveCompare:@"disassociating"] == NSOrderedSame) {
+            return @(AWSEC2NatGatewayAddressStatusDisassociating);
+        }
+        if ([value caseInsensitiveCompare:@"succeeded"] == NSOrderedSame) {
+            return @(AWSEC2NatGatewayAddressStatusSucceeded);
+        }
+        if ([value caseInsensitiveCompare:@"failed"] == NSOrderedSame) {
+            return @(AWSEC2NatGatewayAddressStatusFailed);
+        }
+        return @(AWSEC2NatGatewayAddressStatusUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2NatGatewayAddressStatusAssigning:
+                return @"assigning";
+            case AWSEC2NatGatewayAddressStatusUnassigning:
+                return @"unassigning";
+            case AWSEC2NatGatewayAddressStatusAssociating:
+                return @"associating";
+            case AWSEC2NatGatewayAddressStatusDisassociating:
+                return @"disassociating";
+            case AWSEC2NatGatewayAddressStatusSucceeded:
+                return @"succeeded";
+            case AWSEC2NatGatewayAddressStatusFailed:
+                return @"failed";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -77727,8 +78743,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"cidr" : @"Cidr",
              @"cidrAuthorizationContext" : @"CidrAuthorizationContext",
+             @"clientToken" : @"ClientToken",
              @"dryRun" : @"DryRun",
              @"ipamPoolId" : @"IpamPoolId",
+             @"netmaskLength" : @"NetmaskLength",
              };
 }
 
@@ -111710,6 +112728,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
         }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscovery);
+        }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -111879,6 +112903,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"vpn-connection-device-type";
             case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
                 return @"vpc-block-public-access-exclusion";
+            case AWSEC2ResourceTypeIpamResourceDiscovery:
+                return @"ipam-resource-discovery";
+            case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
+                return @"ipam-resource-discovery-association";
             default:
                 return nil;
         }
@@ -116555,6 +117583,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
         }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscovery);
+        }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -116724,6 +117758,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"vpn-connection-device-type";
             case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
                 return @"vpc-block-public-access-exclusion";
+            case AWSEC2ResourceTypeIpamResourceDiscovery:
+                return @"ipam-resource-discovery";
+            case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
+                return @"ipam-resource-discovery-association";
             default:
                 return nil;
         }
@@ -116996,6 +118034,12 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"vpc-block-public-access-exclusion"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeVpcBlockPublicAccessExclusion);
         }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscovery);
+        }
+        if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -117165,6 +118209,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"vpn-connection-device-type";
             case AWSEC2ResourceTypeVpcBlockPublicAccessExclusion:
                 return @"vpc-block-public-access-exclusion";
+            case AWSEC2ResourceTypeIpamResourceDiscovery:
+                return @"ipam-resource-discovery";
+            case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
+                return @"ipam-resource-discovery-association";
             default:
                 return nil;
         }
@@ -120655,6 +121703,42 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"networkInterfaceId" : @"NetworkInterfaceId",
              @"privateIpAddresses" : @"PrivateIpAddresses",
              };
+}
+
+@end
+
+@implementation AWSEC2UnassignPrivateNatGatewayAddressRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"maxDrainDurationSeconds" : @"MaxDrainDurationSeconds",
+             @"natGatewayId" : @"NatGatewayId",
+             @"privateIpAddresses" : @"PrivateIpAddresses",
+             };
+}
+
+@end
+
+@implementation AWSEC2UnassignPrivateNatGatewayAddressResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"natGatewayAddresses" : @"NatGatewayAddresses",
+             @"natGatewayId" : @"NatGatewayId",
+             };
+}
+
++ (NSValueTransformer *)natGatewayAddressesJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2NatGatewayAddress class]];
 }
 
 @end
