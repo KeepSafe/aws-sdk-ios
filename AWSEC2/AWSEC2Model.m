@@ -73303,6 +73303,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"detail" : @"Description",
              @"dryRun" : @"DryRun",
              @"imageId" : @"ImageId",
+             @"imdsSupport" : @"ImdsSupport",
              @"launchPermission" : @"LaunchPermission",
              @"operationType" : @"OperationType",
              @"organizationArns" : @"OrganizationArns",
@@ -73315,6 +73316,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 }
 
 + (NSValueTransformer *)detailJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AttributeValue class]];
+}
+
++ (NSValueTransformer *)imdsSupportJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AttributeValue class]];
 }
 
