@@ -31018,6 +31018,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"dnsRecordIpType" : @"DnsRecordIpType",
+             @"privateDnsOnlyForInboundResolverEndpoint" : @"PrivateDnsOnlyForInboundResolverEndpoint",
              };
 }
 
@@ -31063,6 +31064,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"dnsRecordIpType" : @"DnsRecordIpType",
+             @"privateDnsOnlyForInboundResolverEndpoint" : @"PrivateDnsOnlyForInboundResolverEndpoint",
              };
 }
 
