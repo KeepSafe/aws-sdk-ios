@@ -563,10 +563,36 @@ NSString *const AWSEC2ErrorDomain = @"com.amazonaws.AWSEC2ErrorDomain";
 	return @{
              @"additionalDetailType" : @"AdditionalDetailType",
              @"component" : @"Component",
+             @"loadBalancers" : @"LoadBalancers",
+             @"ruleGroupRuleOptionsPairs" : @"RuleGroupRuleOptionsPairs",
+             @"ruleGroupTypePairs" : @"RuleGroupTypePairs",
+             @"ruleOptions" : @"RuleOptions",
+             @"serviceName" : @"ServiceName",
+             @"vpcEndpointService" : @"VpcEndpointService",
              };
 }
 
 + (NSValueTransformer *)componentJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AnalysisComponent class]];
+}
+
++ (NSValueTransformer *)loadBalancersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2AnalysisComponent class]];
+}
+
++ (NSValueTransformer *)ruleGroupRuleOptionsPairsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2RuleGroupRuleOptionsPair class]];
+}
+
++ (NSValueTransformer *)ruleGroupTypePairsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2RuleGroupTypePair class]];
+}
+
++ (NSValueTransformer *)ruleOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2RuleOption class]];
+}
+
++ (NSValueTransformer *)vpcEndpointServiceJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AnalysisComponent class]];
 }
 
@@ -1156,11 +1182,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"carrierGatewayId" : @"CarrierGatewayId",
+             @"coreNetworkArn" : @"CoreNetworkArn",
              @"destinationCidr" : @"DestinationCidr",
              @"destinationPrefixListId" : @"DestinationPrefixListId",
              @"egressOnlyInternetGatewayId" : @"EgressOnlyInternetGatewayId",
              @"gatewayId" : @"GatewayId",
              @"instanceId" : @"InstanceId",
+             @"localGatewayId" : @"LocalGatewayId",
              @"natGatewayId" : @"NatGatewayId",
              @"networkInterfaceId" : @"NetworkInterfaceId",
              @"origin" : @"Origin",
@@ -10891,11 +10920,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"destinationIp" : @"DestinationIp",
              @"destinationPort" : @"DestinationPort",
              @"dryRun" : @"DryRun",
+             @"filterAtDestination" : @"FilterAtDestination",
+             @"filterAtSource" : @"FilterAtSource",
              @"protocols" : @"Protocol",
              @"source" : @"Source",
              @"sourceIp" : @"SourceIp",
              @"tagSpecifications" : @"TagSpecifications",
              };
+}
+
++ (NSValueTransformer *)filterAtDestinationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2PathRequestFilter class]];
+}
+
++ (NSValueTransformer *)filterAtSourceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2PathRequestFilter class]];
 }
 
 + (NSValueTransformer *)protocolsJSONTransformer {
@@ -32358,6 +32397,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"direction" : @"Direction",
              @"elasticLoadBalancerListener" : @"ElasticLoadBalancerListener",
              @"explanationCode" : @"ExplanationCode",
+             @"firewallStatefulRule" : @"FirewallStatefulRule",
+             @"firewallStatelessRule" : @"FirewallStatelessRule",
              @"ingressRouteTable" : @"IngressRouteTable",
              @"internetGateway" : @"InternetGateway",
              @"loadBalancerArn" : @"LoadBalancerArn",
@@ -32429,6 +32470,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)elasticLoadBalancerListenerJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AnalysisComponent class]];
+}
+
++ (NSValueTransformer *)firewallStatefulRuleJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2FirewallStatefulRule class]];
+}
+
++ (NSValueTransformer *)firewallStatelessRuleJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2FirewallStatelessRule class]];
 }
 
 + (NSValueTransformer *)ingressRouteTableJSONTransformer {
@@ -33126,6 +33175,79 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"name" : @"Name",
              @"values" : @"Values",
              };
+}
+
+@end
+
+@implementation AWSEC2FilterPortRange
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"fromPort" : @"FromPort",
+             @"toPort" : @"ToPort",
+             };
+}
+
+@end
+
+@implementation AWSEC2FirewallStatefulRule
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destinationPorts" : @"DestinationPorts",
+             @"destinations" : @"Destinations",
+             @"direction" : @"Direction",
+             @"protocols" : @"Protocol",
+             @"ruleAction" : @"RuleAction",
+             @"ruleGroupArn" : @"RuleGroupArn",
+             @"sourcePorts" : @"SourcePorts",
+             @"sources" : @"Sources",
+             };
+}
+
++ (NSValueTransformer *)destinationPortsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2PortRange class]];
+}
+
++ (NSValueTransformer *)sourcePortsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2PortRange class]];
+}
+
+@end
+
+@implementation AWSEC2FirewallStatelessRule
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destinationPorts" : @"DestinationPorts",
+             @"destinations" : @"Destinations",
+             @"priority" : @"Priority",
+             @"protocols" : @"Protocols",
+             @"ruleAction" : @"RuleAction",
+             @"ruleGroupArn" : @"RuleGroupArn",
+             @"sourcePorts" : @"SourcePorts",
+             @"sources" : @"Sources",
+             };
+}
+
++ (NSValueTransformer *)destinationPortsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2PortRange class]];
+}
+
++ (NSValueTransformer *)sourcePortsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2PortRange class]];
 }
 
 @end
@@ -78205,6 +78327,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"destinationArn" : @"DestinationArn",
              @"destinationIp" : @"DestinationIp",
              @"destinationPort" : @"DestinationPort",
+             @"filterAtDestination" : @"FilterAtDestination",
+             @"filterAtSource" : @"FilterAtSource",
              @"networkInsightsPathArn" : @"NetworkInsightsPathArn",
              @"networkInsightsPathId" : @"NetworkInsightsPathId",
              @"protocols" : @"Protocol",
@@ -78221,6 +78345,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     } reverseBlock:^id(NSDate *date) {
 return [date aws_stringValue:AWSDateISO8601DateFormat1];
     }];
+}
+
++ (NSValueTransformer *)filterAtDestinationJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2PathFilter class]];
+}
+
++ (NSValueTransformer *)filterAtSourceJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2PathFilter class]];
 }
 
 + (NSValueTransformer *)protocolsJSONTransformer {
@@ -78886,11 +79018,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"destinationVpc" : @"DestinationVpc",
              @"elasticLoadBalancerListener" : @"ElasticLoadBalancerListener",
              @"explanations" : @"Explanations",
+             @"firewallStatefulRule" : @"FirewallStatefulRule",
+             @"firewallStatelessRule" : @"FirewallStatelessRule",
              @"inboundHeader" : @"InboundHeader",
              @"outboundHeader" : @"OutboundHeader",
              @"routeTableRoute" : @"RouteTableRoute",
              @"securityGroupRule" : @"SecurityGroupRule",
              @"sequenceNumber" : @"SequenceNumber",
+             @"serviceName" : @"ServiceName",
              @"sourceVpc" : @"SourceVpc",
              @"subnet" : @"Subnet",
              @"transitGateway" : @"TransitGateway",
@@ -78927,6 +79062,14 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Explanation class]];
 }
 
++ (NSValueTransformer *)firewallStatefulRuleJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2FirewallStatefulRule class]];
+}
+
++ (NSValueTransformer *)firewallStatelessRuleJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2FirewallStatelessRule class]];
+}
+
 + (NSValueTransformer *)inboundHeaderJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AnalysisPacketHeader class]];
 }
@@ -78961,6 +79104,56 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)vpcJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2AnalysisComponent class]];
+}
+
+@end
+
+@implementation AWSEC2PathFilter
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destinationAddress" : @"DestinationAddress",
+             @"destinationPortRange" : @"DestinationPortRange",
+             @"sourceAddress" : @"SourceAddress",
+             @"sourcePortRange" : @"SourcePortRange",
+             };
+}
+
++ (NSValueTransformer *)destinationPortRangeJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2FilterPortRange class]];
+}
+
++ (NSValueTransformer *)sourcePortRangeJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2FilterPortRange class]];
+}
+
+@end
+
+@implementation AWSEC2PathRequestFilter
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"destinationAddress" : @"DestinationAddress",
+             @"destinationPortRange" : @"DestinationPortRange",
+             @"sourceAddress" : @"SourceAddress",
+             @"sourcePortRange" : @"SourcePortRange",
+             };
+}
+
++ (NSValueTransformer *)destinationPortRangeJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2RequestFilterPortRange class]];
+}
+
++ (NSValueTransformer *)sourcePortRangeJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2RequestFilterPortRange class]];
 }
 
 @end
@@ -81288,6 +81481,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSEC2RequestFilterPortRange
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"fromPort" : @"FromPort",
+             @"toPort" : @"ToPort",
+             };
 }
 
 @end
@@ -106010,6 +106218,55 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSEC2RuleGroupRuleOptionsPair
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ruleGroupArn" : @"RuleGroupArn",
+             @"ruleOptions" : @"RuleOptions",
+             };
+}
+
++ (NSValueTransformer *)ruleOptionsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2RuleOption class]];
+}
+
+@end
+
+@implementation AWSEC2RuleGroupTypePair
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ruleGroupArn" : @"RuleGroupArn",
+             @"ruleGroupType" : @"RuleGroupType",
+             };
+}
+
+@end
+
+@implementation AWSEC2RuleOption
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"keyword" : @"Keyword",
+             @"settings" : @"Settings",
+             };
 }
 
 @end
