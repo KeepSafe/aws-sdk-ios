@@ -77159,7 +77159,13 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"authorizationEndpoint" : @"AuthorizationEndpoint",
+             @"clientId" : @"ClientId",
+             @"clientSecret" : @"ClientSecret",
+             @"issuer" : @"Issuer",
              @"scope" : @"Scope",
+             @"tokenEndpoint" : @"TokenEndpoint",
+             @"userInfoEndpoint" : @"UserInfoEndpoint",
              };
 }
 
