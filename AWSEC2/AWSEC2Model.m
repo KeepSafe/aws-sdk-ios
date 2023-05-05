@@ -5340,9 +5340,31 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"amdSevSnp" : @"AmdSevSnp",
              @"coreCount" : @"CoreCount",
              @"threadsPerCore" : @"ThreadsPerCore",
              };
+}
+
++ (NSValueTransformer *)amdSevSnpJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"enabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationEnabled);
+        }
+        if ([value caseInsensitiveCompare:@"disabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationDisabled);
+        }
+        return @(AWSEC2AmdSevSnpSpecificationUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2AmdSevSnpSpecificationEnabled:
+                return @"enabled";
+            case AWSEC2AmdSevSnpSpecificationDisabled:
+                return @"disabled";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -5355,9 +5377,31 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"amdSevSnp" : @"AmdSevSnp",
              @"coreCount" : @"CoreCount",
              @"threadsPerCore" : @"ThreadsPerCore",
              };
+}
+
++ (NSValueTransformer *)amdSevSnpJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"enabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationEnabled);
+        }
+        if ([value caseInsensitiveCompare:@"disabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationDisabled);
+        }
+        return @(AWSEC2AmdSevSnpSpecificationUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2AmdSevSnpSpecificationEnabled:
+                return @"enabled";
+            case AWSEC2AmdSevSnpSpecificationDisabled:
+                return @"disabled";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -68305,9 +68349,31 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"amdSevSnp" : @"AmdSevSnp",
              @"coreCount" : @"CoreCount",
              @"threadsPerCore" : @"ThreadsPerCore",
              };
+}
+
++ (NSValueTransformer *)amdSevSnpJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"enabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationEnabled);
+        }
+        if ([value caseInsensitiveCompare:@"disabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationDisabled);
+        }
+        return @(AWSEC2AmdSevSnpSpecificationUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2AmdSevSnpSpecificationEnabled:
+                return @"enabled";
+            case AWSEC2AmdSevSnpSpecificationDisabled:
+                return @"disabled";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -68320,9 +68386,31 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"amdSevSnp" : @"AmdSevSnp",
              @"coreCount" : @"CoreCount",
              @"threadsPerCore" : @"ThreadsPerCore",
              };
+}
+
++ (NSValueTransformer *)amdSevSnpJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"enabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationEnabled);
+        }
+        if ([value caseInsensitiveCompare:@"disabled"] == NSOrderedSame) {
+            return @(AWSEC2AmdSevSnpSpecificationDisabled);
+        }
+        return @(AWSEC2AmdSevSnpSpecificationUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2AmdSevSnpSpecificationEnabled:
+                return @"enabled";
+            case AWSEC2AmdSevSnpSpecificationDisabled:
+                return @"disabled";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -80392,6 +80480,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"supportedArchitectures" : @"SupportedArchitectures",
+             @"supportedFeatures" : @"SupportedFeatures",
              @"sustainedClockSpeedInGhz" : @"SustainedClockSpeedInGhz",
              };
 }
