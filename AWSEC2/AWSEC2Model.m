@@ -8302,6 +8302,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -9601,6 +9619,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -19920,6 +19950,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -21219,6 +21267,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -25813,6 +25873,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -27112,6 +27190,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -35518,6 +35608,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -36817,6 +36925,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -39051,6 +39171,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -40350,6 +40488,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -42332,6 +42482,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -43631,6 +43799,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -49383,6 +49563,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -50682,6 +50880,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -53224,6 +53434,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -54523,6 +54751,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -58761,6 +59001,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -60060,6 +60318,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -62062,6 +62332,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -63361,6 +63649,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -67093,6 +67393,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -68392,6 +68710,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -71398,6 +71728,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -72697,6 +73045,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -84367,6 +84727,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -85666,6 +86044,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -87835,6 +88225,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -89134,6 +89542,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -91240,6 +91660,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -92539,6 +92977,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -94638,6 +95088,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -95937,6 +96405,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -98078,6 +98558,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -99377,6 +99875,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -101589,6 +102099,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -102888,6 +103416,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -105473,6 +106013,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -106772,6 +107330,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -109492,6 +110062,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -110791,6 +111379,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -114335,6 +114935,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -115634,6 +116252,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
@@ -118984,6 +119614,24 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"trn1n.32xlarge"] == NSOrderedSame) {
             return @(AWSEC2InstanceTypeTRN1n_32xlarge);
         }
+        if ([value caseInsensitiveCompare:@"i4g.large"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_large);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.2xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_2xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.4xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_4xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.8xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_8xlarge);
+        }
+        if ([value caseInsensitiveCompare:@"i4g.16xlarge"] == NSOrderedSame) {
+            return @(AWSEC2InstanceTypeI4G_16xlarge);
+        }
         return @(AWSEC2InstanceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -120283,6 +120931,18 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"inf2.48xlarge";
             case AWSEC2InstanceTypeTRN1n_32xlarge:
                 return @"trn1n.32xlarge";
+            case AWSEC2InstanceTypeI4G_large:
+                return @"i4g.large";
+            case AWSEC2InstanceTypeI4G_xlarge:
+                return @"i4g.xlarge";
+            case AWSEC2InstanceTypeI4G_2xlarge:
+                return @"i4g.2xlarge";
+            case AWSEC2InstanceTypeI4G_4xlarge:
+                return @"i4g.4xlarge";
+            case AWSEC2InstanceTypeI4G_8xlarge:
+                return @"i4g.8xlarge";
+            case AWSEC2InstanceTypeI4G_16xlarge:
+                return @"i4g.16xlarge";
             default:
                 return nil;
         }
