@@ -10046,6 +10046,48 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2CreateInstanceConnectEndpointRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"dryRun" : @"DryRun",
+             @"preserveClientIp" : @"PreserveClientIp",
+             @"securityGroupIds" : @"SecurityGroupIds",
+             @"subnetId" : @"SubnetId",
+             @"tagSpecifications" : @"TagSpecifications",
+             };
+}
+
++ (NSValueTransformer *)tagSpecificationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2TagSpecification class]];
+}
+
+@end
+
+@implementation AWSEC2CreateInstanceConnectEndpointResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"clientToken" : @"ClientToken",
+             @"instanceConnectEndpoint" : @"InstanceConnectEndpoint",
+             };
+}
+
++ (NSValueTransformer *)instanceConnectEndpointJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2Ec2InstanceConnectEndpoint class]];
+}
+
+@end
+
 @implementation AWSEC2CreateInstanceEventWindowRequest
 
 + (BOOL)supportsSecureCoding {
@@ -14480,6 +14522,39 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"returned" : @"Return",
              };
+}
+
+@end
+
+@implementation AWSEC2DeleteInstanceConnectEndpointRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"instanceConnectEndpointId" : @"InstanceConnectEndpointId",
+             };
+}
+
+@end
+
+@implementation AWSEC2DeleteInstanceConnectEndpointResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"instanceConnectEndpoint" : @"InstanceConnectEndpoint",
+             };
+}
+
++ (NSValueTransformer *)instanceConnectEndpointJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2Ec2InstanceConnectEndpoint class]];
 }
 
 @end
@@ -22060,6 +22135,47 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
+@end
+
+@implementation AWSEC2DescribeInstanceConnectEndpointsRequest
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"dryRun" : @"DryRun",
+             @"filters" : @"Filters",
+             @"instanceConnectEndpointIds" : @"InstanceConnectEndpointIds",
+             @"maxResults" : @"MaxResults",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)filtersJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Filter class]];
+}
+
+@end
+
+@implementation AWSEC2DescribeInstanceConnectEndpointsResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"instanceConnectEndpoints" : @"InstanceConnectEndpoints",
+             @"nextToken" : @"NextToken",
+             };
+}
+
++ (NSValueTransformer *)instanceConnectEndpointsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Ec2InstanceConnectEndpoint class]];
 }
 
 @end
@@ -31687,6 +31803,87 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"maximumIops" : @"MaximumIops",
              @"maximumThroughputInMBps" : @"MaximumThroughputInMBps",
              };
+}
+
+@end
+
+@implementation AWSEC2Ec2InstanceConnectEndpoint
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"availabilityZone" : @"AvailabilityZone",
+             @"createdAt" : @"CreatedAt",
+             @"dnsName" : @"DnsName",
+             @"fipsDnsName" : @"FipsDnsName",
+             @"instanceConnectEndpointArn" : @"InstanceConnectEndpointArn",
+             @"instanceConnectEndpointId" : @"InstanceConnectEndpointId",
+             @"networkInterfaceIds" : @"NetworkInterfaceIds",
+             @"ownerId" : @"OwnerId",
+             @"preserveClientIp" : @"PreserveClientIp",
+             @"securityGroupIds" : @"SecurityGroupIds",
+             @"state" : @"State",
+             @"stateMessage" : @"StateMessage",
+             @"subnetId" : @"SubnetId",
+             @"tags" : @"Tags",
+             @"vpcId" : @"VpcId",
+             };
+}
+
++ (NSValueTransformer *)createdAtJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate aws_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)stateJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"create-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2Ec2InstanceConnectEndpointStateCreateInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"create-complete"] == NSOrderedSame) {
+            return @(AWSEC2Ec2InstanceConnectEndpointStateCreateComplete);
+        }
+        if ([value caseInsensitiveCompare:@"create-failed"] == NSOrderedSame) {
+            return @(AWSEC2Ec2InstanceConnectEndpointStateCreateFailed);
+        }
+        if ([value caseInsensitiveCompare:@"delete-in-progress"] == NSOrderedSame) {
+            return @(AWSEC2Ec2InstanceConnectEndpointStateDeleteInProgress);
+        }
+        if ([value caseInsensitiveCompare:@"delete-complete"] == NSOrderedSame) {
+            return @(AWSEC2Ec2InstanceConnectEndpointStateDeleteComplete);
+        }
+        if ([value caseInsensitiveCompare:@"delete-failed"] == NSOrderedSame) {
+            return @(AWSEC2Ec2InstanceConnectEndpointStateDeleteFailed);
+        }
+        return @(AWSEC2Ec2InstanceConnectEndpointStateUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2Ec2InstanceConnectEndpointStateCreateInProgress:
+                return @"create-in-progress";
+            case AWSEC2Ec2InstanceConnectEndpointStateCreateComplete:
+                return @"create-complete";
+            case AWSEC2Ec2InstanceConnectEndpointStateCreateFailed:
+                return @"create-failed";
+            case AWSEC2Ec2InstanceConnectEndpointStateDeleteInProgress:
+                return @"delete-in-progress";
+            case AWSEC2Ec2InstanceConnectEndpointStateDeleteComplete:
+                return @"delete-complete";
+            case AWSEC2Ec2InstanceConnectEndpointStateDeleteFailed:
+                return @"delete-failed";
+            default:
+                return nil;
+        }
+    }];
+}
+
++ (NSValueTransformer *)tagsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
 }
 
 @end
@@ -73667,6 +73864,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
         }
+        if ([value caseInsensitiveCompare:@"instance-connect-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeInstanceConnectEndpoint);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -73840,6 +74040,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"ipam-resource-discovery";
             case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
                 return @"ipam-resource-discovery-association";
+            case AWSEC2ResourceTypeInstanceConnectEndpoint:
+                return @"instance-connect-endpoint";
             default:
                 return nil;
         }
@@ -74122,6 +74324,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
         }
+        if ([value caseInsensitiveCompare:@"instance-connect-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeInstanceConnectEndpoint);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -74295,6 +74500,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"ipam-resource-discovery";
             case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
                 return @"ipam-resource-discovery-association";
+            case AWSEC2ResourceTypeInstanceConnectEndpoint:
+                return @"instance-connect-endpoint";
             default:
                 return nil;
         }
@@ -116919,6 +117126,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
         }
+        if ([value caseInsensitiveCompare:@"instance-connect-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeInstanceConnectEndpoint);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -117092,6 +117302,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"ipam-resource-discovery";
             case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
                 return @"ipam-resource-discovery-association";
+            case AWSEC2ResourceTypeInstanceConnectEndpoint:
+                return @"instance-connect-endpoint";
             default:
                 return nil;
         }
@@ -121949,6 +122161,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
         }
+        if ([value caseInsensitiveCompare:@"instance-connect-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeInstanceConnectEndpoint);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -122122,6 +122337,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"ipam-resource-discovery";
             case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
                 return @"ipam-resource-discovery-association";
+            case AWSEC2ResourceTypeInstanceConnectEndpoint:
+                return @"instance-connect-endpoint";
             default:
                 return nil;
         }
@@ -122400,6 +122617,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"ipam-resource-discovery-association"] == NSOrderedSame) {
             return @(AWSEC2ResourceTypeIpamResourceDiscoveryAssociation);
         }
+        if ([value caseInsensitiveCompare:@"instance-connect-endpoint"] == NSOrderedSame) {
+            return @(AWSEC2ResourceTypeInstanceConnectEndpoint);
+        }
         return @(AWSEC2ResourceTypeUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -122573,6 +122793,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"ipam-resource-discovery";
             case AWSEC2ResourceTypeIpamResourceDiscoveryAssociation:
                 return @"ipam-resource-discovery-association";
+            case AWSEC2ResourceTypeInstanceConnectEndpoint:
+                return @"instance-connect-endpoint";
             default:
                 return nil;
         }
