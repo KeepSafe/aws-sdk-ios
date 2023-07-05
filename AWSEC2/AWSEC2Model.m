@@ -860,6 +860,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"assetIds" : @"AssetIds",
              @"autoPlacement" : @"AutoPlacement",
              @"availabilityZone" : @"AvailabilityZone",
              @"clientToken" : @"ClientToken",
@@ -46509,6 +46510,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"allocationTime" : @"AllocationTime",
              @"allowsMultipleInstanceTypes" : @"AllowsMultipleInstanceTypes",
+             @"assetId" : @"AssetId",
              @"autoPlacement" : @"AutoPlacement",
              @"availabilityZone" : @"AvailabilityZone",
              @"availabilityZoneId" : @"AvailabilityZoneId",
@@ -127080,7 +127082,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"cloudWatchLogs" : @"CloudWatchLogs",
+             @"includeTrustContext" : @"IncludeTrustContext",
              @"kinesisDataFirehose" : @"KinesisDataFirehose",
+             @"logVersion" : @"LogVersion",
              @"s3" : @"S3",
              };
 }
@@ -127147,7 +127151,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"cloudWatchLogs" : @"CloudWatchLogs",
+             @"includeTrustContext" : @"IncludeTrustContext",
              @"kinesisDataFirehose" : @"KinesisDataFirehose",
+             @"logVersion" : @"LogVersion",
              @"s3" : @"S3",
              };
 }
