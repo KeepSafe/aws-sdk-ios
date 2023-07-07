@@ -57203,6 +57203,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"instanceType" : @"InstanceType",
              @"memoryInfo" : @"MemoryInfo",
              @"networkInfo" : @"NetworkInfo",
+             @"nitroEnclavesSupport" : @"NitroEnclavesSupport",
              @"placementGroupInfo" : @"PlacementGroupInfo",
              @"processorInfo" : @"ProcessorInfo",
              @"supportedBootModes" : @"SupportedBootModes",
@@ -60541,6 +60542,27 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)networkInfoJSONTransformer {
     return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2NetworkInfo class]];
+}
+
++ (NSValueTransformer *)nitroEnclavesSupportJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"unsupported"] == NSOrderedSame) {
+            return @(AWSEC2NitroEnclavesSupportUnsupported);
+        }
+        if ([value caseInsensitiveCompare:@"supported"] == NSOrderedSame) {
+            return @(AWSEC2NitroEnclavesSupportSupported);
+        }
+        return @(AWSEC2NitroEnclavesSupportUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2NitroEnclavesSupportUnsupported:
+                return @"unsupported";
+            case AWSEC2NitroEnclavesSupportSupported:
+                return @"supported";
+            default:
+                return nil;
+        }
+    }];
 }
 
 + (NSValueTransformer *)placementGroupInfoJSONTransformer {
