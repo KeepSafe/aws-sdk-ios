@@ -118656,6 +118656,9 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         if ([value caseInsensitiveCompare:@"failed"] == NSOrderedSame) {
             return @(AWSEC2SpotInstanceStateFailed);
         }
+        if ([value caseInsensitiveCompare:@"disabled"] == NSOrderedSame) {
+            return @(AWSEC2SpotInstanceStateDisabled);
+        }
         return @(AWSEC2SpotInstanceStateUnknown);
     } reverseBlock:^NSString *(NSNumber *value) {
         switch ([value integerValue]) {
@@ -118669,6 +118672,8 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return @"cancelled";
             case AWSEC2SpotInstanceStateFailed:
                 return @"failed";
+            case AWSEC2SpotInstanceStateDisabled:
+                return @"disabled";
             default:
                 return nil;
         }
