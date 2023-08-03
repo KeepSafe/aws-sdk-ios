@@ -51822,6 +51822,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"accelerators" : @"Accelerators",
+             @"totalInferenceMemoryInMiB" : @"TotalInferenceMemoryInMiB",
              };
 }
 
@@ -51841,7 +51842,26 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 	return @{
              @"count" : @"Count",
              @"manufacturer" : @"Manufacturer",
+             @"memoryInfo" : @"MemoryInfo",
              @"name" : @"Name",
+             };
+}
+
++ (NSValueTransformer *)memoryInfoJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONDictionaryTransformerWithModelClass:[AWSEC2InferenceDeviceMemoryInfo class]];
+}
+
+@end
+
+@implementation AWSEC2InferenceDeviceMemoryInfo
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"sizeInMiB" : @"SizeInMiB",
              };
 }
 
@@ -80050,9 +80070,11 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
+             @"baselineBandwidthInGbps" : @"BaselineBandwidthInGbps",
              @"maximumNetworkInterfaces" : @"MaximumNetworkInterfaces",
              @"networkCardIndex" : @"NetworkCardIndex",
              @"networkPerformance" : @"NetworkPerformance",
+             @"peakBandwidthInGbps" : @"PeakBandwidthInGbps",
              };
 }
 
