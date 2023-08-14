@@ -45207,7 +45207,34 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"ebsEncryptionByDefault" : @"EbsEncryptionByDefault",
+             @"sseType" : @"SseType",
              };
+}
+
++ (NSValueTransformer *)sseTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"sse-ebs"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseEbs);
+        }
+        if ([value caseInsensitiveCompare:@"sse-kms"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseKms);
+        }
+        if ([value caseInsensitiveCompare:@"none"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeNone);
+        }
+        return @(AWSEC2SSETypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2SSETypeSseEbs:
+                return @"sse-ebs";
+            case AWSEC2SSETypeSseKms:
+                return @"sse-kms";
+            case AWSEC2SSETypeNone:
+                return @"none";
+            default:
+                return nil;
+        }
+    }];
 }
 
 @end
@@ -108870,11 +108897,38 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"ownerId" : @"OwnerId",
              @"progress" : @"Progress",
              @"snapshotId" : @"SnapshotId",
+             @"sseType" : @"SseType",
              @"startTime" : @"StartTime",
              @"state" : @"State",
              @"volumeId" : @"VolumeId",
              @"volumeSize" : @"VolumeSize",
              };
+}
+
++ (NSValueTransformer *)sseTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"sse-ebs"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseEbs);
+        }
+        if ([value caseInsensitiveCompare:@"sse-kms"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseKms);
+        }
+        if ([value caseInsensitiveCompare:@"none"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeNone);
+        }
+        return @(AWSEC2SSETypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2SSETypeSseEbs:
+                return @"sse-ebs";
+            case AWSEC2SSETypeSseKms:
+                return @"sse-kms";
+            case AWSEC2SSETypeNone:
+                return @"none";
+            default:
+                return nil;
+        }
+    }];
 }
 
 + (NSValueTransformer *)startTimeJSONTransformer {
@@ -113825,6 +113879,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"progress" : @"Progress",
              @"restoreExpiryTime" : @"RestoreExpiryTime",
              @"snapshotId" : @"SnapshotId",
+             @"sseType" : @"SseType",
              @"startTime" : @"StartTime",
              @"state" : @"State",
              @"stateMessage" : @"StateMessage",
@@ -113840,6 +113895,32 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         return [NSDate aws_dateFromString:str];
     } reverseBlock:^id(NSDate *date) {
 return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)sseTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"sse-ebs"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseEbs);
+        }
+        if ([value caseInsensitiveCompare:@"sse-kms"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseKms);
+        }
+        if ([value caseInsensitiveCompare:@"none"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeNone);
+        }
+        return @(AWSEC2SSETypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2SSETypeSseEbs:
+                return @"sse-ebs";
+            case AWSEC2SSETypeSseKms:
+                return @"sse-kms";
+            case AWSEC2SSETypeNone:
+                return @"none";
+            default:
+                return nil;
+        }
     }];
 }
 
@@ -113976,12 +114057,39 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"ownerId" : @"OwnerId",
              @"progress" : @"Progress",
              @"snapshotId" : @"SnapshotId",
+             @"sseType" : @"SseType",
              @"startTime" : @"StartTime",
              @"state" : @"State",
              @"tags" : @"Tags",
              @"volumeId" : @"VolumeId",
              @"volumeSize" : @"VolumeSize",
              };
+}
+
++ (NSValueTransformer *)sseTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"sse-ebs"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseEbs);
+        }
+        if ([value caseInsensitiveCompare:@"sse-kms"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseKms);
+        }
+        if ([value caseInsensitiveCompare:@"none"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeNone);
+        }
+        return @(AWSEC2SSETypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2SSETypeSseEbs:
+                return @"sse-ebs";
+            case AWSEC2SSETypeSseKms:
+                return @"sse-kms";
+            case AWSEC2SSETypeNone:
+                return @"none";
+            default:
+                return nil;
+        }
+    }];
 }
 
 + (NSValueTransformer *)startTimeJSONTransformer {
@@ -128719,6 +128827,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"outpostArn" : @"OutpostArn",
              @"size" : @"Size",
              @"snapshotId" : @"SnapshotId",
+             @"sseType" : @"SseType",
              @"state" : @"State",
              @"tags" : @"Tags",
              @"throughput" : @"Throughput",
@@ -128736,6 +128845,32 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
         return [NSDate aws_dateFromString:str];
     } reverseBlock:^id(NSDate *date) {
 return [date aws_stringValue:AWSDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)sseTypeJSONTransformer {
+    return [AWSMTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value caseInsensitiveCompare:@"sse-ebs"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseEbs);
+        }
+        if ([value caseInsensitiveCompare:@"sse-kms"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeSseKms);
+        }
+        if ([value caseInsensitiveCompare:@"none"] == NSOrderedSame) {
+            return @(AWSEC2SSETypeNone);
+        }
+        return @(AWSEC2SSETypeUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case AWSEC2SSETypeSseEbs:
+                return @"sse-ebs";
+            case AWSEC2SSETypeSseKms:
+                return @"sse-kms";
+            case AWSEC2SSETypeNone:
+                return @"none";
+            default:
+                return nil;
+        }
     }];
 }
 
