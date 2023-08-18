@@ -13552,6 +13552,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"routeTableIds" : @"RouteTableIds",
              @"securityGroupIds" : @"SecurityGroupIds",
              @"serviceName" : @"ServiceName",
+             @"subnetConfigurations" : @"SubnetConfigurations",
              @"subnetIds" : @"SubnetIds",
              @"tagSpecifications" : @"TagSpecifications",
              @"vpcEndpointType" : @"VpcEndpointType",
@@ -13587,6 +13588,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
++ (NSValueTransformer *)subnetConfigurationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2SubnetConfiguration class]];
 }
 
 + (NSValueTransformer *)tagSpecificationsJSONTransformer {
@@ -80014,6 +80019,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"removeSecurityGroupIds" : @"RemoveSecurityGroupIds",
              @"removeSubnetIds" : @"RemoveSubnetIds",
              @"resetPolicy" : @"ResetPolicy",
+             @"subnetConfigurations" : @"SubnetConfigurations",
              @"vpcEndpointId" : @"VpcEndpointId",
              };
 }
@@ -80046,6 +80052,10 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
                 return nil;
         }
     }];
+}
+
++ (NSValueTransformer *)subnetConfigurationsJSONTransformer {
+    return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2SubnetConfiguration class]];
 }
 
 @end
@@ -124799,6 +124809,22 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 + (NSValueTransformer *)tagsJSONTransformer {
     return [NSValueTransformer awsmtl_JSONArrayTransformerWithModelClass:[AWSEC2Tag class]];
+}
+
+@end
+
+@implementation AWSEC2SubnetConfiguration
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"ipv4" : @"Ipv4",
+             @"ipv6" : @"Ipv6",
+             @"subnetId" : @"SubnetId",
+             };
 }
 
 @end
