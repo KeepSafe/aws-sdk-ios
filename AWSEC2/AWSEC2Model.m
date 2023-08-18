@@ -11272,6 +11272,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"clientToken" : @"ClientToken",
              @"detail" : @"Description",
              @"dryRun" : @"DryRun",
+             @"enablePrimaryIpv6" : @"EnablePrimaryIpv6",
              @"groups" : @"Groups",
              @"interfaceType" : @"InterfaceType",
              @"ipv4PrefixCount" : @"Ipv4PrefixCount",
@@ -56302,6 +56303,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"ipv6Address" : @"Ipv6Address",
+             @"isPrimaryIpv6" : @"IsPrimaryIpv6",
              };
 }
 
@@ -56879,6 +56881,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"ipv6Prefixes" : @"Ipv6Prefixes",
              @"networkCardIndex" : @"NetworkCardIndex",
              @"networkInterfaceId" : @"NetworkInterfaceId",
+             @"primaryIpv6" : @"PrimaryIpv6",
              @"privateIpAddress" : @"PrivateIpAddress",
              @"privateIpAddresses" : @"PrivateIpAddresses",
              @"secondaryPrivateIpAddressCount" : @"SecondaryPrivateIpAddressCount",
@@ -70559,6 +70562,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"ipv6Prefixes" : @"Ipv6Prefixes",
              @"networkCardIndex" : @"NetworkCardIndex",
              @"networkInterfaceId" : @"NetworkInterfaceId",
+             @"primaryIpv6" : @"PrimaryIpv6",
              @"privateIpAddress" : @"PrivateIpAddress",
              @"privateIpAddresses" : @"PrivateIpAddresses",
              @"secondaryPrivateIpAddressCount" : @"SecondaryPrivateIpAddressCount",
@@ -70607,6 +70611,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"ipv6Prefixes" : @"Ipv6Prefixes",
              @"networkCardIndex" : @"NetworkCardIndex",
              @"networkInterfaceId" : @"NetworkInterfaceId",
+             @"primaryIpv6" : @"PrimaryIpv6",
              @"privateIpAddress" : @"PrivateIpAddress",
              @"privateIpAddresses" : @"PrivateIpAddresses",
              @"secondaryPrivateIpAddressCount" : @"SecondaryPrivateIpAddressCount",
@@ -77682,6 +77687,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"detail" : @"Description",
              @"dryRun" : @"DryRun",
              @"enaSrdSpecification" : @"EnaSrdSpecification",
+             @"enablePrimaryIpv6" : @"EnablePrimaryIpv6",
              @"groups" : @"Groups",
              @"networkInterfaceId" : @"NetworkInterfaceId",
              @"sourceDestCheck" : @"SourceDestCheck",
@@ -80818,6 +80824,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
              @"ipv6Address" : @"Ipv6Address",
+             @"isPrimaryIpv6" : @"IsPrimaryIpv6",
              };
 }
 
@@ -109417,6 +109424,7 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
              @"ebsOptimized" : @"EbsOptimized",
              @"elasticGpuSpecification" : @"ElasticGpuSpecification",
              @"elasticInferenceAccelerators" : @"ElasticInferenceAccelerators",
+             @"enablePrimaryIpv6" : @"EnablePrimaryIpv6",
              @"enclaveOptions" : @"EnclaveOptions",
              @"hibernationOptions" : @"HibernationOptions",
              @"iamInstanceProfile" : @"IamInstanceProfile",
