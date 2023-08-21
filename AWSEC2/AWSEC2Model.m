@@ -14894,6 +14894,21 @@ return [date aws_stringValue:AWSDateISO8601DateFormat1];
 
 @end
 
+@implementation AWSEC2DeleteKeyPairResult
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"keyPairId" : @"KeyPairId",
+             @"returned" : @"Return",
+             };
+}
+
+@end
+
 @implementation AWSEC2DeleteLaunchTemplateRequest
 
 + (BOOL)supportsSecureCoding {
