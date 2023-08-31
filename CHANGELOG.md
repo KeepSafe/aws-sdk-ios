@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Updated the SDK to most recent version. Manually added the previous nil checks into it.
+
 ### Misc. Updates
 
 - Model updates for the following services

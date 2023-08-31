@@ -46,7 +46,7 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
     @"retry_count INTEGER NOT NULL,"
     @"request_headers TEXT,"
     @"request_parameters TEXT)";
-
+    
     NSString *dbDirPath = [cacheDirectoryPath stringByAppendingString:AWSS3TransferUtilityDatabaseDirectory];
     BOOL fileExistsAtPath = [[NSFileManager defaultManager] fileExistsAtPath:dbDirPath];
     if (!fileExistsAtPath) {
@@ -58,17 +58,17 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
             return nil;
         }
     }
-
+    
     NSString * databasePath = [dbDirPath stringByAppendingString:AWSS3TransferUtilityDatabaseName];
     //Open the database if the directory exists
     AWSDDLogInfo(@"Transfer Utility Database Path: [%@]", databasePath);
     AWSFMDatabaseQueue *databaseQueue = [AWSFMDatabaseQueue databaseQueueWithPath: databasePath];
-
+    
     if (!databaseQueue) {
         AWSDDLogError(@"Unable to create Database Queue for [%@]", databasePath);
         return nil;
     }
-
+    
     [databaseQueue inDatabase:^(AWSFMDatabase *db) {
         if (! [db executeUpdate: AWSS3TransferUtilityCreateAWSTransfer]) {
             AWSDDLogError(@"Failed to create awstransfer Database table. [%@]", db.lastError);
@@ -83,19 +83,19 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
                        databaseQueue: (AWSFMDatabaseQueue *) databaseQueue {
     NSString *const AWSS3TransferUtilityDeleteTransfer =  @"DELETE FROM awstransfer "
     @"WHERE transfer_id=:transfer_id";
-
+    
     [databaseQueue inDatabase:^(AWSFMDatabase *db) {
         BOOL result = [db executeUpdate: AWSS3TransferUtilityDeleteTransfer
                 withParameterDictionary:@{
                                           @"transfer_id": transferID
                                           }];
-
+        
         if (!result) {
             AWSDDLogError(@"Failed to delete transfer_request [%@] in Database. [%@]", transferID,
                           db.lastError);
             return;
         }
-
+        
     }];
 }
 
@@ -149,7 +149,7 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
                                           @"part_number": partNumber,
                                           @"retry_count": @(retryCount)
                                           }];
-
+        
         if (!result) {
             AWSDDLogError(@"Failed to update transfer_request [%@] in Database. [%@]", transferID,
                           db.lastError);
@@ -160,7 +160,7 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
 
 + (void) insertUploadTransferRequestInDB:(AWSS3TransferUtilityUploadTask *) task
                            databaseQueue: (AWSFMDatabaseQueue *) databaseQueue {
-
+    
     [AWSS3TransferUtilityDatabaseHelper insertTransferRequestInDB:task.transferID
                                                    nsURLSessionID:task.nsURLSessionID
                                                    taskIdentifier:@(task.taskIdentifier)
@@ -272,12 +272,12 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
     @":transfer_id,:ns_url_session_id, :session_task_id, :transfer_type, :bucket_name, :key, :part_number, :multi_part_id, :etag, :file, :temporary_file_created, :content_length, "
     @":status, :retry_count, :request_headers, :request_parameters"
     @")";
-
+    
     NSNumber *tempFileCreated = [NSNumber numberWithInt:0];
     if (temporaryFileCreated) {
         tempFileCreated = [NSNumber numberWithInt:1];
     }
-
+    
     [databaseQueue inDatabase:^(AWSFMDatabase *db) {
         BOOL result = [db executeUpdate: AWSS3TransferUtiltyInsertIntoAWSTransfer
                 withParameterDictionary:@{
@@ -298,7 +298,7 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
                                           @"request_parameters": requestParametersJSON,
                                           @"retry_count": retryCount
                                           }];
-
+        
         if (!result) {
             AWSDDLogError(@"Failed to save Transfer [%@] in awstransfer database table. [%@]", transferID, db.lastError);
         }
@@ -313,7 +313,7 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
     @"status, retry_count, request_headers, request_parameters "
     @"From awstransfer "
     @"Where ns_url_session_id=:ns_url_session_id order by transfer_id, part_number";
-
+    
     NSMutableArray *tasks = [NSMutableArray new];
     //Read from DB
     [databaseQueue inDatabase:^(AWSFMDatabase *db) {
@@ -417,3 +417,4 @@ NSString *const AWSS3TransferUtilityDatabaseName = @"transfer_utility_database";
 }
 
 @end
+
