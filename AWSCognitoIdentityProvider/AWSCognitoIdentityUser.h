@@ -71,9 +71,23 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly, getter=isSignedIn) BOOL signedIn;
 
 /**
+ Determines whether this user's session is revocable. If the access token has "origin_jti" claim, then the revocation feature is enabled.
+*/
+@property (nonatomic, readonly, getter=isSessionRevocable) BOOL sessionRevocable;
+
+/**
+ Get the device id
+ 
+ @warning This function is deprecated and will be removed in an upcoming minor
+ version of the SDK. You should use deviceIdentifier instead.
+ @deprecated Use deviceIdentifier instead.
+ */
+@property (nonatomic, readonly) NSString * deviceId DEPRECATED_MSG_ATTRIBUTE("Use deviceIdentifier instead.");
+
+/**
  Get the device id
  */
-@property (nonatomic, readonly) NSString * deviceId;
+@property (nonatomic, readonly, nullable) NSString * deviceIdentifier;
 
 /**
  Confirm a users' sign up with the confirmation code
@@ -96,6 +110,8 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Resend the confirmation code sent during sign up
  */
+- (AWSTask<AWSCognitoIdentityUserResendConfirmationCodeResponse *> *)resendConfirmationCode: (nullable NSDictionary<NSString *, NSString*> *) clientMetaData;
+
 - (AWSTask<AWSCognitoIdentityUserResendConfirmationCodeResponse *> *)resendConfirmationCode;
 
 /**
@@ -113,6 +129,17 @@ NS_ASSUME_NONNULL_BEGIN
 - (AWSTask<AWSCognitoIdentityUserSession *> *)getSession:(NSString *)username
                                                 password:(NSString *)password
                                           validationData:(nullable NSArray<AWSCognitoIdentityUserAttributeType *> *)validationData
+                                          clientMetaData:(nullable NSDictionary<NSString *, NSString*> *) clientMetaData;
+
+- (AWSTask<AWSCognitoIdentityUserSession *> *)getSession:(NSString *)username
+                                                password:(NSString *)password
+                                          validationData:(nullable NSArray<AWSCognitoIdentityUserAttributeType *> *)validationData
+                                isInitialCustomChallenge:(BOOL)isInitialCustomChallenge;
+
+- (AWSTask<AWSCognitoIdentityUserSession *> *)getSession:(NSString *)username
+                                                password:(NSString *)password
+                                          validationData:(nullable NSArray<AWSCognitoIdentityUserAttributeType *> *)validationData
+                                          clientMetaData:(nullable NSDictionary<NSString *, NSString*> *) clientMetaData
                                 isInitialCustomChallenge:(BOOL)isInitialCustomChallenge;
 
 /**
@@ -149,6 +176,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Update this user's attributes
  */
+- (AWSTask<AWSCognitoIdentityUserUpdateAttributesResponse *> *)updateAttributes:(NSArray<AWSCognitoIdentityUserAttributeType *> *)attributes
+                                                                 clientMetaData:(nullable NSDictionary<NSString *, NSString*> *) clientMetaData;
+
 - (AWSTask<AWSCognitoIdentityUserUpdateAttributesResponse *> *)updateAttributes:(NSArray<AWSCognitoIdentityUserAttributeType *> *)attributes;
 
 /**
@@ -166,6 +196,9 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Request a verification code to verify an attribute.
  */
+- (AWSTask<AWSCognitoIdentityUserGetAttributeVerificationCodeResponse *> *)getAttributeVerificationCode:(NSString *)attributeName
+                                                                                         clientMetaData:(nullable NSDictionary<NSString *, NSString*> *) clientMetaData;
+
 - (AWSTask<AWSCognitoIdentityUserGetAttributeVerificationCodeResponse *> *)getAttributeVerificationCode:(NSString *)attributeName;
 
 /**
@@ -199,6 +232,11 @@ NS_ASSUME_NONNULL_BEGIN
  Remove all sessions from the keychain for this user.  Last known user remains.
  */
 - (void)signOut;
+
+/**
+ Revoke all tokens for this user. Check Access Token for claims for validity to revoke tokens.
+ */
+- (AWSTask<AWSCognitoIdentityProviderRevokeTokenResponse *> *) revokeToken;
 
 /**
  Invalidate any active sessions with the service.  Last known user remains.

@@ -32,7 +32,7 @@
 
 + (BOOL)createBucketWithName:(NSString *)bucketName {
     return [AWSS3TestHelper createBucketWithName:bucketName
-                                       andRegion:[AWSTestUtility getDefaultRegionType]];
+                                       andRegion:[AWSTestUtility getRegionFromTestConfiguration]];
 }
 
 + (BOOL)createBucketWithName:(NSString *)bucketName
@@ -46,6 +46,7 @@
     __block BOOL success = NO;
     [[[s3 createBucket:createBucketReq] continueWithBlock:^id(AWSTask *task) {
         if (task.error) {
+            NSLog(@"Could not create bucket '%@': %@", bucketName, task.error);
             success = NO;
         } else {
             success = YES;
@@ -60,7 +61,7 @@
 
 + (AWSS3CreateBucketRequest *)getCreateBucketRequest {
     AWSS3CreateBucketRequest *createBucketReq = [AWSS3CreateBucketRequest new];
-    AWSRegionType regionType = [AWSTestUtility getDefaultRegionType];
+    AWSRegionType regionType = [AWSTestUtility getRegionFromTestConfiguration];
     AWSS3BucketLocationConstraint locationConstraint = [AWSS3TestHelper getLocationConstraintForRegionType:regionType];
     
     if (locationConstraint == AWSS3BucketLocationConstraintBlank) {
@@ -121,6 +122,7 @@
     __block BOOL success = NO;
     [[[s3 deleteBucket:deleteBucketReq] continueWithBlock:^id(AWSTask *task) {
         if (task.error) {
+            NSLog(@"Could not delete bucket '%@': %@", bucketName, task.error);
             success = NO;
         } else {
             success = YES;
@@ -152,7 +154,7 @@
         deleteObjectsRequest.remove = s3Remove;
         [[s3 deleteObjects:deleteObjectsRequest] continueWithBlock:^id(AWSTask *task) {
             if (task.error) {
-                NSLog(@"Failed to delete: %@", task.error);
+                NSLog(@"Could not delete objects from bucket '%@': %@", bucketName, task.error);
             } else {
                 NSLog(@"Successfully deleted: %@", objects);
             }
@@ -170,6 +172,7 @@
     __block BOOL success = NO;
     [[[s3 headObject:headObjectRequest] continueWithBlock:^id(AWSTask *task) {
         if (task.error) {
+            NSLog(@"Failed to headObject '%@' in bucket '%@': %@", keyName, bucketName, task.error);
             success = NO;
         } else {
             success = YES;
@@ -177,6 +180,14 @@
         return nil;
     }] waitUntilFinished];
     return success;
+}
+
++ (NSString *)getTestBucketName {
+    NSString *bucketPrefix = [AWSTestUtility getIntegrationTestConfigurationValueForPackageId:@"s3"
+                                                                                    configKey:@"bucket_name_prefix"];
+    NSTimeInterval timestamp = [NSDate timeIntervalSinceReferenceDate];
+    NSString *bucketName = [NSString stringWithFormat:@"%@-%lld", bucketPrefix, (int64_t)timestamp];
+    return bucketName;
 }
 
 @end

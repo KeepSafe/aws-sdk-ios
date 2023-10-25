@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@
 #import "AWSLogsResources.h"
 
 static NSString *const AWSInfoLogs = @"Logs";
-NSString *const AWSLogsSDKVersion = @"2.13.3";
+NSString *const AWSLogsSDKVersion = @"2.33.4";
 
 
 @interface AWSLogsResponseSerializer : AWSJSONResponseSerializer
@@ -49,6 +49,7 @@ static NSDictionary *errorCodeDictionary = nil;
                             @"ResourceAlreadyExistsException" : @(AWSLogsErrorResourceAlreadyExists),
                             @"ResourceNotFoundException" : @(AWSLogsErrorResourceNotFound),
                             @"ServiceUnavailableException" : @(AWSLogsErrorServiceUnavailable),
+                            @"TooManyTagsException" : @(AWSLogsErrorTooManyTags),
                             @"UnrecognizedClientException" : @(AWSLogsErrorUnrecognizedClient),
                             };
 }
@@ -395,6 +396,50 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     }];
 }
 
+- (AWSTask *)deleteAccountPolicy:(AWSLogsDeleteAccountPolicyRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"DeleteAccountPolicy"
+                   outputClass:nil];
+}
+
+- (void)deleteAccountPolicy:(AWSLogsDeleteAccountPolicyRequest *)request
+     completionHandler:(void (^)(NSError *error))completionHandler {
+    [[self deleteAccountPolicy:request] continueWithBlock:^id _Nullable(AWSTask * _Nonnull task) {
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(error);
+        }
+
+        return nil;
+    }];
+}
+
+- (AWSTask *)deleteDataProtectionPolicy:(AWSLogsDeleteDataProtectionPolicyRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"DeleteDataProtectionPolicy"
+                   outputClass:nil];
+}
+
+- (void)deleteDataProtectionPolicy:(AWSLogsDeleteDataProtectionPolicyRequest *)request
+     completionHandler:(void (^)(NSError *error))completionHandler {
+    [[self deleteDataProtectionPolicy:request] continueWithBlock:^id _Nullable(AWSTask * _Nonnull task) {
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(error);
+        }
+
+        return nil;
+    }];
+}
+
 - (AWSTask *)deleteDestination:(AWSLogsDeleteDestinationRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:AWSHTTPMethodPOST
@@ -483,6 +528,29 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     }];
 }
 
+- (AWSTask<AWSLogsDeleteQueryDefinitionResponse *> *)deleteQueryDefinition:(AWSLogsDeleteQueryDefinitionRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"DeleteQueryDefinition"
+                   outputClass:[AWSLogsDeleteQueryDefinitionResponse class]];
+}
+
+- (void)deleteQueryDefinition:(AWSLogsDeleteQueryDefinitionRequest *)request
+     completionHandler:(void (^)(AWSLogsDeleteQueryDefinitionResponse *response, NSError *error))completionHandler {
+    [[self deleteQueryDefinition:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsDeleteQueryDefinitionResponse *> * _Nonnull task) {
+        AWSLogsDeleteQueryDefinitionResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
+        }
+
+        return nil;
+    }];
+}
+
 - (AWSTask *)deleteResourcePolicy:(AWSLogsDeleteResourcePolicyRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:AWSHTTPMethodPOST
@@ -543,6 +611,29 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 
         if (completionHandler) {
             completionHandler(error);
+        }
+
+        return nil;
+    }];
+}
+
+- (AWSTask<AWSLogsDescribeAccountPoliciesResponse *> *)describeAccountPolicies:(AWSLogsDescribeAccountPoliciesRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"DescribeAccountPolicies"
+                   outputClass:[AWSLogsDescribeAccountPoliciesResponse class]];
+}
+
+- (void)describeAccountPolicies:(AWSLogsDescribeAccountPoliciesRequest *)request
+     completionHandler:(void (^)(AWSLogsDescribeAccountPoliciesResponse *response, NSError *error))completionHandler {
+    [[self describeAccountPolicies:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsDescribeAccountPoliciesResponse *> * _Nonnull task) {
+        AWSLogsDescribeAccountPoliciesResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
         }
 
         return nil;
@@ -687,6 +778,29 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     }];
 }
 
+- (AWSTask<AWSLogsDescribeQueryDefinitionsResponse *> *)describeQueryDefinitions:(AWSLogsDescribeQueryDefinitionsRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"DescribeQueryDefinitions"
+                   outputClass:[AWSLogsDescribeQueryDefinitionsResponse class]];
+}
+
+- (void)describeQueryDefinitions:(AWSLogsDescribeQueryDefinitionsRequest *)request
+     completionHandler:(void (^)(AWSLogsDescribeQueryDefinitionsResponse *response, NSError *error))completionHandler {
+    [[self describeQueryDefinitions:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsDescribeQueryDefinitionsResponse *> * _Nonnull task) {
+        AWSLogsDescribeQueryDefinitionsResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
+        }
+
+        return nil;
+    }];
+}
+
 - (AWSTask<AWSLogsDescribeResourcePoliciesResponse *> *)describeResourcePolicies:(AWSLogsDescribeResourcePoliciesRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:AWSHTTPMethodPOST
@@ -768,6 +882,29 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
      completionHandler:(void (^)(AWSLogsFilterLogEventsResponse *response, NSError *error))completionHandler {
     [[self filterLogEvents:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsFilterLogEventsResponse *> * _Nonnull task) {
         AWSLogsFilterLogEventsResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
+        }
+
+        return nil;
+    }];
+}
+
+- (AWSTask<AWSLogsGetDataProtectionPolicyResponse *> *)getDataProtectionPolicy:(AWSLogsGetDataProtectionPolicyRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"GetDataProtectionPolicy"
+                   outputClass:[AWSLogsGetDataProtectionPolicyResponse class]];
+}
+
+- (void)getDataProtectionPolicy:(AWSLogsGetDataProtectionPolicyRequest *)request
+     completionHandler:(void (^)(AWSLogsGetDataProtectionPolicyResponse *response, NSError *error))completionHandler {
+    [[self getDataProtectionPolicy:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsGetDataProtectionPolicyResponse *> * _Nonnull task) {
+        AWSLogsGetDataProtectionPolicyResponse *result = task.result;
         NSError *error = task.error;
 
         if (completionHandler) {
@@ -870,6 +1007,29 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     }];
 }
 
+- (AWSTask<AWSLogsListTagsForResourceResponse *> *)listTagsForResource:(AWSLogsListTagsForResourceRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"ListTagsForResource"
+                   outputClass:[AWSLogsListTagsForResourceResponse class]];
+}
+
+- (void)listTagsForResource:(AWSLogsListTagsForResourceRequest *)request
+     completionHandler:(void (^)(AWSLogsListTagsForResourceResponse *response, NSError *error))completionHandler {
+    [[self listTagsForResource:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsListTagsForResourceResponse *> * _Nonnull task) {
+        AWSLogsListTagsForResourceResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
+        }
+
+        return nil;
+    }];
+}
+
 - (AWSTask<AWSLogsListTagsLogGroupResponse *> *)listTagsLogGroup:(AWSLogsListTagsLogGroupRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:AWSHTTPMethodPOST
@@ -883,6 +1043,52 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
      completionHandler:(void (^)(AWSLogsListTagsLogGroupResponse *response, NSError *error))completionHandler {
     [[self listTagsLogGroup:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsListTagsLogGroupResponse *> * _Nonnull task) {
         AWSLogsListTagsLogGroupResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
+        }
+
+        return nil;
+    }];
+}
+
+- (AWSTask<AWSLogsPutAccountPolicyResponse *> *)putAccountPolicy:(AWSLogsPutAccountPolicyRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"PutAccountPolicy"
+                   outputClass:[AWSLogsPutAccountPolicyResponse class]];
+}
+
+- (void)putAccountPolicy:(AWSLogsPutAccountPolicyRequest *)request
+     completionHandler:(void (^)(AWSLogsPutAccountPolicyResponse *response, NSError *error))completionHandler {
+    [[self putAccountPolicy:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsPutAccountPolicyResponse *> * _Nonnull task) {
+        AWSLogsPutAccountPolicyResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
+        }
+
+        return nil;
+    }];
+}
+
+- (AWSTask<AWSLogsPutDataProtectionPolicyResponse *> *)putDataProtectionPolicy:(AWSLogsPutDataProtectionPolicyRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"PutDataProtectionPolicy"
+                   outputClass:[AWSLogsPutDataProtectionPolicyResponse class]];
+}
+
+- (void)putDataProtectionPolicy:(AWSLogsPutDataProtectionPolicyRequest *)request
+     completionHandler:(void (^)(AWSLogsPutDataProtectionPolicyResponse *response, NSError *error))completionHandler {
+    [[self putDataProtectionPolicy:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsPutDataProtectionPolicyResponse *> * _Nonnull task) {
+        AWSLogsPutDataProtectionPolicyResponse *result = task.result;
         NSError *error = task.error;
 
         if (completionHandler) {
@@ -977,6 +1183,29 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 
         if (completionHandler) {
             completionHandler(error);
+        }
+
+        return nil;
+    }];
+}
+
+- (AWSTask<AWSLogsPutQueryDefinitionResponse *> *)putQueryDefinition:(AWSLogsPutQueryDefinitionRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"PutQueryDefinition"
+                   outputClass:[AWSLogsPutQueryDefinitionResponse class]];
+}
+
+- (void)putQueryDefinition:(AWSLogsPutQueryDefinitionRequest *)request
+     completionHandler:(void (^)(AWSLogsPutQueryDefinitionResponse *response, NSError *error))completionHandler {
+    [[self putQueryDefinition:request] continueWithBlock:^id _Nullable(AWSTask<AWSLogsPutQueryDefinitionResponse *> * _Nonnull task) {
+        AWSLogsPutQueryDefinitionResponse *result = task.result;
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(result, error);
         }
 
         return nil;
@@ -1118,6 +1347,28 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
     }];
 }
 
+- (AWSTask *)tagResource:(AWSLogsTagResourceRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"TagResource"
+                   outputClass:nil];
+}
+
+- (void)tagResource:(AWSLogsTagResourceRequest *)request
+     completionHandler:(void (^)(NSError *error))completionHandler {
+    [[self tagResource:request] continueWithBlock:^id _Nullable(AWSTask * _Nonnull task) {
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(error);
+        }
+
+        return nil;
+    }];
+}
+
 - (AWSTask<AWSLogsTestMetricFilterResponse *> *)testMetricFilter:(AWSLogsTestMetricFilterRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:AWSHTTPMethodPOST
@@ -1153,6 +1404,28 @@ static AWSSynchronizedMutableDictionary *_serviceClients = nil;
 - (void)untagLogGroup:(AWSLogsUntagLogGroupRequest *)request
      completionHandler:(void (^)(NSError *error))completionHandler {
     [[self untagLogGroup:request] continueWithBlock:^id _Nullable(AWSTask * _Nonnull task) {
+        NSError *error = task.error;
+
+        if (completionHandler) {
+            completionHandler(error);
+        }
+
+        return nil;
+    }];
+}
+
+- (AWSTask *)untagResource:(AWSLogsUntagResourceRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:AWSHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@"Logs_20140328"
+                 operationName:@"UntagResource"
+                   outputClass:nil];
+}
+
+- (void)untagResource:(AWSLogsUntagResourceRequest *)request
+     completionHandler:(void (^)(NSError *error))completionHandler {
+    [[self untagResource:request] continueWithBlock:^id _Nullable(AWSTask * _Nonnull task) {
         NSError *error = task.error;
 
         if (completionHandler) {

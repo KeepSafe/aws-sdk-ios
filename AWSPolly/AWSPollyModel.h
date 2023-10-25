@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -89,6 +89,16 @@ typedef NS_ENUM(NSInteger, AWSPollyLanguageCode) {
     AWSPollyLanguageCodeRuRU,
     AWSPollyLanguageCodeSvSE,
     AWSPollyLanguageCodeTrTR,
+    AWSPollyLanguageCodeEnNZ,
+    AWSPollyLanguageCodeEnZA,
+    AWSPollyLanguageCodeCaES,
+    AWSPollyLanguageCodeDeAT,
+    AWSPollyLanguageCodeYueCN,
+    AWSPollyLanguageCodeArAE,
+    AWSPollyLanguageCodeFiFI,
+    AWSPollyLanguageCodeEnIE,
+    AWSPollyLanguageCodeNlBE,
+    AWSPollyLanguageCodeFrBE,
 };
 
 typedef NS_ENUM(NSInteger, AWSPollyOutputFormat) {
@@ -140,6 +150,7 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
     AWSPollyVoiceIdEnrique,
     AWSPollyVoiceIdEwa,
     AWSPollyVoiceIdFiliz,
+    AWSPollyVoiceIdGabrielle,
     AWSPollyVoiceIdGeraint,
     AWSPollyVoiceIdGiorgio,
     AWSPollyVoiceIdGwyneth,
@@ -153,6 +164,7 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
     AWSPollyVoiceIdJustin,
     AWSPollyVoiceIdKarl,
     AWSPollyVoiceIdKendra,
+    AWSPollyVoiceIdKevin,
     AWSPollyVoiceIdKimberly,
     AWSPollyVoiceIdLea,
     AWSPollyVoiceIdLiv,
@@ -170,6 +182,7 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
     AWSPollyVoiceIdMizuki,
     AWSPollyVoiceIdNaja,
     AWSPollyVoiceIdNicole,
+    AWSPollyVoiceIdOlivia,
     AWSPollyVoiceIdPenelope,
     AWSPollyVoiceIdRaveena,
     AWSPollyVoiceIdRicardo,
@@ -183,6 +196,36 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
     AWSPollyVoiceIdVitoria,
     AWSPollyVoiceIdZeina,
     AWSPollyVoiceIdZhiyu,
+    AWSPollyVoiceIdAria,
+    AWSPollyVoiceIdAyanda,
+    AWSPollyVoiceIdArlet,
+    AWSPollyVoiceIdHannah,
+    AWSPollyVoiceIdArthur,
+    AWSPollyVoiceIdDaniel,
+    AWSPollyVoiceIdLiam,
+    AWSPollyVoiceIdPedro,
+    AWSPollyVoiceIdKajal,
+    AWSPollyVoiceIdHiujin,
+    AWSPollyVoiceIdLaura,
+    AWSPollyVoiceIdElin,
+    AWSPollyVoiceIdIda,
+    AWSPollyVoiceIdSuvi,
+    AWSPollyVoiceIdOla,
+    AWSPollyVoiceIdHala,
+    AWSPollyVoiceIdAndres,
+    AWSPollyVoiceIdSergio,
+    AWSPollyVoiceIdRemi,
+    AWSPollyVoiceIdAdriano,
+    AWSPollyVoiceIdThiago,
+    AWSPollyVoiceIdRuth,
+    AWSPollyVoiceIdStephen,
+    AWSPollyVoiceIdKazuha,
+    AWSPollyVoiceIdTomoko,
+    AWSPollyVoiceIdNiamh,
+    AWSPollyVoiceIdSofie,
+    AWSPollyVoiceIdLisa,
+    AWSPollyVoiceIdIsabelle,
+    AWSPollyVoiceIdZayd,
 };
 
 @class AWSPollyDeleteLexiconInput;
@@ -517,7 +560,7 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
 @property (nonatomic, assign) AWSPollyEngine engine;
 
 /**
- <p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p><p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>
+ <p>Optional language code for the Speech Synthesis request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p><p>If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>
  */
 @property (nonatomic, assign) AWSPollyLanguageCode languageCode;
 
@@ -603,7 +646,7 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
 @property (nonatomic, assign) AWSPollyEngine engine;
 
 /**
- <p>Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p><p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>
+ <p>Optional language code for a synthesis task. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p><p>If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>
  */
 @property (nonatomic, assign) AWSPollyLanguageCode languageCode;
 
@@ -676,12 +719,12 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
 
 
 /**
- <p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. Using a voice that is not supported for the engine selected will result in an error.</p>
+ <p>Specifies the engine (<code>standard</code> or <code>neural</code>) for Amazon Polly to use when processing input text for speech synthesis. For information on Amazon Polly voices and which voices are available in standard-only, NTTS-only, and both standard and NTTS formats, see <a href="https://docs.aws.amazon.com/polly/latest/dg/voicelist.html">Available Voices</a>.</p><p><b>NTTS-only voices</b></p><p>When using NTTS-only voices such as Kevin (en-US), this parameter is required and must be set to <code>neural</code>. If the engine is not specified, or is set to <code>standard</code>, this will result in an error. </p><p>Type: String</p><p>Valid Values: <code>standard</code> | <code>neural</code></p><p>Required: Yes</p><p><b>Standard voices</b></p><p>For standard voices, this is not required; the engine parameter defaults to <code>standard</code>. If the engine is not specified, or is set to <code>standard</code> and an NTTS-only voice is selected, this will result in an error. </p>
  */
 @property (nonatomic, assign) AWSPollyEngine engine;
 
 /**
- <p>Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p><p>If a bilingual voice is used and no language code is specified, Amazon Polly will use the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>
+ <p>Optional language code for the Synthesize Speech request. This is only necessary if using a bilingual voice, such as Aditi, which can be used for either Indian English (en-IN) or Hindi (hi-IN). </p><p>If a bilingual voice is used and no language code is specified, Amazon Polly uses the default language of the bilingual voice. The default language for any voice is the one returned by the <a href="https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html">DescribeVoices</a> operation for the <code>LanguageCode</code> parameter. For example, if no language code is specified, Aditi will use Indian English rather than Hindi.</p>
  */
 @property (nonatomic, assign) AWSPollyLanguageCode languageCode;
 
@@ -734,7 +777,7 @@ typedef NS_ENUM(NSInteger, AWSPollyVoiceId) {
 @property (nonatomic, strong) NSData * _Nullable audioStream;
 
 /**
- <p> Specifies the type audio stream. This should reflect the <code>OutputFormat</code> parameter in your request. </p><ul><li><p> If you request <code>mp3</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/mpeg. </p></li><li><p> If you request <code>ogg_vorbis</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/ogg. </p></li><li><p> If you request <code>pcm</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. </p></li><li><p>If you request <code>json</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/json.</p></li></ul><p></p>
+ <p> Specifies the type audio stream. This should reflect the <code>OutputFormat</code> parameter in your request. </p><ul><li><p> If you request <code>mp3</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/mpeg. </p></li><li><p> If you request <code>ogg_vorbis</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/ogg. </p></li><li><p> If you request <code>pcm</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is audio/pcm in a signed 16-bit, 1 channel (mono), little-endian format. </p></li><li><p>If you request <code>json</code> as the <code>OutputFormat</code>, the <code>ContentType</code> returned is application/x-json-stream.</p></li></ul><p></p>
  */
 @property (nonatomic, strong) NSString * _Nullable contentType;
 

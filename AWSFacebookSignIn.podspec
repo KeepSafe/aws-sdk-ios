@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
    s.name         = 'AWSFacebookSignIn'
-   s.version      = '2.13.3'
+   s.version      = '2.33.4'
    s.summary      = 'Amazon Web Services SDK for iOS.'
  
    s.description  = 'The AWS SDK for iOS provides a library, code samples, and documentation for developers to build connected mobile applications using AWS.'
@@ -9,12 +9,14 @@ Pod::Spec.new do |s|
    s.license      = 'Apache License, Version 2.0'
    s.author       = { 'Amazon Web Services' => 'amazonwebservices' }
    s.platform     = :ios, '9.0'
-   s.source       = { :git => 'https://github.com/aws/aws-sdk-ios.git',
+   s.source       = { :git => 'https://github.com/aws-amplify/aws-sdk-ios.git',
                       :tag => s.version}
    s.requires_arc = true
-   s.dependency 'AWSAuthCore', '2.13.3'
-   s.dependency 'FBSDKLoginKit', '5.8'
-   s.dependency 'FBSDKCoreKit', '5.8'
+   s.dependency 'AWSAuthCore', '2.33.4'
+   s.dependency 'AWSCore', '2.33.4'
+   s.dependency 'FBSDKLoginKit', '9.0'
+   s.dependency 'FBSDKCoreKit', '9.0'
+
    s.source_files = 'AWSAuthSDK/Sources/AWSFacebookSignIn/*.{h,m}'
    s.public_header_files = 'AWSAuthSDK/Sources/AWSFacebookSignIn/*.h'
    s.resource_bundle = {  'AWSFacebookSignIn' => 'AWSAuthSDK/Sources/AWSFacebookSignIn/Images.xcassets' }

@@ -1,60 +1,66 @@
-from subprocess import Popen, PIPE
-import subprocess
 import os
+import sys
+import json
+
+from framework_list import frameworks
+from functions import log, run_command
 import time
-from framework_list import grouped_frameworks
-from utils import log
 
-# Execute a process using `Popen` and avoid CircleCI to kill the process by emitting
-# a message to the process every now and then.
-def execute_command_and_wait(commands):
-    process = Popen(commands, stdout= PIPE, stderr= PIPE)
-    wait_times = 0
-    while True:
-        try:
-            (output, err) = process.communicate(timeout = 10)
-        except subprocess.TimeoutExpired:
-            wait_times = wait_times + 1
-            # tell circleci I am still alive, don't kill me
-            if wait_times % 30 == 0:
-                log('I am still alive')
-            if wait_times > 600:
-                log('time out')
-                quit(1)
 
-            continue
-        break
+def get_cocoapods_trunk_token():
+    (exit_code, out, error) = run_command([
+        "aws", "secretsmanager", "get-secret-value", "--secret-id", os.environ['COCOAPODS_SECRET_ARN']
+    ])
+    if exit_code != 0:
+        log(f"Failed to get CocoaPods token from AWS. Output: {out}, Error: {error}")
+        sys.exit(exit_code)
 
-        exit_code = process.wait()
+    return json.loads(out)["SecretString"]
+
+log(f"Retrieving CocoaPods token")
+os.environ['COCOAPODS_TRUNK_TOKEN'] = get_cocoapods_trunk_token()
+log("Retrieved CocoaPods token")
+
+retry_intervals = [30, 60, 210]
+def publish(framework: str, retryAttempt: int = 0):
+
+    # Most pods take a few minutes to build, and a few seconds to push to trunk. However, the
+    # AWSiOSSDK podspec can take a long time to build, since it builds each dependent pod as
+    # part of its linting process, so set the timeout accordingly.
+    (exit_code, out, err) = run_command(
+        ["bundle", "exec", "pod", "trunk", "push", f"{framework}.podspec", "--allow-warnings", "--synchronous"],
+        keepalive_interval=retry_intervals[retryAttempt % len(retry_intervals)],
+        timeout=3600,
+    )
+
+    if retryAttempt < 3 and exit_code != 0 and "Unable to accept duplicate entry for" not in str(out):
+        log(f"Retrying {framework}")
+        return publish(framework=framework, retryAttempt=retryAttempt + 1)
+    return (exit_code, out, err)
+
+log("Publishing CocoaPods")
+
+for framework in frameworks:
+    log(f"Publishing {framework}")
+
+    (exit_code, out, err) = publish(framework=framework)
+
+    if exit_code != 0 and "Unable to accept duplicate entry for" in str(out):
+        log(f"Already published {framework}")
+    elif exit_code == 0:
+        log(f"Published {framework}")
+    else:
+        log(f"Could not publish {framework}: output: {out}; error: {err}")
+        sys.exit(exit_code)
+
+    if framework == "AWSCore":
+        log(f"pod repo update after {framework}")
+        (exit_code, out, err) = run_command(
+            ["bundle", "exec", "pod", "repo", "update"],
+            keepalive_interval=300,
+            timeout=3600,
+        )
         if exit_code != 0:
-            if 'Unable to accept duplicate entry for:' in str(output):
-                log(f'{package} is already published')
-            else:
-                log(f'Output: {output}')
-                log(f'Error: {err}')
-                log(f'Exit code: {exit_code}')
-                log(f'Failed to publish {package}')
-                quit(exit_code)
+            log(f"Failed to update CocoaPods repo'; output={out}, error={err}")
 
-# Start the CocoaPods publishing...
-
-# Wait time between each framework group publishing, so dependencies are resolved correctly
-# Refer to https://github.com/CocoaPods/CocoaPods/issues/9497 for details
-COCOAPODS_PUSH_WAIT_TIME = 600
-
-log('Publishing cocoapods')
-
-number_of_groups = len(grouped_frameworks)
-current_group = 0
-
-for frameworks in grouped_frameworks:
-    for package in frameworks:
-        log(f'Publishing {package}')
-
-        execute_command_and_wait(['pod', 'trunk', 'push', f'{package}.podspec', '--allow-warnings'])
-        log(f'Published {package}')
-    if current_group < number_of_groups - 1:
-        # Wait until the packages
-        log('Waiting for packages to reach Trunk...')
-        time.sleep(COCOAPODS_PUSH_WAIT_TIME)
-    current_group += 1
+sys.exit(0)

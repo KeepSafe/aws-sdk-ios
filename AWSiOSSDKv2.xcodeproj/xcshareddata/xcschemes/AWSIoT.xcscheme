@@ -46,6 +46,14 @@
                BlueprintName = "AWSIoTTests"
                ReferencedContainer = "container:AWSiOSSDKv2.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "AWSIoTDataManagerRetainTests/testRetainMessageOnTopic()">
+               </Test>
+               <Test
+                  Identifier = "AWSIoTDataTests/testWebSocketMQTTPubSub">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">
@@ -54,16 +62,6 @@
                BlueprintIdentifier = "CE5604531C6BC91D00B4E00B"
                BuildableName = "AWSIoTUnitTests.xctest"
                BlueprintName = "AWSIoTUnitTests"
-               ReferencedContainer = "container:AWSiOSSDKv2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FAFE10AE234D3CF200BD2DCA"
-               BuildableName = "AWSIoTFreeRTOSOTATests.xctest"
-               BlueprintName = "AWSIoTFreeRTOSOTATests"
                ReferencedContainer = "container:AWSiOSSDKv2.xcodeproj">
             </BuildableReference>
          </TestableReference>

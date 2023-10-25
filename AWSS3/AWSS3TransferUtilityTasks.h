@@ -15,11 +15,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-
 @class AWSS3TransferUtilityTask;
 @class AWSS3TransferUtilityUploadTask;
 @class AWSS3TransferUtilityMultiPartUploadTask;
+@class AWSS3TransferUtilityUploadSubTask;
 @class AWSS3TransferUtilityDownloadTask;
 @class AWSS3TransferUtilityExpression;
 @class AWSS3TransferUtilityUploadExpression;
@@ -43,7 +42,6 @@ typedef NS_ENUM(NSInteger, AWSS3TransferUtilityTransferStatusType) {
  @param error Returns the error object when the download failed.
  */
 typedef void (^AWSS3TransferUtilityUploadCompletionHandlerBlock) (AWSS3TransferUtilityUploadTask *task,
-                                                                  NSString* _Nullable etag,
                                                                   NSError * _Nullable error);
 
 /**
@@ -53,7 +51,6 @@ typedef void (^AWSS3TransferUtilityUploadCompletionHandlerBlock) (AWSS3TransferU
  @param error Returns the error object when the download failed.
  */
 typedef void (^AWSS3TransferUtilityMultiPartUploadCompletionHandlerBlock) (AWSS3TransferUtilityMultiPartUploadTask *task,
-                                                                           NSString * _Nullable info,
                                                                            NSError * _Nullable error);
 
 /**
@@ -165,8 +162,6 @@ typedef void (^AWSS3TransferUtilityMultiPartProgressBlock) (AWSS3TransferUtility
  */
 @interface AWSS3TransferUtilityUploadTask : AWSS3TransferUtilityTask
 
-@property (readonly) BOOL allowsCellularAccess;
-
 /**
  set completion handler for task
  **/
@@ -183,49 +178,7 @@ typedef void (^AWSS3TransferUtilityMultiPartProgressBlock) (AWSS3TransferUtility
 /**
  The task object to represent a multipart upload task.
  */
-@interface AWSS3TransferUtilityMultiPartUploadTask: NSObject
-
-/**
- An identifier uniquely identifies the transferID.
- */
-@property (readonly) NSString *transferID;
-
-/**
- The Amazon S3 bucket name associated with the transfer.
- */
-@property (readonly) NSString *bucket;
-
-/**
- The Amazon S3 object key name associated with the transfer.
- */
-@property (readonly) NSString *key;
-
-/**
- The transfer progress.
- */
-@property (readonly) NSProgress *progress;
-
-/**
- the status of the Transfer.
- */
-@property (readonly) AWSS3TransferUtilityTransferStatusType status;
-
-@property (readonly) BOOL allowsCellularAccess;
-
-/**
- Cancels the task.
- */
-- (void)cancel;
-
-/**
- Resumes the task, if it is suspended.
- */
-- (void)resume;
-
-/**
- Temporarily suspends a task.
- */
-- (void)suspend;
+@interface AWSS3TransferUtilityMultiPartUploadTask: AWSS3TransferUtilityTask
 
 /**
  set completion handler for task
@@ -310,11 +263,6 @@ typedef void (^AWSS3TransferUtilityMultiPartProgressBlock) (AWSS3TransferUtility
  */
 @property (nonatomic, nullable) NSString *contentMD5;
 
-/**
- Whether the underlying requests allow cellular access
- */
-@property (nonatomic) BOOL allowsCellularAccess;
-
 @end
 
 
@@ -337,11 +285,6 @@ typedef void (^AWSS3TransferUtilityMultiPartProgressBlock) (AWSS3TransferUtility
  The progress feedback block.
  */
 @property (copy, nonatomic, nullable) AWSS3TransferUtilityMultiPartProgressBlock progressBlock;
-
-/**
- Whether the underlying requests allow cellular access
- */
-@property (nonatomic) BOOL allowsCellularAccess;
 
 /**
  Set an additional request header to be included in the pre-signed URL.

@@ -53,16 +53,6 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "177B8AE521E81B7D0051068F"
-               BuildableName = "AWSAuthSDKTestAppUITests.xctest"
-               BlueprintName = "AWSAuthSDKTestAppUITests"
-               ReferencedContainer = "container:AWSAuthSDK.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "B92BA3C52318859D007C1175"
                BuildableName = "AWSMobileClientUnitTests.xctest"
                BlueprintName = "AWSMobileClientUnitTests"
@@ -76,6 +66,26 @@
                BlueprintIdentifier = "B412F5DE233445A500F1AC69"
                BuildableName = "AWSMobileClientCustomAuthTests.xctest"
                BlueprintName = "AWSMobileClientCustomAuthTests"
+               ReferencedContainer = "container:AWSAuthSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FA771187260BEFCA0030966D"
+               BuildableName = "AWSMobileClientCustomEndpointTest.xctest"
+               BlueprintName = "AWSMobileClientCustomEndpointTest"
+               ReferencedContainer = "container:AWSAuthSDK.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B4CD531627643EA100B2F6B9"
+               BuildableName = "AWSMobileClientUnitTestWithApp.xctest"
+               BlueprintName = "AWSMobileClientUnitTestWithApp"
                ReferencedContainer = "container:AWSAuthSDK.xcodeproj">
             </BuildableReference>
          </TestableReference>

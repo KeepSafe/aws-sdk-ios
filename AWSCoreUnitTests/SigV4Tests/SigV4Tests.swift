@@ -43,11 +43,11 @@ class SigV4Tests: XCTestCase {
 
         let taskIsComplete = expectation(description: "Task is complete")
 
-        let presignedURL = AWSSignatureV4Signer.sigV4SignedURL(
+        _ = AWSSignatureV4Signer.sigV4SignedURL(
             with: originalRequest,
             credentialProvider: testCase.credentialsProvider,
             regionName: SigV4TestCredentials.regionName,
-            serviceName: SigV4TestCredentials.serviceName,
+            serviceName: testCase.serviceName,
             date: SigV4TestCredentials.testDate,
             expireDuration: SigV4TestCredentials.expiry,
             signBody: testCase.shouldSignBody,

@@ -26,8 +26,8 @@
 @implementation AWSS3Tests
 
 NSUInteger const AWSS3Test256KB = 1024 * 256;
-NSUInteger const AWSS3TestsTransferManagerMinimumPartSize = 5 * 1024 * 1024;
-NSString *const AWSS3TestBucketNamePrefix = @"s3-integ-test-";
+NSUInteger const AWSS3TestsMinimumPartSize = 5 * 1024 * 1024;
+NSString *AWSS3TestBucketNamePrefix = nil;
 
 static NSURL *tempLargeURL = nil;
 static NSURL *tempSmallURL = nil;
@@ -38,12 +38,10 @@ static NSMutableArray<NSString *> *testBucketsCreated;
 + (void)setUp {
     [super setUp];
     
-    if ([AWSTestUtility isCognitoSupportedInDefaultRegion]) {
-        [AWSTestUtility setupCognitoCredentialsProvider];
-    } else {
-        [AWSTestUtility setupCredentialsViaFile];
-    }
-
+    [AWSTestUtility setupSessionCredentialsProvider];
+    AWSS3TestBucketNamePrefix = [AWSTestUtility getIntegrationTestConfigurationValueForPackageId:@"s3"
+                                                                                       configKey:@"bucket_name_prefix"];
+    
     testBucketsCreated = [NSMutableArray new];
     
     //Create bucketName
@@ -104,8 +102,8 @@ static NSMutableArray<NSString *> *testBucketsCreated;
 - (void)setUp {
     [super setUp];
     
-    [AWSDDLog sharedInstance].logLevel = AWSDDLogLevelVerbose;
-    [AWSDDLog addLogger:[AWSDDTTYLogger sharedInstance]];//xcode console logger
+//    [AWSDDLog sharedInstance].logLevel = AWSDDLogLevelVerbose;
+//    [AWSDDLog addLogger:[AWSDDTTYLogger sharedInstance]];//xcode console logger
     
     AWSDDLogVerbose(@"verbose logging");
     
@@ -202,7 +200,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
 }
 
 - (void)testCreateDeleteBucket {
-    NSString *bucketNameTest2 = [testBucketNameGeneral stringByAppendingString:@"-testcreatedeletebucket"];
+    NSString *bucketNameTest2 = [AWSS3TestHelper getTestBucketName];
     [testBucketsCreated addObject:bucketNameTest2];
     
     AWSS3 *s3 = [AWSS3 defaultS3];
@@ -242,7 +240,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
 }
 
 - (void)testCreateDeleteBucketWithDefaultEncryption {
-    NSString *bucketNameTest2 = [testBucketNameGeneral stringByAppendingString:@"-testbucket"];
+    NSString *bucketNameTest2 = [AWSS3TestHelper getTestBucketName];
     [testBucketsCreated addObject:bucketNameTest2];
     
     AWSS3 *s3 = [AWSS3 defaultS3];
@@ -297,14 +295,9 @@ static NSMutableArray<NSString *> *testBucketsCreated;
 }
 
 - (void)testBucketCustomEndpoint {
-    AWSRegionType region = [AWSTestUtility getDefaultRegionType];
+    AWSRegionType region = [AWSTestUtility getRegionFromTestConfiguration];
 
-    id<AWSCredentialsProvider> credentialsProvider;
-    if ([AWSTestUtility isCognitoSupportedInDefaultRegion]) {
-        credentialsProvider = [AWSTestUtility getCognitoCredentialsProviderFromFileForRegion:region];
-    } else {
-        credentialsProvider = [AWSTestUtility getStaticCredentialsProviderFromFile];
-    }
+    id<AWSCredentialsProvider> credentialsProvider = [AWSTestUtility getDefaultCredentialsProvider];
 
     NSString *regionName = [AWSEndpoint regionNameFromType:region];
     NSString *urlString = [NSString stringWithFormat:@"https://s3.dualstack.%@.amazonaws.com", regionName];
@@ -385,6 +378,9 @@ static NSMutableArray<NSString *> *testBucketsCreated;
 
 
 - (void)testPutBucketWithGrants {
+
+    XCTSkipIf(TRUE, "Disabled test because of an update that was made to service API. The test would be enabled in the future.");
+
     AWSS3 *s3 = [AWSS3 defaultS3];
     XCTAssertNotNil(s3);
 
@@ -405,10 +401,10 @@ static NSMutableArray<NSString *> *testBucketsCreated;
         return;
     }
     
-    NSString *grantBucketName = [testBucketNameGeneral stringByAppendingString:@"-grant"];
+    NSString *grantBucketName = [AWSS3TestHelper getTestBucketName];
     [testBucketsCreated addObject:grantBucketName];
     XCTAssertTrue([AWSS3TestHelper createBucketWithName:grantBucketName
-                                              andRegion:[AWSTestUtility getDefaultRegionType]]);
+                                              andRegion:[AWSTestUtility getRegionFromTestConfiguration]]);
 
     AWSS3Grantee *granteeOne = [AWSS3Grantee new];
     granteeOne.identifier = @"154b2f3550127d0439dfe1e89a03a7a4178048cc05c6fdaeb40796841a5cfcef";
@@ -500,7 +496,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
         XCTAssertTrue([task.result isKindOfClass:[AWSS3PutObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([AWSS3PutObjectOutput class]),[task.result description]);
         AWSS3PutObjectOutput *putObjectOutput = task.result;
         XCTAssertNotNil(putObjectOutput.ETag);
-        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionUnknown);
+        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionAES256);
         return nil;
         
     }] waitUntilFinished];
@@ -540,6 +536,64 @@ static NSMutableArray<NSString *> *testBucketsCreated;
 
 }
 
+/// Test put/get to a transfer-accelerate-enabled bucket:
+/// https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html
+- (void)testTransferAcceleration {
+    NSString *bucketName = [AWSS3Tests transferAccelerationBucketName];
+    AWSRegionType region = [AWSTestUtility getRegionFromTestConfiguration];
+
+    id<AWSCredentialsProvider> credentialsProvider = [AWSTestUtility getDefaultCredentialsProvider];
+    AWSEndpoint *customEndpoint = [[AWSEndpoint alloc]initWithURLString:@"https://s3-accelerate.amazonaws.com"];
+
+    AWSServiceConfiguration *serviceConfiguration = [[AWSServiceConfiguration alloc]initWithRegion:region
+                                                                                          endpoint:customEndpoint
+                                                                               credentialsProvider:credentialsProvider];
+
+    [AWSS3 registerS3WithConfiguration:serviceConfiguration forKey:@"testTransferAcceleration"];
+    AWSS3 *s3 = [AWSS3 S3ForKey:@"testTransferAcceleration"];
+
+    NSString *testObjectStr = @"a test object string.";
+
+    NSTimeInterval timestamp = [NSDate timeIntervalSinceReferenceDate];
+    NSString *keyName = [NSString stringWithFormat:@"ios-test-transfer-acceleration-%lld", (int64_t)timestamp];
+    NSData *testObjectData = [testObjectStr dataUsingEncoding:NSUTF8StringEncoding];
+
+    AWSS3PutObjectRequest *putObjectRequest = [AWSS3PutObjectRequest new];
+    putObjectRequest.bucket = bucketName;
+    putObjectRequest.key = keyName;
+    putObjectRequest.body = testObjectData;
+    putObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:[testObjectData length]];
+    putObjectRequest.contentType = @"application/octet-stream";
+
+    [[[s3 putObject:putObjectRequest] continueWithBlock:^id(AWSTask<AWSS3PutObjectOutput *> *task) {
+        XCTAssertNil(task.error);
+        XCTAssertNotNil(task.result.ETag);
+        return nil;
+    }] waitUntilFinished];
+
+    AWSS3GetObjectRequest *getObjectRequest = [AWSS3GetObjectRequest new];
+    getObjectRequest.bucket = bucketName;
+    getObjectRequest.key = keyName;
+
+    [[[s3 getObject:getObjectRequest] continueWithBlock:^id(AWSTask<AWSS3GetObjectOutput *> *task) {
+        XCTAssertNil(task.error);
+        XCTAssertNotNil(task.result);
+        XCTAssertEqualObjects(task.result.body, testObjectData);
+        return nil;
+    }] waitUntilFinished];
+
+    AWSS3DeleteObjectRequest *deleteObjectRequest = [AWSS3DeleteObjectRequest new];
+    deleteObjectRequest.bucket = bucketName;
+    deleteObjectRequest.key = keyName;
+    [[[s3 deleteObject:deleteObjectRequest] continueWithBlock:^id(AWSTask<AWSS3DeleteObjectOutput *> *task) {
+        XCTAssertNil(task.error);
+        XCTAssertNotNil(task.result);
+        return nil;
+    }] waitUntilFinished];
+
+    [AWSS3 removeS3ForKey:@"testTransferAcceleration"];
+}
+
 - (void)testPutHeadGetAndDeleteObject {
     NSString *testObjectStr = @"a test object string.";
     NSString *keyName = @"ios-test-put-get-and-delete-obj";
@@ -566,7 +620,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
         XCTAssertTrue([task.result isKindOfClass:[AWSS3PutObjectOutput class]], @"The response object is not a class of [%@], got: %@", NSStringFromClass([AWSS3PutObjectOutput class]), [task.result description]);
         AWSS3PutObjectOutput *putObjectOutput = task.result;
         XCTAssertNotNil(putObjectOutput.ETag);
-        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionUnknown);
+        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionAES256);
 
         AWSS3HeadObjectRequest *headObjectRequest = [AWSS3HeadObjectRequest new];
         headObjectRequest.bucket = testBucketNameGeneral;
@@ -898,7 +952,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
         XCTAssertTrue([task.result isKindOfClass:[AWSS3PutObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([AWSS3PutObjectOutput class]),[task.result description]);
         AWSS3PutObjectOutput *putObjectOutput = task.result;
         XCTAssertNotNil(putObjectOutput.ETag);
-        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionUnknown);
+        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionAES256);
         return nil;
 
     }] waitUntilFinished];
@@ -1171,7 +1225,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
         XCTAssertTrue([task.result isKindOfClass:[AWSS3PutObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([AWSS3PutObjectOutput class]),[task.result description]);
         AWSS3PutObjectOutput *putObjectOutput = task.result;
         XCTAssertNotNil(putObjectOutput.ETag);
-        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionUnknown);
+        XCTAssertEqual(putObjectOutput.serverSideEncryption, AWSS3ServerSideEncryptionAES256);
         return nil;
 
     }] waitUntilFinished];
@@ -1281,7 +1335,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
     __block NSString *uploadId = @"";
     __block NSString *resultETag = @"";
 
-    NSUInteger partCount = ceil((double)[testData length] / AWSS3TestsTransferManagerMinimumPartSize);
+    NSUInteger partCount = ceil((double)[testData length] / AWSS3TestsMinimumPartSize);
     NSMutableArray *completedParts = [NSMutableArray arrayWithCapacity:partCount];
     for (int32_t i = 0; i < partCount; i++) {
         [completedParts addObject:[NSNull null]];
@@ -1300,8 +1354,8 @@ static NSMutableArray<NSString *> *testBucketsCreated;
         NSMutableArray *partUploadTasks = [NSMutableArray arrayWithCapacity:partCount];
 
         for (int32_t i = 1; i < partCount + 1; i++) {
-            NSUInteger dataLength = i == partCount ? [testData length] - ((i - 1) * AWSS3TestsTransferManagerMinimumPartSize) : AWSS3TestsTransferManagerMinimumPartSize;
-            NSData *partData = [testData subdataWithRange:NSMakeRange((i - 1) * AWSS3TestsTransferManagerMinimumPartSize, dataLength)];
+            NSUInteger dataLength = i == partCount ? [testData length] - ((i - 1) * AWSS3TestsMinimumPartSize) : AWSS3TestsMinimumPartSize;
+            NSData *partData = [testData subdataWithRange:NSMakeRange((i - 1) * AWSS3TestsMinimumPartSize, dataLength)];
 
             AWSS3UploadPartRequest *uploadPartRequest = [AWSS3UploadPartRequest new];
             uploadPartRequest.bucket = testBucketNameGeneral;
@@ -1399,7 +1453,7 @@ static NSMutableArray<NSString *> *testBucketsCreated;
     AWSS3GetBucketLocationRequest *getBucketLocationRequest = [AWSS3GetBucketLocationRequest new];
     getBucketLocationRequest.bucket = testBucketNameGeneral;
     
-    AWSRegionType regionType = [AWSTestUtility getDefaultRegionType];
+    AWSRegionType regionType = [AWSTestUtility getRegionFromTestConfiguration];
     AWSS3BucketLocationConstraint expectedConstraint = [AWSS3TestHelper getLocationConstraintForRegionType:regionType];
 
     [[[s3 getBucketLocation:getBucketLocationRequest] continueWithBlock:^id(AWSTask *task) {
@@ -1489,11 +1543,11 @@ static NSMutableArray<NSString *> *testBucketsCreated;
     AWSS3 *s3 = [AWSS3 defaultS3];
     XCTAssertNotNil(s3);
 
-    NSString *sourceBucketName = [testBucketNameGeneral stringByAppendingString:@"-inventory-source"];
+    NSString *sourceBucketName = [AWSS3TestHelper getTestBucketName];
     [AWSS3TestHelper createBucketWithName:sourceBucketName];
     [testBucketsCreated addObject:sourceBucketName];
 
-    NSString *destinationBucketName = [testBucketNameGeneral stringByAppendingString:@"-inventory-destination"];
+    NSString *destinationBucketName = [AWSS3TestHelper getTestBucketName];
     [AWSS3TestHelper createBucketWithName:destinationBucketName];
     [testBucketsCreated addObject:destinationBucketName];
 
@@ -1537,6 +1591,14 @@ static NSMutableArray<NSString *> *testBucketsCreated;
         }
         return task;
     }] waitUntilFinished];
+}
+
+#pragma mark - Utilities
+
++ (NSString *)transferAccelerationBucketName {
+    NSString *bucketName = [AWSTestUtility getIntegrationTestConfigurationValueForPackageId:@"s3"
+                                                                                    configKey:@"bucket_name_transfer_acceleration"];
+    return bucketName;
 }
 
 @end

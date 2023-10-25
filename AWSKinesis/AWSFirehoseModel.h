@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2022 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -32,12 +32,40 @@ typedef NS_ENUM(NSInteger, AWSFirehoseErrorType) {
     AWSFirehoseErrorServiceUnavailable,
 };
 
+typedef NS_ENUM(NSInteger, AWSFirehoseAmazonOpenSearchServerlessS3BackupMode) {
+    AWSFirehoseAmazonOpenSearchServerlessS3BackupModeUnknown,
+    AWSFirehoseAmazonOpenSearchServerlessS3BackupModeFailedDocumentsOnly,
+    AWSFirehoseAmazonOpenSearchServerlessS3BackupModeAllDocuments,
+};
+
+typedef NS_ENUM(NSInteger, AWSFirehoseAmazonopensearchserviceIndexRotationPeriod) {
+    AWSFirehoseAmazonopensearchserviceIndexRotationPeriodUnknown,
+    AWSFirehoseAmazonopensearchserviceIndexRotationPeriodNoRotation,
+    AWSFirehoseAmazonopensearchserviceIndexRotationPeriodOneHour,
+    AWSFirehoseAmazonopensearchserviceIndexRotationPeriodOneDay,
+    AWSFirehoseAmazonopensearchserviceIndexRotationPeriodOneWeek,
+    AWSFirehoseAmazonopensearchserviceIndexRotationPeriodOneMonth,
+};
+
+typedef NS_ENUM(NSInteger, AWSFirehoseAmazonopensearchserviceS3BackupMode) {
+    AWSFirehoseAmazonopensearchserviceS3BackupModeUnknown,
+    AWSFirehoseAmazonopensearchserviceS3BackupModeFailedDocumentsOnly,
+    AWSFirehoseAmazonopensearchserviceS3BackupModeAllDocuments,
+};
+
 typedef NS_ENUM(NSInteger, AWSFirehoseCompressionFormat) {
     AWSFirehoseCompressionFormatUnknown,
     AWSFirehoseCompressionFormatUncompressed,
     AWSFirehoseCompressionFormatGzip,
     AWSFirehoseCompressionFormatZip,
     AWSFirehoseCompressionFormatSnappy,
+    AWSFirehoseCompressionFormatHadoopSnappy,
+};
+
+typedef NS_ENUM(NSInteger, AWSFirehoseContentEncoding) {
+    AWSFirehoseContentEncodingUnknown,
+    AWSFirehoseContentEncodingNone,
+    AWSFirehoseContentEncodingGzip,
 };
 
 typedef NS_ENUM(NSInteger, AWSFirehoseDeliveryStreamEncryptionStatus) {
@@ -59,6 +87,13 @@ typedef NS_ENUM(NSInteger, AWSFirehoseDeliveryStreamFailureType) {
     AWSFirehoseDeliveryStreamFailureTypeInvalidKmsKey,
     AWSFirehoseDeliveryStreamFailureTypeKmsKeyNotFound,
     AWSFirehoseDeliveryStreamFailureTypeKmsOptInRequired,
+    AWSFirehoseDeliveryStreamFailureTypeCreateEniFailed,
+    AWSFirehoseDeliveryStreamFailureTypeDeleteEniFailed,
+    AWSFirehoseDeliveryStreamFailureTypeSubnetNotFound,
+    AWSFirehoseDeliveryStreamFailureTypeSecurityGroupNotFound,
+    AWSFirehoseDeliveryStreamFailureTypeEniAccessDenied,
+    AWSFirehoseDeliveryStreamFailureTypeSubnetAccessDenied,
+    AWSFirehoseDeliveryStreamFailureTypeSecurityGroupAccessDenied,
     AWSFirehoseDeliveryStreamFailureTypeUnknownError,
 };
 
@@ -96,6 +131,12 @@ typedef NS_ENUM(NSInteger, AWSFirehoseHECEndpointType) {
     AWSFirehoseHECEndpointTypeUnknown,
     AWSFirehoseHECEndpointTypeRaw,
     AWSFirehoseHECEndpointTypeEvent,
+};
+
+typedef NS_ENUM(NSInteger, AWSFirehoseHttpEndpointS3BackupMode) {
+    AWSFirehoseHttpEndpointS3BackupModeUnknown,
+    AWSFirehoseHttpEndpointS3BackupModeFailedDataOnly,
+    AWSFirehoseHttpEndpointS3BackupModeAllData,
 };
 
 typedef NS_ENUM(NSInteger, AWSFirehoseKeyType) {
@@ -139,14 +180,21 @@ typedef NS_ENUM(NSInteger, AWSFirehoseProcessorParameterName) {
     AWSFirehoseProcessorParameterNameUnknown,
     AWSFirehoseProcessorParameterNameLambdaArn,
     AWSFirehoseProcessorParameterNameNumberOfRetries,
+    AWSFirehoseProcessorParameterNameMetadataExtractionQuery,
+    AWSFirehoseProcessorParameterNameJsonParsingEngine,
     AWSFirehoseProcessorParameterNameRoleArn,
     AWSFirehoseProcessorParameterNameBufferSizeInMBs,
     AWSFirehoseProcessorParameterNameBufferIntervalInSeconds,
+    AWSFirehoseProcessorParameterNameSubRecordType,
+    AWSFirehoseProcessorParameterNameDelimiter,
 };
 
 typedef NS_ENUM(NSInteger, AWSFirehoseProcessorType) {
     AWSFirehoseProcessorTypeUnknown,
+    AWSFirehoseProcessorTypeRecordDeAggregation,
     AWSFirehoseProcessorTypeLambda,
+    AWSFirehoseProcessorTypeMetadataExtraction,
+    AWSFirehoseProcessorTypeAppendDelimiterToRecord,
 };
 
 typedef NS_ENUM(NSInteger, AWSFirehoseRedshiftS3BackupMode) {
@@ -167,6 +215,16 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
     AWSFirehoseSplunkS3BackupModeAllEvents,
 };
 
+@class AWSFirehoseAmazonOpenSearchServerlessBufferingHints;
+@class AWSFirehoseAmazonOpenSearchServerlessDestinationConfiguration;
+@class AWSFirehoseAmazonOpenSearchServerlessDestinationDescription;
+@class AWSFirehoseAmazonOpenSearchServerlessDestinationUpdate;
+@class AWSFirehoseAmazonOpenSearchServerlessRetryOptions;
+@class AWSFirehoseAmazonopensearchserviceBufferingHints;
+@class AWSFirehoseAmazonopensearchserviceDestinationConfiguration;
+@class AWSFirehoseAmazonopensearchserviceDestinationDescription;
+@class AWSFirehoseAmazonopensearchserviceDestinationUpdate;
+@class AWSFirehoseAmazonopensearchserviceRetryOptions;
 @class AWSFirehoseBufferingHints;
 @class AWSFirehoseCloudWatchLoggingOptions;
 @class AWSFirehoseReplicateCommand;
@@ -182,6 +240,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @class AWSFirehoseDescribeDeliveryStreamOutput;
 @class AWSFirehoseDeserializer;
 @class AWSFirehoseDestinationDescription;
+@class AWSFirehoseDynamicPartitioningConfiguration;
 @class AWSFirehoseElasticsearchBufferingHints;
 @class AWSFirehoseElasticsearchDestinationConfiguration;
 @class AWSFirehoseElasticsearchDestinationDescription;
@@ -193,6 +252,15 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @class AWSFirehoseExtendedS3DestinationUpdate;
 @class AWSFirehoseFailureDescription;
 @class AWSFirehoseHiveJsonSerDe;
+@class AWSFirehoseHttpEndpointBufferingHints;
+@class AWSFirehoseHttpEndpointCommonAttribute;
+@class AWSFirehoseHttpEndpointConfiguration;
+@class AWSFirehoseHttpEndpointDescription;
+@class AWSFirehoseHttpEndpointDestinationConfiguration;
+@class AWSFirehoseHttpEndpointDestinationDescription;
+@class AWSFirehoseHttpEndpointDestinationUpdate;
+@class AWSFirehoseHttpEndpointRequestConfiguration;
+@class AWSFirehoseHttpEndpointRetryOptions;
 @class AWSFirehoseInputFormatConfiguration;
 @class AWSFirehoseKMSEncryptionConfig;
 @class AWSFirehoseKinesisStreamSourceConfiguration;
@@ -218,6 +286,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @class AWSFirehoseRedshiftDestinationDescription;
 @class AWSFirehoseRedshiftDestinationUpdate;
 @class AWSFirehoseRedshiftRetryOptions;
+@class AWSFirehoseRetryOptions;
 @class AWSFirehoseS3DestinationConfiguration;
 @class AWSFirehoseS3DestinationDescription;
 @class AWSFirehoseS3DestinationUpdate;
@@ -239,6 +308,445 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @class AWSFirehoseUntagDeliveryStreamOutput;
 @class AWSFirehoseUpdateDestinationInput;
 @class AWSFirehoseUpdateDestinationOutput;
+@class AWSFirehoseVpcConfiguration;
+@class AWSFirehoseVpcConfigurationDescription;
+
+/**
+ <p>Describes the buffering to perform before delivering data to the Serverless offering for Amazon OpenSearch Service destination.</p>
+ */
+@interface AWSFirehoseAmazonOpenSearchServerlessBufferingHints : AWSModel
+
+
+/**
+ <p>Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes).</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable intervalInSeconds;
+
+/**
+ <p>Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. </p><p>We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable sizeInMBs;
+
+@end
+
+/**
+ <p>Describes the configuration of a destination in the Serverless offering for Amazon OpenSearch Service.</p>
+ Required parameters: [RoleARN, IndexName, S3Configuration]
+ */
+@interface AWSFirehoseAmazonOpenSearchServerlessDestinationConfiguration : AWSModel
+
+
+/**
+ <p>The buffering options. If no value is specified, the default values for AmazonopensearchserviceBufferingHints are used.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable collectionEndpoint;
+
+/**
+ <p>The Serverless offering for Amazon OpenSearch Service index name.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable indexName;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to the Serverless offering for Amazon OpenSearch Service. The default value is 300 (5 minutes).</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with AmazonOpenSearchService-failed/ appended to the prefix.</p>
+ */
+@property (nonatomic, assign) AWSFirehoseAmazonOpenSearchServerlessS3BackupMode s3BackupMode;
+
+/**
+ <p>Describes the configuration of a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationConfiguration * _Nullable s3Configuration;
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseVpcConfiguration * _Nullable vpcConfiguration;
+
+@end
+
+/**
+ <p>The destination description in the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@interface AWSFirehoseAmazonOpenSearchServerlessDestinationDescription : AWSModel
+
+
+/**
+ <p>The buffering options.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable collectionEndpoint;
+
+/**
+ <p>The Serverless offering for Amazon OpenSearch Service index name.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable indexName;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The Serverless offering for Amazon OpenSearch Service retry options.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>The Amazon Resource Name (ARN) of the AWS credentials.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>The Amazon S3 backup mode.</p>
+ */
+@property (nonatomic, assign) AWSFirehoseAmazonOpenSearchServerlessS3BackupMode s3BackupMode;
+
+/**
+ <p>Describes a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationDescription * _Nullable s3DestinationDescription;
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseVpcConfigurationDescription * _Nullable vpcConfigurationDescription;
+
+@end
+
+/**
+ <p>Describes an update for a destination in the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@interface AWSFirehoseAmazonOpenSearchServerlessDestinationUpdate : AWSModel
+
+
+/**
+ <p>The buffering options. If no value is specified, AmazonopensearchBufferingHints object default values are used.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The endpoint to use when communicating with the collection in the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable collectionEndpoint;
+
+/**
+ <p>The Serverless offering for Amazon OpenSearch Service index name.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable indexName;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to the Serverless offering for Amazon OpenSearch Service. The default value is 300 (5 minutes).</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Serverless offering for Amazon OpenSearch Service Configuration API and for indexing documents.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>Describes an update for a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationUpdate * _Nullable s3Update;
+
+@end
+
+/**
+ <p>Configures retry behavior in case Kinesis Data Firehose is unable to deliver documents to the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@interface AWSFirehoseAmazonOpenSearchServerlessRetryOptions : AWSModel
+
+
+/**
+ <p>After an initial failure to deliver to the Serverless offering for Amazon OpenSearch Service, the total amount of time during which Kinesis Data Firehose retries delivery (including the first attempt). After this time has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results in no retries.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable durationInSeconds;
+
+@end
+
+/**
+ <p>Describes the buffering to perform before delivering data to the Amazon OpenSearch Service destination. </p>
+ */
+@interface AWSFirehoseAmazonopensearchserviceBufferingHints : AWSModel
+
+
+/**
+ <p>Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes). </p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable intervalInSeconds;
+
+/**
+ <p>Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5.</p><p>We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher. </p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable sizeInMBs;
+
+@end
+
+/**
+ <p>Describes the configuration of a destination in Amazon OpenSearch Service</p>
+ Required parameters: [RoleARN, IndexName, S3Configuration]
+ */
+@interface AWSFirehoseAmazonopensearchserviceDestinationConfiguration : AWSModel
+
+
+/**
+ <p>The buffering options. If no value is specified, the default values for AmazonopensearchserviceBufferingHints are used. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The endpoint to use when communicating with the cluster. Specify either this ClusterEndpoint or the DomainARN field. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clusterEndpoint;
+
+/**
+ <p>The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable domainARN;
+
+/**
+ <p>The ElasticsearAmazon OpenSearch Service index name.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable indexName;
+
+/**
+ <p>The Amazon OpenSearch Service index rotation period. Index rotation appends a timestamp to the IndexName to facilitate the expiration of old data.</p>
+ */
+@property (nonatomic, assign) AWSFirehoseAmazonopensearchserviceIndexRotationPeriod indexRotationPeriod;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon OpenSearch Service. The default value is 300 (5 minutes). </p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon OpenSearch Service Configuration API and for indexing documents.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>Defines how documents should be delivered to Amazon S3. When it is set to FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with AmazonOpenSearchService-failed/ appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with AmazonOpenSearchService-failed/ appended to the prefix. </p>
+ */
+@property (nonatomic, assign) AWSFirehoseAmazonopensearchserviceS3BackupMode s3BackupMode;
+
+/**
+ <p>Describes the configuration of a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationConfiguration * _Nullable s3Configuration;
+
+/**
+ <p>The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during run time. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable typeName;
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseVpcConfiguration * _Nullable vpcConfiguration;
+
+@end
+
+/**
+ <p>The destination description in Amazon OpenSearch Service.</p>
+ */
+@interface AWSFirehoseAmazonopensearchserviceDestinationDescription : AWSModel
+
+
+/**
+ <p>The buffering options.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The endpoint to use when communicating with the cluster. Kinesis Data Firehose uses either this ClusterEndpoint or the DomainARN field to send data to Amazon OpenSearch Service. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clusterEndpoint;
+
+/**
+ <p>The ARN of the Amazon OpenSearch Service domain.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable domainARN;
+
+/**
+ <p>The Amazon OpenSearch Service index name.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable indexName;
+
+/**
+ <p>The Amazon OpenSearch Service index rotation period</p>
+ */
+@property (nonatomic, assign) AWSFirehoseAmazonopensearchserviceIndexRotationPeriod indexRotationPeriod;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The Amazon OpenSearch Service retry options.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>The Amazon S3 backup mode.</p>
+ */
+@property (nonatomic, assign) AWSFirehoseAmazonopensearchserviceS3BackupMode s3BackupMode;
+
+/**
+ <p>Describes a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationDescription * _Nullable s3DestinationDescription;
+
+/**
+ <p>The Amazon OpenSearch Service type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no value for TypeName. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable typeName;
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseVpcConfigurationDescription * _Nullable vpcConfigurationDescription;
+
+@end
+
+/**
+ <p>Describes an update for a destination in Amazon OpenSearch Service.</p>
+ */
+@interface AWSFirehoseAmazonopensearchserviceDestinationUpdate : AWSModel
+
+
+/**
+ <p>The buffering options. If no value is specified, AmazonopensearchBufferingHints object default values are used. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The endpoint to use when communicating with the cluster. Specify either this ClusterEndpoint or the DomainARN field. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable clusterEndpoint;
+
+/**
+ <p>The ARN of the Amazon OpenSearch Service domain. The IAM role must have permissions for DescribeDomain, DescribeDomains, and DescribeDomainConfig after assuming the IAM role specified in RoleARN.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable domainARN;
+
+/**
+ <p>The Amazon OpenSearch Service index name.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable indexName;
+
+/**
+ <p>The Amazon OpenSearch Service index rotation period. Index rotation appends a timestamp to IndexName to facilitate the expiration of old data.</p>
+ */
+@property (nonatomic, assign) AWSFirehoseAmazonopensearchserviceIndexRotationPeriod indexRotationPeriod;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon OpenSearch Service. The default value is 300 (5 minutes). </p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon OpenSearch Service Configuration API and for indexing documents. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>Describes an update for a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationUpdate * _Nullable s3Update;
+
+/**
+ <p>The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during runtime. </p><p>If you upgrade Elasticsearch from 6.x to 7.x and don’t update your delivery stream, Kinesis Data Firehose still delivers data to Elasticsearch with the old index name and type name. If you want to update your delivery stream with a new index name, provide an empty string for TypeName. </p>
+ */
+@property (nonatomic, strong) NSString * _Nullable typeName;
+
+@end
+
+/**
+ <p>Configures retry behavior in case Kinesis Data Firehose is unable to deliver documents to Amazon OpenSearch Service. </p>
+ */
+@interface AWSFirehoseAmazonopensearchserviceRetryOptions : AWSModel
+
+
+/**
+ <p>After an initial failure to deliver to Amazon OpenSearch Service, the total amount of time during which Kinesis Data Firehose retries delivery (including the first attempt). After this time has elapsed, the failed documents are written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0 (zero) results in no retries. </p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable durationInSeconds;
+
+@end
 
 /**
  <p>Describes hints for the buffering to perform before delivering data to the destination. These options are treated as hints, and therefore Kinesis Data Firehose might choose to use different values when it is optimal. The <code>SizeInMBs</code> and <code>IntervalInSeconds</code> parameters are optional. However, if specify a value for one of them, you must also provide a value for the other.</p>
@@ -312,12 +820,22 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
+ <p>The destination in the Serverless offering for Amazon OpenSearch Service. You can specify only one destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessDestinationConfiguration * _Nullable amazonOpenSearchServerlessDestinationConfiguration;
+
+/**
+ <p>The destination in Amazon OpenSearch Service. You can specify only one destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceDestinationConfiguration * _Nullable amazonopensearchserviceDestinationConfiguration;
+
+/**
  <p>Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed for Server-Side Encryption (SSE).</p>
  */
 @property (nonatomic, strong) AWSFirehoseDeliveryStreamEncryptionConfigurationInput * _Nullable deliveryStreamEncryptionConfigurationInput;
 
 /**
- <p>The name of the delivery stream. This name must be unique per AWS account in the same AWS Region. If the delivery streams are in different accounts or different Regions, you can have multiple delivery streams with the same name.</p>
+ <p>The name of the delivery stream. This name must be unique per Amazon Web Services account in the same Amazon Web Services Region. If the delivery streams are in different accounts or different Regions, you can have multiple delivery streams with the same name.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable deliveryStreamName;
 
@@ -335,6 +853,11 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
  <p>The destination in Amazon S3. You can specify only one destination.</p>
  */
 @property (nonatomic, strong) AWSFirehoseExtendedS3DestinationConfiguration * _Nullable extendedS3DestinationConfiguration;
+
+/**
+ <p>Enables configuring Kinesis Firehose to deliver data to any HTTP endpoint destination. You can specify only one destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointDestinationConfiguration * _Nullable httpEndpointDestinationConfiguration;
 
 /**
  <p>When a Kinesis data stream is used as the source for the delivery stream, a <a>KinesisStreamSourceConfiguration</a> containing the Kinesis data stream Amazon Resource Name (ARN) and the role ARN for the source stream.</p>
@@ -357,7 +880,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseSplunkDestinationConfiguration * _Nullable splunkDestinationConfiguration;
 
 /**
- <p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to AWS resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the AWS Billing and Cost Management User Guide.</p><p>You can specify up to 50 tags when creating a delivery stream.</p>
+ <p>A set of tags to assign to the delivery stream. A tag is a key-value pair that you can define and assign to Amazon Web Services resources. Tags are metadata. For example, you can add friendly names and descriptions or other types of information that can help you distinguish the delivery stream. For more information about tags, see <a href="https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html">Using Cost Allocation Tags</a> in the Amazon Web Services Billing and Cost Management User Guide.</p><p>You can specify up to 50 tags when creating a delivery stream.</p>
  */
 @property (nonatomic, strong) NSArray<AWSFirehoseTag *> * _Nullable tags;
 
@@ -377,7 +900,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @end
 
 /**
- <p>Specifies that you want Kinesis Data Firehose to convert data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. Kinesis Data Firehose uses the serializer and deserializer that you specify, in addition to the column information from the AWS Glue table, to deserialize your input data from JSON and then serialize it to the Parquet or ORC format. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html">Kinesis Data Firehose Record Format Conversion</a>.</p>
+ <p>Specifies that you want Kinesis Data Firehose to convert data from the JSON format to the Parquet or ORC format before writing it to Amazon S3. Kinesis Data Firehose uses the serializer and deserializer that you specify, in addition to the column information from the Amazon Web Services Glue table, to deserialize your input data from JSON and then serialize it to the Parquet or ORC format. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html">Kinesis Data Firehose Record Format Conversion</a>.</p>
  */
 @interface AWSFirehoseDataFormatConversionConfiguration : AWSModel
 
@@ -388,17 +911,17 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSNumber * _Nullable enabled;
 
 /**
- <p>Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON.</p>
+ <p>Specifies the deserializer that you want Kinesis Data Firehose to use to convert the format of your data from JSON. This parameter is required if <code>Enabled</code> is set to true.</p>
  */
 @property (nonatomic, strong) AWSFirehoseInputFormatConfiguration * _Nullable inputFormatConfiguration;
 
 /**
- <p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format.</p>
+ <p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data to the Parquet or ORC format. This parameter is required if <code>Enabled</code> is set to true.</p>
  */
 @property (nonatomic, strong) AWSFirehoseOutputFormatConfiguration * _Nullable outputFormatConfiguration;
 
 /**
- <p>Specifies the AWS Glue Data Catalog table that contains the column information.</p>
+ <p>Specifies the Amazon Web Services Glue Data Catalog table that contains the column information. This parameter is required if <code>Enabled</code> is set to true.</p>
  */
 @property (nonatomic, strong) AWSFirehoseSchemaConfiguration * _Nullable schemaConfiguration;
 
@@ -411,7 +934,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>Set this to true if you want to delete the delivery stream even if Kinesis Data Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose might be unable to retire the grant due to a customer error, such as when the CMK or the grant are in an invalid state. If you force deletion, you can then use the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html">RevokeGrant</a> operation to revoke the grant you gave to Kinesis Data Firehose. If a failure to retire the grant happens due to an AWS KMS issue, Kinesis Data Firehose keeps retrying the delete operation.</p><p>The default value is false.</p>
+ <p>Set this to true if you want to delete the delivery stream even if Kinesis Data Firehose is unable to retire the grant for the CMK. Kinesis Data Firehose might be unable to retire the grant due to a customer error, such as when the CMK or the grant are in an invalid state. If you force deletion, you can then use the <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html">RevokeGrant</a> operation to revoke the grant you gave to Kinesis Data Firehose. If a failure to retire the grant happens due to an Amazon Web Services KMS issue, Kinesis Data Firehose keeps retrying the delete operation.</p><p>The default value is false.</p>
  */
 @property (nonatomic, strong) NSNumber * _Nullable allowForceDelete;
 
@@ -443,7 +966,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSDate * _Nullable createTimestamp;
 
 /**
- <p>The Amazon Resource Name (ARN) of the delivery stream. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the delivery stream. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable deliveryStreamARN;
 
@@ -511,12 +1034,12 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseFailureDescription * _Nullable failureDescription;
 
 /**
- <p>If <code>KeyType</code> is <code>CUSTOMER_MANAGED_CMK</code>, this field contains the ARN of the customer managed CMK. If <code>KeyType</code> is <code>AWS_OWNED_CMK</code>, <code>DeliveryStreamEncryptionConfiguration</code> doesn't contain a value for <code>KeyARN</code>.</p>
+ <p>If <code>KeyType</code> is <code>CUSTOMER_MANAGED_CMK</code>, this field contains the ARN of the customer managed CMK. If <code>KeyType</code> is <code>Amazon Web Services_OWNED_CMK</code>, <code>DeliveryStreamEncryptionConfiguration</code> doesn't contain a value for <code>KeyARN</code>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable keyARN;
 
 /**
- <p>Indicates the type of customer master key (CMK) that is used for encryption. The default setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys (CMKs)</a>.</p>
+ <p>Indicates the type of customer master key (CMK) that is used for encryption. The default setting is <code>Amazon Web Services_OWNED_CMK</code>. For more information about CMKs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys (CMKs)</a>.</p>
  */
 @property (nonatomic, assign) AWSFirehoseKeyType keyType;
 
@@ -528,19 +1051,19 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @end
 
 /**
- <p>Used to specify the type and Amazon Resource Name (ARN) of the CMK needed for Server-Side Encryption (SSE). </p>
+ <p>Specifies the type and Amazon Resource Name (ARN) of the CMK to use for Server-Side Encryption (SSE). </p>
  Required parameters: [KeyType]
  */
 @interface AWSFirehoseDeliveryStreamEncryptionConfigurationInput : AWSModel
 
 
 /**
- <p>If you set <code>KeyType</code> to <code>CUSTOMER_MANAGED_CMK</code>, you must specify the Amazon Resource Name (ARN) of the CMK. If you set <code>KeyType</code> to <code>AWS_OWNED_CMK</code>, Kinesis Data Firehose uses a service-account CMK.</p>
+ <p>If you set <code>KeyType</code> to <code>CUSTOMER_MANAGED_CMK</code>, you must specify the Amazon Resource Name (ARN) of the CMK. If you set <code>KeyType</code> to <code>Amazon Web Services_OWNED_CMK</code>, Kinesis Data Firehose uses a service-account CMK.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable keyARN;
 
 /**
- <p>Indicates the type of customer master key (CMK) to use for encryption. The default setting is <code>AWS_OWNED_CMK</code>. For more information about CMKs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html">CreateGrant</a> to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant. </p><p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a delivery stream that is already encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement.</p>
+ <p>Indicates the type of customer master key (CMK) to use for encryption. The default setting is <code>Amazon Web Services_OWNED_CMK</code>. For more information about CMKs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys">Customer Master Keys (CMKs)</a>. When you invoke <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> with <code>KeyType</code> set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon KMS operation <a href="https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateGrant.html">CreateGrant</a> to create a grant that allows the Kinesis Data Firehose service to use the customer managed CMK to perform encryption and decryption. Kinesis Data Firehose manages that grant. </p><p>When you invoke <a>StartDeliveryStreamEncryption</a> to change the CMK for a delivery stream that is encrypted with a customer managed CMK, Kinesis Data Firehose schedules the grant it had on the old CMK for retirement.</p><p>You can use a CMK of type CUSTOMER_MANAGED_CMK to encrypt up to 500 delivery streams. If a <a>CreateDeliveryStream</a> or <a>StartDeliveryStreamEncryption</a> operation exceeds this limit, Kinesis Data Firehose throws a <code>LimitExceededException</code>. </p><important><p>To encrypt your delivery stream, use symmetric CMKs. Kinesis Data Firehose doesn't support asymmetric CMKs. For information about symmetric and asymmetric CMKs, see <a href="https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html">About Symmetric and Asymmetric CMKs</a> in the Amazon Web Services Key Management Service developer guide.</p></important>
  */
 @property (nonatomic, assign) AWSFirehoseKeyType keyType;
 
@@ -608,6 +1131,16 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
+ <p>The destination in the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessDestinationDescription * _Nullable amazonOpenSearchServerlessDestinationDescription;
+
+/**
+ <p>The destination in Amazon OpenSearch Service.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceDestinationDescription * _Nullable amazonopensearchserviceDestinationDescription;
+
+/**
  <p>The ID of the destination.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable destinationId;
@@ -623,6 +1156,11 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseExtendedS3DestinationDescription * _Nullable extendedS3DestinationDescription;
 
 /**
+ <p>Describes the specified HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointDestinationDescription * _Nullable httpEndpointDestinationDescription;
+
+/**
  <p>The destination in Amazon Redshift.</p>
  */
 @property (nonatomic, strong) AWSFirehoseRedshiftDestinationDescription * _Nullable redshiftDestinationDescription;
@@ -636,6 +1174,24 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
  <p>The destination in Splunk.</p>
  */
 @property (nonatomic, strong) AWSFirehoseSplunkDestinationDescription * _Nullable splunkDestinationDescription;
+
+@end
+
+/**
+ <p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. </p>
+ */
+@interface AWSFirehoseDynamicPartitioningConfiguration : AWSModel
+
+
+/**
+ <p>Specifies that the dynamic partitioning is enabled for this Kinesis Data Firehose delivery stream.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable enabled;
+
+/**
+ <p>The retry behavior in case Kinesis Data Firehose is unable to deliver data to an Amazon S3 prefix.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseRetryOptions * _Nullable retryOptions;
 
 @end
 
@@ -680,7 +1236,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable clusterEndpoint;
 
 /**
- <p>The ARN of the Amazon ES domain. The IAM role must have permissions for <code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>, and <code>DescribeElasticsearchDomainConfig</code> after assuming the role specified in <b>RoleARN</b>. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p><p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
+ <p>The ARN of the Amazon ES domain. The IAM role must have permissions for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and <code>DescribeDomainConfig</code> after assuming the role specified in <b>RoleARN</b>. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p><p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable domainARN;
 
@@ -705,12 +1261,12 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseElasticsearchRetryOptions * _Nullable retryOptions;
 
 /**
- <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Grant Kinesis Data Firehose Access to an Amazon S3 Destination</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Grant Kinesis Data Firehose Access to an Amazon S3 Destination</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
 /**
- <p>Defines how documents should be delivered to Amazon S3. When it is set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with <code>elasticsearch-failed/</code> appended to the key prefix. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with <code>elasticsearch-failed/</code> appended to the prefix. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup">Amazon S3 Backup for the Amazon ES Destination</a>. Default value is <code>FailedDocumentsOnly</code>.</p>
+ <p>Defines how documents should be delivered to Amazon S3. When it is set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any documents that could not be indexed to the configured Amazon S3 destination, with <code>AmazonOpenSearchService-failed/</code> appended to the key prefix. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents with <code>AmazonOpenSearchService-failed/</code> appended to the prefix. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup">Amazon S3 Backup for the Amazon ES Destination</a>. Default value is <code>FailedDocumentsOnly</code>.</p><p>You can't change this backup mode after you create the delivery stream. </p>
  */
 @property (nonatomic, assign) AWSFirehoseElasticsearchS3BackupMode s3BackupMode;
 
@@ -723,6 +1279,11 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
  <p>The Elasticsearch type name. For Elasticsearch 6.x, there can be only one type per index. If you try to specify a new type for an existing index that already has another type, Kinesis Data Firehose returns an error during run time.</p><p>For Elasticsearch 7.x, don't specify a <code>TypeName</code>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable typeName;
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseVpcConfiguration * _Nullable vpcConfiguration;
 
 @end
 
@@ -748,7 +1309,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable clusterEndpoint;
 
 /**
- <p>The ARN of the Amazon ES domain. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p><p>Kinesis Data Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code> to send data to Amazon ES.</p>
+ <p>The ARN of the Amazon ES domain. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p><p>Kinesis Data Firehose uses either <code>ClusterEndpoint</code> or <code>DomainARN</code> to send data to Amazon ES.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable domainARN;
 
@@ -773,7 +1334,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseElasticsearchRetryOptions * _Nullable retryOptions;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -788,9 +1349,14 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseS3DestinationDescription * _Nullable s3DestinationDescription;
 
 /**
- <p>The Elasticsearch type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x, there's no value for <code>TypeName</code>.</p>
+ <p>The Elasticsearch type name. This applies to Elasticsearch 6.x and lower versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no value for <code>TypeName</code>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable typeName;
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseVpcConfigurationDescription * _Nullable vpcConfigurationDescription;
 
 @end
 
@@ -816,7 +1382,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable clusterEndpoint;
 
 /**
- <p>The ARN of the Amazon ES domain. The IAM role must have permissions for <code>DescribeElasticsearchDomain</code>, <code>DescribeElasticsearchDomains</code>, and <code>DescribeElasticsearchDomainConfig</code> after assuming the IAM role specified in <code>RoleARN</code>. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p><p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
+ <p>The ARN of the Amazon ES domain. The IAM role must have permissions for <code>DescribeDomain</code>, <code>DescribeDomains</code>, and <code>DescribeDomainConfig</code> after assuming the IAM role specified in <code>RoleARN</code>. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p><p>Specify either <code>ClusterEndpoint</code> or <code>DomainARN</code>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable domainARN;
 
@@ -841,7 +1407,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseElasticsearchRetryOptions * _Nullable retryOptions;
 
 /**
- <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Grant Kinesis Data Firehose Access to an Amazon S3 Destination</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data Firehose for calling the Amazon ES Configuration API and for indexing documents. For more information, see <a href="https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3">Grant Kinesis Data Firehose Access to an Amazon S3 Destination</a> and <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -896,7 +1462,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable bucketARN;
 
@@ -921,6 +1487,11 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseDataFormatConversionConfiguration * _Nullable dataFormatConversionConfiguration;
 
 /**
+ <p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseDynamicPartitioningConfiguration * _Nullable dynamicPartitioningConfiguration;
+
+/**
  <p>The encryption configuration. If no value is specified, the default is no encryption.</p>
  */
 @property (nonatomic, strong) AWSFirehoseEncryptionConfiguration * _Nullable encryptionConfiguration;
@@ -941,7 +1512,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -951,7 +1522,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseS3DestinationConfiguration * _Nullable s3BackupConfiguration;
 
 /**
- <p>The Amazon S3 backup mode.</p>
+ <p>The Amazon S3 backup mode. After you create a delivery stream, you can update it to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. </p>
  */
 @property (nonatomic, assign) AWSFirehoseS3BackupMode s3BackupMode;
 
@@ -965,7 +1536,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable bucketARN;
 
@@ -990,6 +1561,11 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseDataFormatConversionConfiguration * _Nullable dataFormatConversionConfiguration;
 
 /**
+ <p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseDynamicPartitioningConfiguration * _Nullable dynamicPartitioningConfiguration;
+
+/**
  <p>The encryption configuration. If no value is specified, the default is no encryption.</p>
  */
 @property (nonatomic, strong) AWSFirehoseEncryptionConfiguration * _Nullable encryptionConfiguration;
@@ -1010,7 +1586,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -1033,7 +1609,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable bucketARN;
 
@@ -1058,6 +1634,11 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseDataFormatConversionConfiguration * _Nullable dataFormatConversionConfiguration;
 
 /**
+ <p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseDynamicPartitioningConfiguration * _Nullable dynamicPartitioningConfiguration;
+
+/**
  <p>The encryption configuration. If no value is specified, the default is no encryption.</p>
  */
 @property (nonatomic, strong) AWSFirehoseEncryptionConfiguration * _Nullable encryptionConfiguration;
@@ -1078,12 +1659,12 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
 /**
- <p>Enables or disables Amazon S3 backup mode.</p>
+ <p>You can update a delivery stream to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. </p>
  */
 @property (nonatomic, assign) AWSFirehoseS3BackupMode s3BackupMode;
 
@@ -1127,7 +1708,277 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @end
 
 /**
- <p>Specifies the deserializer you want to use to convert the format of the input data.</p>
+ <p>Describes the buffering options that can be applied before data is delivered to the HTTP endpoint destination. Kinesis Data Firehose treats these options as hints, and it might choose to use more optimal values. The <code>SizeInMBs</code> and <code>IntervalInSeconds</code> parameters are optional. However, if specify a value for one of them, you must also provide a value for the other. </p>
+ */
+@interface AWSFirehoseHttpEndpointBufferingHints : AWSModel
+
+
+/**
+ <p>Buffer incoming data for the specified period of time, in seconds, before delivering it to the destination. The default value is 300 (5 minutes). </p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable intervalInSeconds;
+
+/**
+ <p>Buffer incoming data to the specified size, in MBs, before delivering it to the destination. The default value is 5. </p><p>We recommend setting this parameter to a value greater than the amount of data you typically ingest into the delivery stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the value should be 10 MB or higher. </p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable sizeInMBs;
+
+@end
+
+/**
+ <p>Describes the metadata that's delivered to the specified HTTP endpoint destination.</p>
+ Required parameters: [AttributeName, AttributeValue]
+ */
+@interface AWSFirehoseHttpEndpointCommonAttribute : AWSModel
+
+
+/**
+ <p>The name of the HTTP endpoint common attribute.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable attributeName;
+
+/**
+ <p>The value of the HTTP endpoint common attribute.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable attributeValue;
+
+@end
+
+/**
+ <p>Describes the configuration of the HTTP endpoint to which Kinesis Firehose delivers data.</p>
+ Required parameters: [Url]
+ */
+@interface AWSFirehoseHttpEndpointConfiguration : AWSModel
+
+
+/**
+ <p>The access key required for Kinesis Firehose to authenticate with the HTTP endpoint selected as the destination.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable accessKey;
+
+/**
+ <p>The name of the HTTP endpoint selected as the destination.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable name;
+
+/**
+ <p>The URL of the HTTP endpoint selected as the destination.</p><important><p>If you choose an HTTP endpoint as your destination, review and follow the instructions in the <a href="https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html">Appendix - HTTP Endpoint Delivery Request and Response Specifications</a>.</p></important>
+ */
+@property (nonatomic, strong) NSString * _Nullable url;
+
+@end
+
+/**
+ <p>Describes the HTTP endpoint selected as the destination. </p>
+ */
+@interface AWSFirehoseHttpEndpointDescription : AWSModel
+
+
+/**
+ <p>The name of the HTTP endpoint selected as the destination.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable name;
+
+/**
+ <p>The URL of the HTTP endpoint selected as the destination.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable url;
+
+@end
+
+/**
+ <p>Describes the configuration of the HTTP endpoint destination.</p>
+ Required parameters: [EndpointConfiguration, S3Configuration]
+ */
+@interface AWSFirehoseHttpEndpointDestinationConfiguration : AWSModel
+
+
+/**
+ <p>The buffering options that can be used before data is delivered to the specified destination. Kinesis Data Firehose treats these options as hints, and it might choose to use more optimal values. The <code>SizeInMBs</code> and <code>IntervalInSeconds</code> parameters are optional. However, if you specify a value for one of them, you must also provide a value for the other. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The configuration of the HTTP endpoint selected as the destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointConfiguration * _Nullable endpointConfiguration;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The configuration of the requeste sent to the HTTP endpoint specified as the destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointRequestConfiguration * _Nullable requestConfiguration;
+
+/**
+ <p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of receipt from the specified HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>Describes the S3 bucket backup options for the data that Kinesis Data Firehose delivers to the HTTP endpoint destination. You can back up all documents (<code>AllData</code>) or only the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint destination (<code>FailedDataOnly</code>).</p>
+ */
+@property (nonatomic, assign) AWSFirehoseHttpEndpointS3BackupMode s3BackupMode;
+
+/**
+ <p>Describes the configuration of a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationConfiguration * _Nullable s3Configuration;
+
+@end
+
+/**
+ <p>Describes the HTTP endpoint destination.</p>
+ */
+@interface AWSFirehoseHttpEndpointDestinationDescription : AWSModel
+
+
+/**
+ <p>Describes buffering options that can be applied to the data before it is delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats these options as hints, and it might choose to use more optimal values. The <code>SizeInMBs</code> and <code>IntervalInSeconds</code> parameters are optional. However, if specify a value for one of them, you must also provide a value for the other. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>The configuration of the specified HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointDescription * _Nullable endpointConfiguration;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The configuration of request sent to the HTTP endpoint specified as the destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointRequestConfiguration * _Nullable requestConfiguration;
+
+/**
+ <p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of receipt from the specified HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>Describes the S3 bucket backup options for the data that Kinesis Firehose delivers to the HTTP endpoint destination. You can back up all documents (<code>AllData</code>) or only the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint destination (<code>FailedDataOnly</code>).</p>
+ */
+@property (nonatomic, assign) AWSFirehoseHttpEndpointS3BackupMode s3BackupMode;
+
+/**
+ <p>Describes a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationDescription * _Nullable s3DestinationDescription;
+
+@end
+
+/**
+ <p>Updates the specified HTTP endpoint destination.</p>
+ */
+@interface AWSFirehoseHttpEndpointDestinationUpdate : AWSModel
+
+
+/**
+ <p>Describes buffering options that can be applied to the data before it is delivered to the HTTPS endpoint destination. Kinesis Data Firehose teats these options as hints, and it might choose to use more optimal values. The <code>SizeInMBs</code> and <code>IntervalInSeconds</code> parameters are optional. However, if specify a value for one of them, you must also provide a value for the other. </p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointBufferingHints * _Nullable bufferingHints;
+
+/**
+ <p>Describes the Amazon CloudWatch logging options for your delivery stream.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseCloudWatchLoggingOptions * _Nullable cloudWatchLoggingOptions;
+
+/**
+ <p>Describes the configuration of the HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointConfiguration * _Nullable endpointConfiguration;
+
+/**
+ <p>Describes a data processing configuration.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseProcessingConfiguration * _Nullable processingConfiguration;
+
+/**
+ <p>The configuration of the request sent to the HTTP endpoint specified as the destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointRequestConfiguration * _Nullable requestConfiguration;
+
+/**
+ <p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of receipt from the specified HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointRetryOptions * _Nullable retryOptions;
+
+/**
+ <p>Kinesis Data Firehose uses this IAM role for all the permissions that the delivery stream needs.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>Describes the S3 bucket backup options for the data that Kinesis Firehose delivers to the HTTP endpoint destination. You can back up all documents (<code>AllData</code>) or only the documents that Kinesis Data Firehose could not deliver to the specified HTTP endpoint destination (<code>FailedDataOnly</code>).</p>
+ */
+@property (nonatomic, assign) AWSFirehoseHttpEndpointS3BackupMode s3BackupMode;
+
+/**
+ <p>Describes an update for a destination in Amazon S3.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseS3DestinationUpdate * _Nullable s3Update;
+
+@end
+
+/**
+ <p>The configuration of the HTTP endpoint request.</p>
+ */
+@interface AWSFirehoseHttpEndpointRequestConfiguration : AWSModel
+
+
+/**
+ <p>Describes the metadata sent to the HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) NSArray<AWSFirehoseHttpEndpointCommonAttribute *> * _Nullable commonAttributes;
+
+/**
+ <p>Kinesis Data Firehose uses the content encoding to compress the body of a request before sending the request to the destination. For more information, see <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Encoding">Content-Encoding</a> in MDN Web Docs, the official Mozilla documentation.</p>
+ */
+@property (nonatomic, assign) AWSFirehoseContentEncoding contentEncoding;
+
+@end
+
+/**
+ <p>Describes the retry behavior in case Kinesis Data Firehose is unable to deliver data to the specified HTTP endpoint destination, or if it doesn't receive a valid acknowledgment of receipt from the specified HTTP endpoint destination.</p>
+ */
+@interface AWSFirehoseHttpEndpointRetryOptions : AWSModel
+
+
+/**
+ <p>The total amount of time that Kinesis Data Firehose spends on retries. This duration starts after the initial attempt to send data to the custom destination via HTTPS endpoint fails. It doesn't include the periods during which Kinesis Data Firehose waits for acknowledgment from the specified destination after each attempt. </p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable durationInSeconds;
+
+@end
+
+/**
+ <p>Specifies the deserializer you want to use to convert the format of the input data. This parameter is required if <code>Enabled</code> is set to true.</p>
  */
 @interface AWSFirehoseInputFormatConfiguration : AWSModel
 
@@ -1147,7 +1998,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>The Amazon Resource Name (ARN) of the encryption key. Must belong to the same AWS Region as the destination Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the encryption key. Must belong to the same Amazon Web Services Region as the destination Amazon S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable AWSKMSKeyARN;
 
@@ -1166,7 +2017,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable kinesisStreamARN;
 
 /**
- <p>The ARN of the role that provides access to the source Kinesis data stream. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam">AWS Identity and Access Management (IAM) ARN Format</a>.</p>
+ <p>The ARN of the role that provides access to the source Kinesis data stream. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam">Amazon Web Services Identity and Access Management (IAM) ARN Format</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -1189,7 +2040,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable kinesisStreamARN;
 
 /**
- <p>The ARN of the role used by the source Kinesis data stream. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam">AWS Identity and Access Management (IAM) ARN Format</a>.</p>
+ <p>The ARN of the role used by the source Kinesis data stream. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam">Amazon Web Services Identity and Access Management (IAM) ARN Format</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -1359,7 +2210,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @end
 
 /**
- <p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data before it writes it to Amazon S3.</p>
+ <p>Specifies the serializer that you want Kinesis Data Firehose to use to convert the format of your data before it writes it to Amazon S3. This parameter is required if <code>Enabled</code> is set to true.</p>
  */
 @interface AWSFirehoseOutputFormatConfiguration : AWSModel
 
@@ -1447,14 +2298,14 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @end
 
 /**
- <p>Describes the processor parameter.</p>
+ <p>Describes the processor parameter. </p>
  Required parameters: [ParameterName, ParameterValue]
  */
 @interface AWSFirehoseProcessorParameter : AWSModel
 
 
 /**
- <p>The name of the parameter.</p>
+ <p>The name of the parameter. Currently the following default values are supported: 3 for <code>NumberOfRetries</code> and 60 for the <code>BufferIntervalInSeconds</code>. The <code>BufferSizeInMBs</code> ranges between 0.2 MB and up to 3MB. The default buffering hint is 1MB for all destinations, except Splunk. For Splunk, the default buffering hint is 256 KB. </p>
  */
 @property (nonatomic, assign) AWSFirehoseProcessorParameterName parameterName;
 
@@ -1617,7 +2468,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseRedshiftRetryOptions * _Nullable retryOptions;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -1627,7 +2478,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseS3DestinationConfiguration * _Nullable s3BackupConfiguration;
 
 /**
- <p>The Amazon S3 backup mode.</p>
+ <p>The Amazon S3 backup mode. After you create a delivery stream, you can update it to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. </p>
  */
 @property (nonatomic, assign) AWSFirehoseRedshiftS3BackupMode s3BackupMode;
 
@@ -1676,7 +2527,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseRedshiftRetryOptions * _Nullable retryOptions;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -1739,12 +2590,12 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseRedshiftRetryOptions * _Nullable retryOptions;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
 /**
- <p>The Amazon S3 backup mode.</p>
+ <p>You can update a delivery stream to enable Amazon S3 backup if it is disabled. If backup is enabled, you can't update the delivery stream to disable it. </p>
  */
 @property (nonatomic, assign) AWSFirehoseRedshiftS3BackupMode s3BackupMode;
 
@@ -1779,6 +2630,19 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @end
 
 /**
+ <p> The retry behavior in case Kinesis Data Firehose is unable to deliver data to an Amazon S3 prefix.</p>
+ */
+@interface AWSFirehoseRetryOptions : AWSModel
+
+
+/**
+ <p>The period of time during which Kinesis Data Firehose retries to deliver data to the specified Amazon S3 prefix.</p>
+ */
+@property (nonatomic, strong) NSNumber * _Nullable durationInSeconds;
+
+@end
+
+/**
  <p>Describes the configuration of a destination in Amazon S3.</p>
  Required parameters: [RoleARN, BucketARN]
  */
@@ -1786,7 +2650,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable bucketARN;
 
@@ -1821,7 +2685,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable prefix;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -1835,7 +2699,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable bucketARN;
 
@@ -1870,7 +2734,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable prefix;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
@@ -1883,7 +2747,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
- <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The ARN of the S3 bucket. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable bucketARN;
 
@@ -1918,40 +2782,40 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) NSString * _Nullable prefix;
 
 /**
- <p>The Amazon Resource Name (ARN) of the AWS credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>
+ <p>The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more information, see <a href="https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
 @end
 
 /**
- <p>Specifies the schema to which you want Kinesis Data Firehose to configure your data before it writes it to Amazon S3.</p>
+ <p>Specifies the schema to which you want Kinesis Data Firehose to configure your data before it writes it to Amazon S3. This parameter is required if <code>Enabled</code> is set to true.</p>
  */
 @interface AWSFirehoseSchemaConfiguration : AWSModel
 
 
 /**
- <p>The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account ID is used by default.</p>
+ <p>The ID of the Amazon Web Services Glue Data Catalog. If you don't supply this, the Amazon Web Services account ID is used by default.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable catalogId;
 
 /**
- <p>Specifies the name of the AWS Glue database that contains the schema for the output data.</p>
+ <p>Specifies the name of the Amazon Web Services Glue database that contains the schema for the output data.</p><important><p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking the <code>CreateDeliveryStream</code> API, then the <code>DatabaseName</code> property is required and its value must be specified.</p></important>
  */
 @property (nonatomic, strong) NSString * _Nullable databaseName;
 
 /**
- <p>If you don't specify an AWS Region, the default is the current Region.</p>
+ <p>If you don't specify an Amazon Web Services Region, the default is the current Region.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable region;
 
 /**
- <p>The role that Kinesis Data Firehose can use to access AWS Glue. This role must be in the same account you use for Kinesis Data Firehose. Cross-account roles aren't allowed.</p>
+ <p>The role that Kinesis Data Firehose can use to access Amazon Web Services Glue. This role must be in the same account you use for Kinesis Data Firehose. Cross-account roles aren't allowed.</p><important><p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking the <code>CreateDeliveryStream</code> API, then the <code>RoleARN</code> property is required and its value must be specified.</p></important>
  */
 @property (nonatomic, strong) NSString * _Nullable roleARN;
 
 /**
- <p>Specifies the AWS Glue table that contains the column information that constitutes your data schema.</p>
+ <p>Specifies the Amazon Web Services Glue table that contains the column information that constitutes your data schema.</p><important><p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking the <code>CreateDeliveryStream</code> API, then the <code>TableName</code> property is required and its value must be specified.</p></important>
  */
 @property (nonatomic, strong) NSString * _Nullable tableName;
 
@@ -2036,7 +2900,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseSplunkRetryOptions * _Nullable retryOptions;
 
 /**
- <p>Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. </p>
+ <p>Defines how documents should be delivered to Amazon S3. When set to <code>FailedEventsOnly</code>, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllEvents</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. The default value is <code>FailedEventsOnly</code>.</p><p>You can update this backup mode from <code>FailedEventsOnly</code> to <code>AllEvents</code>. You can't update it from <code>AllEvents</code> to <code>FailedEventsOnly</code>.</p>
  */
 @property (nonatomic, assign) AWSFirehoseSplunkS3BackupMode s3BackupMode;
 
@@ -2142,7 +3006,7 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseSplunkRetryOptions * _Nullable retryOptions;
 
 /**
- <p>Defines how documents should be delivered to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllDocuments</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. Default value is <code>FailedDocumentsOnly</code>. </p>
+ <p>Specifies how you want Kinesis Data Firehose to back up documents to Amazon S3. When set to <code>FailedDocumentsOnly</code>, Kinesis Data Firehose writes any data that could not be indexed to the configured Amazon S3 destination. When set to <code>AllEvents</code>, Kinesis Data Firehose delivers all incoming records to Amazon S3, and also writes failed documents to Amazon S3. The default value is <code>FailedEventsOnly</code>.</p><p>You can update this backup mode from <code>FailedEventsOnly</code> to <code>AllEvents</code>. You can't update it from <code>AllEvents</code> to <code>FailedEventsOnly</code>.</p>
  */
 @property (nonatomic, assign) AWSFirehoseSplunkS3BackupMode s3BackupMode;
 
@@ -2291,6 +3155,16 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 
 
 /**
+ <p>Describes an update for a destination in the Serverless offering for Amazon OpenSearch Service.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonOpenSearchServerlessDestinationUpdate * _Nullable amazonOpenSearchServerlessDestinationUpdate;
+
+/**
+ <p>Describes an update for a destination in Amazon OpenSearch Service.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseAmazonopensearchserviceDestinationUpdate * _Nullable amazonopensearchserviceDestinationUpdate;
+
+/**
  <p>Obtain this value from the <code>VersionId</code> result of <a>DeliveryStreamDescription</a>. This value is required, and helps the service perform conditional operations. For example, if there is an interleaving update and this value is null, then the update destination fails. After the update is successful, the <code>VersionId</code> value is updated. The service then performs a merge of the old configuration with the new configuration.</p>
  */
 @property (nonatomic, strong) NSString * _Nullable currentDeliveryStreamVersionId;
@@ -2316,6 +3190,11 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
 @property (nonatomic, strong) AWSFirehoseExtendedS3DestinationUpdate * _Nullable extendedS3DestinationUpdate;
 
 /**
+ <p>Describes an update to the specified HTTP endpoint destination.</p>
+ */
+@property (nonatomic, strong) AWSFirehoseHttpEndpointDestinationUpdate * _Nullable httpEndpointDestinationUpdate;
+
+/**
  <p>Describes an update for a destination in Amazon Redshift.</p>
  */
 @property (nonatomic, strong) AWSFirehoseRedshiftDestinationUpdate * _Nullable redshiftDestinationUpdate;
@@ -2337,6 +3216,59 @@ typedef NS_ENUM(NSInteger, AWSFirehoseSplunkS3BackupMode) {
  */
 @interface AWSFirehoseUpdateDestinationOutput : AWSModel
 
+
+@end
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ Required parameters: [SubnetIds, RoleARN, SecurityGroupIds]
+ */
+@interface AWSFirehoseVpcConfiguration : AWSModel
+
+
+/**
+ <p>The ARN of the IAM role that you want the delivery stream to use to create endpoints in the destination VPC. You can use your existing Kinesis Data Firehose delivery role or you can specify a new role. In either case, make sure that the role trusts the Kinesis Data Firehose service principal and that it grants the following permissions:</p><ul><li><p><code>ec2:DescribeVpcs</code></p></li><li><p><code>ec2:DescribeVpcAttribute</code></p></li><li><p><code>ec2:DescribeSubnets</code></p></li><li><p><code>ec2:DescribeSecurityGroups</code></p></li><li><p><code>ec2:DescribeNetworkInterfaces</code></p></li><li><p><code>ec2:CreateNetworkInterface</code></p></li><li><p><code>ec2:CreateNetworkInterfacePermission</code></p></li><li><p><code>ec2:DeleteNetworkInterface</code></p></li></ul><p>If you revoke these permissions after you create the delivery stream, Kinesis Data Firehose can't scale out by creating more ENIs when necessary. You might therefore see a degradation in performance.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>The IDs of the security groups that you want Kinesis Data Firehose to use when it creates ENIs in the VPC of the Amazon ES destination. You can use the same security group that the Amazon ES domain uses or different ones. If you specify different security groups here, ensure that they allow outbound HTTPS traffic to the Amazon ES domain's security group. Also ensure that the Amazon ES domain's security group allows HTTPS traffic from the security groups specified here. If you use the same security group for both your delivery stream and the Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more information about security group rules, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules">Security group rules</a> in the Amazon VPC documentation.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable securityGroupIds;
+
+/**
+ <p>The IDs of the subnets that you want Kinesis Data Firehose to use to create ENIs in the VPC of the Amazon ES destination. Make sure that the routing tables and inbound and outbound rules allow traffic to flow from the subnets whose IDs are specified here to the subnets that have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in each of the subnets that are specified here. Do not delete or modify these ENIs.</p><p>The number of ENIs that Kinesis Data Firehose creates in the subnets specified here scales up and down automatically based on throughput. To enable Kinesis Data Firehose to scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To help you calculate the quota you need, assume that Kinesis Data Firehose can create up to three ENIs for this delivery stream for each of the subnets specified here. For more information about ENI quota, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable subnetIds;
+
+@end
+
+/**
+ <p>The details of the VPC of the Amazon ES destination.</p>
+ Required parameters: [SubnetIds, RoleARN, SecurityGroupIds, VpcId]
+ */
+@interface AWSFirehoseVpcConfigurationDescription : AWSModel
+
+
+/**
+ <p>The ARN of the IAM role that the delivery stream uses to create endpoints in the destination VPC. You can use your existing Kinesis Data Firehose delivery role or you can specify a new role. In either case, make sure that the role trusts the Kinesis Data Firehose service principal and that it grants the following permissions:</p><ul><li><p><code>ec2:DescribeVpcs</code></p></li><li><p><code>ec2:DescribeVpcAttribute</code></p></li><li><p><code>ec2:DescribeSubnets</code></p></li><li><p><code>ec2:DescribeSecurityGroups</code></p></li><li><p><code>ec2:DescribeNetworkInterfaces</code></p></li><li><p><code>ec2:CreateNetworkInterface</code></p></li><li><p><code>ec2:CreateNetworkInterfacePermission</code></p></li><li><p><code>ec2:DeleteNetworkInterface</code></p></li></ul><p>If you revoke these permissions after you create the delivery stream, Kinesis Data Firehose can't scale out by creating more ENIs when necessary. You might therefore see a degradation in performance.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable roleARN;
+
+/**
+ <p>The IDs of the security groups that Kinesis Data Firehose uses when it creates ENIs in the VPC of the Amazon ES destination. You can use the same security group that the Amazon ES domain uses or different ones. If you specify different security groups, ensure that they allow outbound HTTPS traffic to the Amazon ES domain's security group. Also ensure that the Amazon ES domain's security group allows HTTPS traffic from the security groups specified here. If you use the same security group for both your delivery stream and the Amazon ES domain, make sure the security group inbound rule allows HTTPS traffic. For more information about security group rules, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html#SecurityGroupRules">Security group rules</a> in the Amazon VPC documentation.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable securityGroupIds;
+
+/**
+ <p>The IDs of the subnets that Kinesis Data Firehose uses to create ENIs in the VPC of the Amazon ES destination. Make sure that the routing tables and inbound and outbound rules allow traffic to flow from the subnets whose IDs are specified here to the subnets that have the destination Amazon ES endpoints. Kinesis Data Firehose creates at least one ENI in each of the subnets that are specified here. Do not delete or modify these ENIs.</p><p>The number of ENIs that Kinesis Data Firehose creates in the subnets specified here scales up and down automatically based on throughput. To enable Kinesis Data Firehose to scale up the number of ENIs to match throughput, ensure that you have sufficient quota. To help you calculate the quota you need, assume that Kinesis Data Firehose can create up to three ENIs for this delivery stream for each of the subnets specified here. For more information about ENI quota, see <a href="https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-enis">Network Interfaces </a> in the Amazon VPC Quotas topic.</p>
+ */
+@property (nonatomic, strong) NSArray<NSString *> * _Nullable subnetIds;
+
+/**
+ <p>The ID of the Amazon ES destination's VPC.</p>
+ */
+@property (nonatomic, strong) NSString * _Nullable vpcId;
 
 @end
 

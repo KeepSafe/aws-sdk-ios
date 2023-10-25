@@ -1,5 +1,5 @@
 //
-// Copyright 2010-2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// Copyright 2010-2023 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License").
 // You may not use this file except in compliance with the License.
@@ -18,7 +18,48 @@
 
 NSString *const AWSSageMakerRuntimeErrorDomain = @"com.amazonaws.AWSSageMakerRuntimeErrorDomain";
 
+@implementation AWSSageMakerRuntimeInvokeEndpointAsyncInput
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"accept" : @"Accept",
+             @"contentType" : @"ContentType",
+             @"customAttributes" : @"CustomAttributes",
+             @"endpointName" : @"EndpointName",
+             @"inferenceId" : @"InferenceId",
+             @"inputLocation" : @"InputLocation",
+             @"invocationTimeoutSeconds" : @"InvocationTimeoutSeconds",
+             @"requestTTLSeconds" : @"RequestTTLSeconds",
+             };
+}
+
+@end
+
+@implementation AWSSageMakerRuntimeInvokeEndpointAsyncOutput
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+	return @{
+             @"failureLocation" : @"FailureLocation",
+             @"inferenceId" : @"InferenceId",
+             @"outputLocation" : @"OutputLocation",
+             };
+}
+
+@end
+
 @implementation AWSSageMakerRuntimeInvokeEndpointInput
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
@@ -26,14 +67,22 @@ NSString *const AWSSageMakerRuntimeErrorDomain = @"com.amazonaws.AWSSageMakerRun
              @"body" : @"Body",
              @"contentType" : @"ContentType",
              @"customAttributes" : @"CustomAttributes",
+             @"enableExplanations" : @"EnableExplanations",
              @"endpointName" : @"EndpointName",
+             @"inferenceId" : @"InferenceId",
+             @"targetContainerHostname" : @"TargetContainerHostname",
              @"targetModel" : @"TargetModel",
+             @"targetVariant" : @"TargetVariant",
              };
 }
 
 @end
 
 @implementation AWSSageMakerRuntimeInvokeEndpointOutput
+
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
 	return @{
