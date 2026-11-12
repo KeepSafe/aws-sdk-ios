@@ -41,7 +41,7 @@ jobs:
       RELEASE_VERSION: ${{ github.event.inputs.release-version }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           ref: main
 
